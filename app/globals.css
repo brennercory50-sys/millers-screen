@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg-0: #0B0D10;
+  --bg-1: #11151B;
+  --panel: #0F1318;
+  --text: #E9EEF5;
+  --muted: #A9B3C1;
+  --line: rgba(255,255,255,0.10);
+  --accent-red: #B0161C;
+  --accent-red-hover: #8F1116;
+  --steel-highlight: rgba(255,255,255,0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-0);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='https://i.ytimg.com/vi/rOwuKvua1hc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDCzv9CB5CgmkmTVjJOL6V6_M0b5w id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: -1;
+}
+
+[data-hydration-error] { display: none !important; }
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-[#B0161C] text-white font-semibold rounded-md transition-all duration-200 hover:bg-[#8F1116] hover:shadow-lg hover:-translate-y-0.5;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-transparent border border-white/20 text-white font-semibold rounded-md transition-all duration-200 hover:bg-white/10 hover:border-white/40;
+  }
+  
+  .card {
+    @apply bg-[#0F1318] rounded-md p-6 shadow-lg transition-all duration-200 hover:shadow-xl hover:-translate-y-1;
+  }
+  
+  .section-container {
+    @apply max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bottom padding for sticky mobile CTA bar */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 60px;
+  }
+}
+
+.chatbot-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-red);
+}
