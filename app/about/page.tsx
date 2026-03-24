@@ -52,23 +52,27 @@ const installation = [
   { name: 'Michael', role: 'Head Installer', image: '/team/michael.jpg', bio: 'The fastest screen installer in Volusia County. Quality never suffers though—he just makes it look easy.' },
   { name: 'Devon', role: 'Head Installer', image: '/team/devon.jpg', bio: 'Handles our screen room projects. Takes pride in clean corners and straight lines. His attention to detail is unmatched.' },
   { name: 'Blake R', role: 'Installer', image: '/team/blake-r.jpg', bio: 'Young gun learning the ropes fast. Already running his own crews on smaller jobs. One to watch.' },
-  { name: 'Brendon', role: 'Warranty Division', image: '/team/brendon.jpg', bio: 'Handles all warranty calls and repairs. If something\'s not right, Brendon makes it right. Fast.' },
+  { name: 'Zach', role: 'Installer', image: '/team/zach.jpg', bio: 'Turns your backyard dreams into reality. Has an eye for what works and what won\'t. His installations have won over even the pickiest HOAs.' },
+  { name: 'JoJo', role: 'Warranty / Inspector', image: '/team/jojo.jpg', bio: 'Handles all warranty calls and inspections. If something\'s not right, JoJo makes it right. Fast.' },
+  { name: 'Shane', role: 'Installer', image: '/team/shane.jpg', bio: 'New to the team but learning fast. Ready to help on any job.' },
 ]
 
 const concreteDivision = [
   { name: 'Dale', role: 'Concrete Division', image: '/team/dale.jpg', bio: 'Handles all concrete work for our enclosure projects. From footers to slabs, Dale delivers a solid foundation every time.' },
+  { name: 'Ricky', role: 'Helper', image: '/team/ricky.jpg', bio: 'Keeps our equipment running. If it\'s got an engine or motor, Ricky can fix it.' },
 ]
 
 const shopCrew = [
   { name: 'Thomas', role: 'Shop Crew', image: '/team/thomas.jpg', bio: 'Cuts and preps all the aluminum in our shop. Every piece that leaves here is cut to spec, every time.' },
   { name: 'Derek', role: 'Shop Crew', image: '/team/derek.jpg', bio: 'Loads the trucks and keeps inventory stocked. The crews always have what they need because Derek stays on top of it.' },
-  { name: 'Ricky', role: 'Shop Crew', image: '/team/ricky.jpg', bio: 'Keeps our equipment running. If it\'s got an engine or motor, Ricky can fix it.' },
 ]
 
 const helpers = [
   { name: 'Brandon F', role: 'Helper', image: '/team/brandon-f.jpg', bio: 'Learning the trade from the ground up. Already knows more about screen work than most guys with five years in.' },
   { name: 'Gage', role: 'Helper', image: '/team/gage.jpg', bio: 'Eager to learn and quick to pitch in. The crews fight over who gets him on their jobs.' },
   { name: 'Cory', role: 'Helper', image: '/team/cory.jpg', bio: 'Started last summer and hasn\'t slowed down. Strong work ethic and always on time.' },
+  { name: 'Brendon', role: 'Helper', image: '/team/brendon.jpg', bio: 'Handles all warranty calls and repairs. If something\'s not right, Brendon makes it right. Fast.' },
+  { name: 'Hunter', role: 'Helper', image: '/team/hunter.jpg', bio: 'Eager to learn the trade. Ready to help wherever needed.' },
 ]
 
 function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Users; members: Array<{ name: string; role: string; subtitle?: string; image: string; memorial?: boolean; bio?: string }> }) {
