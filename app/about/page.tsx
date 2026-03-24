@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import HeroSection from '@/components/hero-section'
 import ContentBlock from '@/components/content-block'
+import TeamCard from '@/components/team-card'
 import { Users, Heart, Award, Briefcase, Wrench, Building } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -67,51 +68,7 @@ const helpers = [
   { name: 'Cory', role: 'Helper', image: '/team/cory.jpg', bio: 'Started last summer and hasn\'t slowed down. Strong work ethic and always on time.' },
 ]
 
-interface TeamMember {
-  name: string
-  role: string
-  subtitle?: string
-  image: string
-  memorial?: boolean
-  bio?: string
-}
-
-function TeamCard({ member }: { member: TeamMember }) {
-  return (
-    <div className="group">
-      <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-panel ring-1 ring-line transition-all duration-500 md:hover:ring-accent-red md:hover:shadow-lg md:hover:shadow-accent-red/20">
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          className="object-cover object-top transition-all duration-700 md:group-hover:scale-110 md:group-hover:brightness-[0.35]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/30 to-transparent transition-opacity duration-500 md:group-hover:opacity-0" />
-        <div className="absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/95 to-bg-0/80 opacity-0 md:group-hover:opacity-100 transition-all duration-500 hidden md:flex flex-col justify-end p-5">
-          <div className="transform translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500">
-            <h3 className="text-lg font-bold text-text-primary mb-1">{member.name}</h3>
-            <p className={`text-sm font-semibold ${member.memorial ? 'text-accent-red italic' : 'text-accent-red'} mb-2`}>
-              {member.role}
-            </p>
-            {member.subtitle && <p className="text-xs text-muted mb-2">{member.subtitle}</p>}
-            <p className="text-sm text-muted leading-relaxed opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 delay-100">
-              {member.bio}
-            </p>
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <h3 className="text-base md:text-lg font-bold text-text-primary">{member.name}</h3>
-          <p className={`text-sm font-medium ${member.memorial ? 'text-accent-red italic' : 'text-accent-red'}`}>
-            {member.role}
-          </p>
-          {member.subtitle && <p className="text-xs text-muted mt-0.5">{member.subtitle}</p>}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Users; members: TeamMember[] }) {
+function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Users; members: Array<{ name: string; role: string; subtitle?: string; image: string; memorial?: boolean; bio?: string }> }) {
   return (
     <div className="mb-16">
       <div className="flex items-center gap-3 mb-6">
@@ -176,6 +133,7 @@ export default function AboutPage() {
             <h2 className="text-text-primary text-3xl md:text-4xl font-bold">MEET THE PEOPLE BEHIND THE WORK</h2>
             <p className="text-muted mt-3 max-w-2xl mx-auto">
               <span className="hidden md:inline">Hover over any team member to learn more about them</span>
+              <span className="md:hidden">Tap any team member to read their bio</span>
             </p>
           </div>
 
