@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Send, CheckCircle, AlertCircle, Clock } from 'lucide-react'
+import { Send, CheckCircle, AlertCircle, Clock, Phone } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const serviceOptions = [
@@ -66,13 +66,18 @@ export default function QuickQuoteForm() {
         className="bg-panel rounded-xl p-8 text-center border border-line"
       >
         <CheckCircle className="w-14 h-14 text-green-500 mx-auto mb-4" />
-        <h3 className="text-2xl font-bold text-text-primary mb-2">We Got It!</h3>
-        <p className="text-muted mb-4">We&apos;ll call you back within 1 hour during business hours.</p>
-        <a href="tel:386-756-8770" className="text-accent-red hover:underline font-semibold">
-          Need us now? Call 386-756-8770
+        <h3 className="text-2xl font-bold text-text-primary mb-2">Quote Request Sent!</h3>
+        <p className="text-muted mb-2">We&apos;ll call you back within 1 hour.</p>
+        <p className="text-sm text-green-500 font-medium mb-6">Or call now for instant response:</p>
+        <a 
+          href="tel:386-756-8770" 
+          className="inline-flex items-center gap-2 bg-green-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-700 transition-colors text-lg"
+        >
+          <Phone className="w-5 h-5" />
+          Call 386-756-8770
         </a>
         <button onClick={() => setStatus('idle')} className="mt-6 block mx-auto btn-secondary text-sm">
-          Submit Another
+          Submit Another Request
         </button>
       </motion.div>
     )
@@ -170,6 +175,9 @@ export default function QuickQuoteForm() {
       <p className="mt-4 text-xs text-muted text-center">
         Or call us directly at{' '}
         <a href="tel:386-756-8770" className="text-accent-red hover:underline font-semibold">386-756-8770</a>
+      </p>
+      <p className="mt-2 text-center text-xs text-green-500 font-medium">
+        Free Estimate • No Obligation • No Spam
       </p>
     </form>
   )

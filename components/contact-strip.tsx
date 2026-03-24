@@ -32,7 +32,7 @@ export default function ContactStrip() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-text-primary mb-4">READY TO GET STARTED?</h2>
+          <h2 className="text-text-primary mb-4">TALK TO A LOCAL EXPERT</h2>
           <p className="text-muted text-base md:text-lg mb-8 max-w-xl mx-auto">
             Get a free estimate on your screen enclosure project. Our team responds within 1 hour.
           </p>

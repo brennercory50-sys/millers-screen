@@ -18,7 +18,7 @@ export default function MobileCTABar() {
           className="flex-1 flex items-center justify-center gap-2 min-h-[56px] bg-accent-red text-white font-bold text-base active:bg-accent-red-hover transition-colors"
         >
           <MessageSquare className="w-5 h-5" />
-          Free Quote
+          Get Quote
         </a>
       </div>
     </div>

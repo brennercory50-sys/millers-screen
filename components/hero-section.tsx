@@ -20,6 +20,7 @@ interface HeroSectionProps {
   }
   trustBullets?: string[]
   isHomepage?: boolean
+  urgencyBadge?: string
 }
 
 export default function HeroSection({
@@ -31,6 +32,7 @@ export default function HeroSection({
   ctaSecondary,
   trustBullets,
   isHomepage,
+  urgencyBadge = 'Free Estimates • Licensed & Insured',
 }: HeroSectionProps) {
   return (
     <section className={`relative ${isHomepage ? 'min-h-[85vh] md:min-h-[90vh]' : 'min-h-[60vh] md:min-h-[70vh]'} flex items-center`}>
@@ -75,6 +77,13 @@ export default function HeroSection({
                   <span className="text-sm md:text-base text-text-primary font-medium">{bullet}</span>
                 </div>
               ))}
+            </div>
+          )}
+
+          {isHomepage && (
+            <div className="inline-flex items-center gap-2 bg-green-500/20 text-green-400 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <CheckCircle className="w-4 h-4" />
+              {urgencyBadge}
             </div>
           )}
 
