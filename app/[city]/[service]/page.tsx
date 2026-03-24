@@ -1,7 +1,8 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { MapPin, Phone, CheckCircle, ArrowRight, Star } from 'lucide-react'
+import { MapPin, Phone, CheckCircle, ArrowRight, Star, Clock } from 'lucide-react'
+import MobileCTABar from '@/components/mobile-cta-bar'
 
 const CITIES: Record<string, { name: string; description: string; neighborhoods: string[] }> = {
   'daytona-beach': {
@@ -314,13 +315,13 @@ export default async function ServiceAreaPage({ params }: Props) {
           </p>
           <div className="flex flex-wrap gap-2">
             {cityData.neighborhoods.map((neighborhood, i) => (
-              <Link
+              <a
                 key={i}
-                href={`/contact#form`}
-                className="bg-panel px-4 py-2 rounded-full text-sm text-text-primary hover:bg-accent-red hover:text-white transition-colors"
+                href={`#form`}
+                className="bg-panel px-4 py-2 rounded-full text-sm text-text-primary hover:bg-accent-red hover:text-white transition-colors cursor-pointer"
               >
                 {neighborhood}
-              </Link>
+              </a>
             ))}
           </div>
         </div>
@@ -332,8 +333,12 @@ export default async function ServiceAreaPage({ params }: Props) {
           <h2 className="text-white text-3xl md:text-4xl font-bold mb-4">
             Ready to Start Your {cityData.name} Project?
           </h2>
-          <p className="text-white/80 mb-8 max-w-2xl mx-auto">
+          <p className="text-white/80 mb-6 max-w-2xl mx-auto">
             Get your free, no-obligation estimate today. We'll visit your property, discuss your needs, and provide a detailed quote.
+          </p>
+          <p className="text-white/60 text-sm mb-6 flex items-center justify-center gap-2">
+            <Clock className="w-4 h-4" />
+            We respond within 1 hour
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact#form" className="bg-white text-accent-red font-bold px-8 py-4 rounded-md hover:bg-gray-100 transition-colors inline-flex items-center justify-center gap-2">
@@ -391,6 +396,8 @@ export default async function ServiceAreaPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <MobileCTABar />
     </>
   )
 }

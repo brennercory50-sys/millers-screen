@@ -12,6 +12,7 @@ const packages = [
     badge: 'Same Day Service',
     icon: Wrench,
     features: ['Screen patches & fixes', 'Door repairs', 'Minor frame work', 'Fast turnaround'],
+    ctaText: 'Get Same-Day Repair',
     href: '/contact#form',
     highlighted: false,
   },
@@ -21,6 +22,7 @@ const packages = [
     price: 'Custom Quote',
     icon: RefreshCw,
     features: ['Full panel replacement', 'New spline & hardware', 'Screen material options', 'Most popular choice'],
+    ctaText: 'Get Free Estimate',
     href: '/contact#form',
     highlighted: true,
   },
@@ -30,6 +32,7 @@ const packages = [
     price: 'Custom Quote',
     icon: Home,
     features: ['Engineered to FL code', 'Fully permitted', 'In-house crews only', 'Lifetime warranty'],
+    ctaText: 'Start My Enclosure',
     href: '/contact#form',
     highlighted: false,
   },
@@ -105,7 +108,7 @@ export default function ServicePackages() {
                         : 'bg-bg-1 text-text-primary border border-line hover:border-accent-red/50'
                     }`}
                   >
-                    Get Free Estimate <ArrowRight className="w-4 h-4" />
+                    {pkg.ctaText} <ArrowRight className="w-4 h-4" />
                   </Link>
                   <p className="text-center text-xs text-muted mt-3">
                     Licensed • Insured • Local Crew

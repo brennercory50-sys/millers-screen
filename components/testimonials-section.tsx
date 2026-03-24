@@ -93,7 +93,7 @@ export default function TestimonialsSection() {
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`w-2 h-2 rounded-full transition-colors ${i === current ? 'bg-accent-red' : 'bg-line hover:bg-muted'}`}
+                className={`min-w-[36px] min-h-[36px] rounded-full transition-colors flex items-center justify-center ${i === current ? 'bg-accent-red' : 'bg-line hover:bg-muted'}`}
                 aria-label={`Go to testimonial ${i + 1}`}
               />
             ))}

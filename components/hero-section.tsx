@@ -35,7 +35,7 @@ export default function HeroSection({
   urgencyBadge = 'Free Estimates • Licensed & Insured',
 }: HeroSectionProps) {
   return (
-    <section className={`relative ${isHomepage ? 'min-h-[85vh] md:min-h-[90vh]' : 'min-h-[60vh] md:min-h-[70vh]'} flex items-center`}>
+    <section         className={`relative ${isHomepage ? 'min-h-[60vh] md:min-h-[90vh]' : 'min-h-[50vh] md:min-h-[70vh]'} flex items-center`}>
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

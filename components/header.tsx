@@ -57,7 +57,7 @@ export default function Header() {
               386-756-8770
             </a>
             <Link href="/contact#form" className="btn-primary text-sm">
-              Start Your Project
+              Get Free Quote
             </Link>
           </div>
 

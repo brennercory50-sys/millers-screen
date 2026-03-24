@@ -37,7 +37,7 @@ interface FAQSectionProps {
 }
 
 export default function FAQSection({ faqs = defaultFaqs, title }: FAQSectionProps) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
     <section className="py-16 md:py-20">

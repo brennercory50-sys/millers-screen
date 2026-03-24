@@ -98,14 +98,14 @@ export default function ChatbotWidget() {
       const timer = setTimeout(() => {
         const scrollTrigger = () => {
           const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
-          return scrollPercent > 40
+          return scrollPercent > 25
         }
         
         if (scrollTrigger()) {
           setIsOpen(true)
           setTriggered(true)
         }
-      }, 8000)
+      }, 5000)
 
       return () => clearTimeout(timer)
     }
@@ -189,8 +189,9 @@ export default function ChatbotWidget() {
             role: 'assistant',
             content: 'Got it — our team will reach out shortly about your quote. Need us now? Call 386-756-8770.'
           }])
-          setStage('confirmation')
-        }, 500)
+        setStage('confirmation')
+        setTimeout(() => setIsOpen(false), 6000)
+      }, 500)
       }
     } catch (error) {
       console.error('Lead submit error:', error)

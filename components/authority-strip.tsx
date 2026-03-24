@@ -126,8 +126,8 @@ export default function AuthorityStrip() {
             <Phone className="w-4 h-4" />
             Call 386-756-8770
           </a>
-          <span className="text-xs text-muted text-center sm:text-left">
-            State Certified Contractor CBC1262142 • Free Estimates • No Obligation
+          <span className="text-xs text-accent-red font-semibold bg-accent-red/10 px-3 py-1.5 rounded-full">
+            ✓ CBC1262142 Licensed & Insured
           </span>
         </motion.div>
       </div>

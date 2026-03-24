@@ -132,11 +132,12 @@ export default function QuickQuoteForm() {
             value={formData.phone}
             onChange={handleChange}
             className="w-full px-4 py-3.5 bg-bg-1 text-text-primary rounded-lg border border-line focus:border-accent-red focus:outline-none transition-colors text-base"
-            placeholder="(386) 555-1234"
-          />
-        </div>
+              placeholder="(386) 555-1234"
+              autoComplete="tel"
+            />
+          </div>
 
-        <div>
+          <div>
           <label htmlFor="qq-projectType" className="block text-sm font-medium text-muted mb-1">Service Needed *</label>
           <select
             id="qq-projectType"
@@ -170,14 +171,14 @@ export default function QuickQuoteForm() {
             </>
           )}
         </button>
+        <p className="mt-3 text-center text-xs text-green-500 font-medium">
+          Free Estimate • No Obligation • No Spam
+        </p>
       </div>
 
       <p className="mt-4 text-xs text-muted text-center">
         Or call us directly at{' '}
         <a href="tel:386-756-8770" className="text-accent-red hover:underline font-semibold">386-756-8770</a>
-      </p>
-      <p className="mt-2 text-center text-xs text-green-500 font-medium">
-        Free Estimate • No Obligation • No Spam
       </p>
     </form>
   )

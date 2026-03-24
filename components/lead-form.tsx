@@ -145,6 +145,7 @@ export default function LeadForm() {
               onChange={handleChange}
               className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors"
               placeholder="(386) 555-1234"
+              autoComplete="tel"
             />
           </div>
           <div>

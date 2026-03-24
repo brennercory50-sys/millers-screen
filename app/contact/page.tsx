@@ -31,10 +31,10 @@ export default function ContactPage() {
       />
       <HeroSection
         headline="CONTACT"
-        subheadline="Fast estimates. Clean builds. Real crews."
+        subheadline="Free estimates. We respond within 1 hour. Serving all of Volusia County."
         image="/projects/project-72570.jpg"
-        ctaPrimary={{ label: 'Call Now', href: 'tel:386-756-8770' }}
-        ctaSecondary={{ label: 'Request an Estimate', href: '#form' }}
+        ctaPrimary={{ label: 'Get Free Quote', href: '#form' }}
+        ctaSecondary={{ label: 'Call Now', href: 'tel:386-756-8770' }}
       />
 
       <section className="py-12 md:py-16">
