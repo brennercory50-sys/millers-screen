@@ -9,7 +9,6 @@ const packages = [
     title: 'Basic Repair',
     description: 'Small screen fixes, patches, and minor frame repairs.',
     price: 'Starting at $150',
-    badge: 'Same Day Service',
     icon: Wrench,
     features: ['Screen patches & fixes', 'Door repairs', 'Minor frame work', 'Fast turnaround'],
     ctaText: 'Get Same-Day Repair',
@@ -75,12 +74,6 @@ export default function ServicePackages() {
                       <Star className="w-3 h-3" /> MOST POPULAR
                     </div>
                   )}
-                  {pkg.badge && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-green-600 text-white text-xs font-bold px-4 py-1 rounded-full">
-                      {pkg.badge}
-                    </div>
-                  )}
-
                   <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${
                     pkg.highlighted ? 'bg-accent-red' : 'bg-accent-red/10'
                   }`}>

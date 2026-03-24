@@ -3,7 +3,7 @@ import Image from 'next/image'
 import HeroSection from '@/components/hero-section'
 import ContentBlock from '@/components/content-block'
 import TeamCard from '@/components/team-card'
-import { Users, Heart, Award, Briefcase, Wrench, Building } from 'lucide-react'
+import { Users, Heart, Award, Briefcase, Wrench, Building, HardHat } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: "About Miller's Screen | 40+ Years Volusia County Experience",
@@ -55,10 +55,13 @@ const installation = [
   { name: 'Brendon', role: 'Warranty Division', image: '/team/brendon.jpg', bio: 'Handles all warranty calls and repairs. If something\'s not right, Brendon makes it right. Fast.' },
 ]
 
+const concreteDivision = [
+  { name: 'Dale', role: 'Concrete Division', image: '/team/dale.jpg', bio: 'Handles all concrete work for our enclosure projects. From footers to slabs, Dale delivers a solid foundation every time.' },
+]
+
 const shopCrew = [
   { name: 'Thomas', role: 'Shop Crew', image: '/team/thomas.jpg', bio: 'Cuts and preps all the aluminum in our shop. Every piece that leaves here is cut to spec, every time.' },
   { name: 'Derek', role: 'Shop Crew', image: '/team/derek.jpg', bio: 'Loads the trucks and keeps inventory stocked. The crews always have what they need because Derek stays on top of it.' },
-  { name: 'Wyatt', role: 'Shop Crew', image: '/team/wyatt.jpg', bio: 'Handles screen cutting and prep work. Takes pride in zero waste and perfect rolls every time.' },
   { name: 'Ricky', role: 'Shop Crew', image: '/team/ricky.jpg', bio: 'Keeps our equipment running. If it\'s got an engine or motor, Ricky can fix it.' },
 ]
 
@@ -112,7 +115,7 @@ export default function AboutPage() {
       <HeroSection
         headline="MEET THE TEAM"
         subheadline="Florida&apos;s aluminum construction pros."
-        image="/team/sales-team.jpg"
+        image="/projects/project-122978.jpg"
         ctaPrimary={{ label: 'Call 386-756-8770', href: 'tel:386-756-8770' }}
       />
       
@@ -153,6 +156,7 @@ export default function AboutPage() {
 
           <TeamSection title="Office & Sales" icon={Briefcase} members={officeSales} />
           <TeamSection title="Installation Crew" icon={Wrench} members={installation} />
+          <TeamSection title="Concrete Division" icon={HardHat} members={concreteDivision} />
           <TeamSection title="Shop Crew" icon={Building} members={shopCrew} />
           <TeamSection title="Helpers" icon={Users} members={helpers} />
 
