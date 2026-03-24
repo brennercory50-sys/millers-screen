@@ -97,9 +97,9 @@ export default function ContactPage() {
               </p>
               
               <div className="space-y-4">
-                <div className="flex items-center gap-3 text-muted">
-                  <Clock className="w-5 h-5 text-accent-red" />
-                  <span className="text-sm">Typical response time: Within 24 hours</span>
+                <div className="flex items-center gap-3 text-green-400">
+                  <Clock className="w-5 h-5" />
+                  <span className="text-sm font-medium">We respond within 1 hour</span>
                 </div>
               </div>
 
@@ -125,7 +125,7 @@ export default function ContactPage() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3458.8!2d-81.0!3d29.17!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88e6d8f6c0e7e7e7%3A0x0!2s3111%20Opportunity%20Ct%20Suite%20D%2C%20South%20Daytona%2C%20FL%2032119!5e0!3m2!1sen!2sus!4v1234567890"
               width="100%"
               height="100%"
-              style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }}
+              style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
