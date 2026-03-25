@@ -7,16 +7,15 @@ export async function POST(request: Request) {
   try {
     const data = await request?.json?.()
 
-    const { fullName, phone, email, projectType, city, message } = data ?? {}
+    const { fullName, phone, email, projectType, city, message, emailMarketingConsent } = data ?? {}
 
-    if (!fullName || !phone || !projectType) {
+    if (!fullName || !phone || !email || !projectType) {
       return NextResponse.json(
-        { success: false, message: 'Name, phone, and service type are required' },
+        { success: false, message: 'Name, phone, email, and service type are required' },
         { status: 400 }
       )
     }
 
-    // Save to database
     const lead = await prisma?.lead?.create?.({
       data: {
         fullName: fullName ?? '',
@@ -25,13 +24,17 @@ export async function POST(request: Request) {
         projectType: projectType ?? '',
         city: city ?? '',
         message: message ?? '',
+        leadSource: 'quote_form',
+        emailMarketingConsent: emailMarketingConsent ?? false,
+        emailMarketingConsentAt: emailMarketingConsent ? new Date() : null,
       },
     })
 
-    // Send email notification
     const appUrl = process.env.NEXTAUTH_URL ?? ''
     const hostname = appUrl ? new URL(appUrl)?.hostname ?? 'millersscreen' : 'millersscreen'
     const appName = hostname?.split?.('.')?.[0] ?? 'millersscreen'
+
+    const consentText = emailMarketingConsent ? 'Yes - opted in' : 'No'
 
     const htmlBody = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0B0D10; color: #E9EEF5; padding: 20px;">
@@ -60,11 +63,15 @@ export async function POST(request: Request) {
               <td style="padding: 10px 0; color: #A9B3C1;">City:</td>
               <td style="padding: 10px 0; color: #E9EEF5;">${city ?? 'Not specified'}</td>
             </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #A9B3C1;">Marketing Consent:</td>
+              <td style="padding: 10px 0; color: ${emailMarketingConsent ? '#22c55e' : '#A9B3C1'}; font-weight: bold;">${consentText}</td>
+            </tr>
           </table>
         </div>
         <div style="background: #11151B; padding: 20px; border-radius: 8px;">
           <h3 style="color: #A9B3C1; margin-top: 0; font-size: 14px;">Project Details:</h3>
-          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${message ?? ''}</p>
+          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${message ?? 'No additional details provided'}</p>
         </div>
         <p style="color: #A9B3C1; font-size: 12px; margin-top: 20px; text-align: center;">
           Submitted at: ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })}

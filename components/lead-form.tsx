@@ -21,13 +21,21 @@ export default function LeadForm() {
     projectType: '',
     city: '',
     message: '',
+    emailMarketingConsent: false,
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e?.target ?? {}
-    setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: value ?? '' }))
+    const target = e?.target ?? {}
+    const { name, value, type } = target
+    
+    if (type === 'checkbox') {
+      const checked = (target as HTMLInputElement)?.checked ?? false
+      setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: checked }))
+    } else {
+      setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: value ?? '' }))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,11 +43,21 @@ export default function LeadForm() {
     setStatus('loading')
     setErrorMessage('')
 
+    const payload = {
+      fullName: formData?.fullName?.trim?.() ?? '',
+      phone: formData?.phone?.trim?.() ?? '',
+      email: formData?.email?.trim?.() ?? '',
+      projectType: formData?.projectType ?? '',
+      city: formData?.city?.trim?.() ?? '',
+      message: formData?.message?.trim?.() ?? '',
+      emailMarketingConsent: formData?.emailMarketingConsent ?? false,
+    }
+
     try {
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       const result = await response?.json?.()
@@ -56,6 +74,7 @@ export default function LeadForm() {
         projectType: '',
         city: '',
         message: '',
+        emailMarketingConsent: false,
       })
     } catch (error) {
       console.error('Form submission error:', error)
@@ -150,16 +169,18 @@ export default function LeadForm() {
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-muted mb-1">
-              Email <span className="text-muted">(optional)</span>
+              Email *
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              required
               value={formData?.email ?? ''}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors"
               placeholder="john@example.com"
+              autoComplete="email"
             />
           </div>
         </div>
@@ -216,6 +237,21 @@ export default function LeadForm() {
           />
         </div>
 
+        <div className="pt-2">
+          <label className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              name="emailMarketingConsent"
+              checked={formData?.emailMarketingConsent ?? false}
+              onChange={handleChange}
+              className="mt-1 w-5 h-5 rounded border-line bg-bg-1 text-accent-red focus:ring-accent-red cursor-pointer"
+            />
+            <span className="text-sm text-muted leading-relaxed">
+              Yes, I&apos;d like to receive occasional email updates, promotions, and project offers from Miller&apos;s Screen. I understand I can unsubscribe at any time.
+            </span>
+          </label>
+        </div>
+
         <button
           type="submit"
           disabled={status === 'loading'}
@@ -233,6 +269,10 @@ export default function LeadForm() {
             </>
           )}
         </button>
+
+        <p className="text-xs text-muted text-center">
+          By submitting this form, you agree to be contacted about your quote request.
+        </p>
       </div>
 
       <p className="mt-4 text-xs text-muted text-center">
