@@ -9,6 +9,14 @@ export async function POST(request: Request) {
 
     const { fullName, phone, email, projectType, city, message, emailMarketingConsent } = data ?? {}
 
+    if (!process.env.DATABASE_URL) {
+      console.error('DATABASE_URL not configured')
+      return NextResponse.json(
+        { success: false, message: 'Database not configured' },
+        { status: 503 }
+      )
+    }
+
     if (!fullName || !phone || !email || !projectType) {
       return NextResponse.json(
         { success: false, message: 'Name, phone, email, and service type are required' },
@@ -16,19 +24,28 @@ export async function POST(request: Request) {
       )
     }
 
-    const lead = await prisma?.lead?.create?.({
-      data: {
-        fullName: fullName ?? '',
-        phone: phone ?? '',
-        email: email ?? '',
-        projectType: projectType ?? '',
-        city: city ?? '',
-        message: message ?? '',
-        leadSource: 'quote_form',
-        emailMarketingConsent: emailMarketingConsent ?? false,
-        emailMarketingConsentAt: emailMarketingConsent ? new Date() : null,
-      },
-    })
+    let lead
+    try {
+      lead = await prisma.lead.create({
+        data: {
+          fullName: fullName ?? '',
+          phone: phone ?? '',
+          email: email ?? '',
+          projectType: projectType ?? '',
+          city: city ?? '',
+          message: message ?? '',
+          leadSource: 'quote_form',
+          emailMarketingConsent: emailMarketingConsent ?? false,
+          emailMarketingConsentAt: emailMarketingConsent ? new Date() : null,
+        },
+      })
+    } catch (dbError) {
+      console.error('Database error:', dbError)
+      return NextResponse.json(
+        { success: false, message: 'Failed to save lead to database' },
+        { status: 500 }
+      )
+    }
 
     const appUrl = process.env.NEXTAUTH_URL ?? ''
     const hostname = appUrl ? new URL(appUrl)?.hostname ?? 'millersscreen' : 'millersscreen'
