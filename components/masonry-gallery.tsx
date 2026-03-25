@@ -19,15 +19,15 @@ export default function MasonryGallery({ projects, onImageClick }: MasonryGaller
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <AnimatePresence mode="popLayout">
         {projects.map((project) => (
           <motion.div
             key={project.id}
             layout
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
           >
             <ImageCard 
@@ -45,14 +45,14 @@ function ImageCard({ project, onClick }: { project: Project; onClick: () => void
   return (
     <button
       onClick={onClick}
-      className="relative w-full h-full rounded overflow-hidden group cursor-pointer"
+      className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-md group cursor-pointer bg-panel"
     >
       <Image
         src={project.image}
         alt={project.label}
         fill
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
-        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        className="object-cover transition-transform duration-300 group-hover:scale-105"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -64,7 +64,7 @@ function ImageCard({ project, onClick }: { project: Project; onClick: () => void
         </span>
       </div>
       {project.beforeImage && (
-        <div className="absolute top-2 right-2 bg-accent-red text-white text-xs px-2 py-1 rounded">
+        <div className="absolute top-3 right-3 bg-accent-red text-white text-xs font-medium px-2.5 py-1 rounded-md">
           Before/After
         </div>
       )}
