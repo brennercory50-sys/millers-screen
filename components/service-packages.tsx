@@ -2,28 +2,18 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Wrench, RefreshCw, Home, ArrowRight, Star } from 'lucide-react'
+import { RefreshCw, Home, ArrowRight, Star } from 'lucide-react'
 
 const packages = [
   {
-    title: 'Basic Repair',
-    description: 'Small screen fixes, patches, and minor frame repairs.',
-    price: 'Starting at $150',
-    icon: Wrench,
-    features: ['Screen patches & fixes', 'Door repairs', 'Minor frame work', 'Fast turnaround'],
-    ctaText: 'Get Same-Day Repair',
-    href: '/contact#form',
-    highlighted: false,
-  },
-  {
-    title: 'Standard Rescreen',
+    title: 'Rescreen',
     description: 'Full panel replacement for worn-out or damaged screens.',
     price: 'Custom Quote',
     icon: RefreshCw,
-    features: ['Full panel replacement', 'New spline & hardware', 'Screen material options', 'Most popular choice'],
+    features: ['Full panel replacement', 'New spline & hardware', 'Screen material options', 'Fast turnaround'],
     ctaText: 'Get Free Estimate',
     href: '/contact#form',
-    highlighted: true,
+    highlighted: false,
   },
   {
     title: 'Full Enclosure',
@@ -33,6 +23,16 @@ const packages = [
     features: ['Engineered to FL code', 'Fully permitted', 'In-house crews only', 'Lifetime warranty'],
     ctaText: 'Start My Enclosure',
     href: '/contact#form',
+    highlighted: true,
+  },
+  {
+    title: 'MegaView®',
+    description: 'Premium cable-supported enclosure for unobstructed views.',
+    price: 'Custom Quote',
+    icon: Star,
+    features: ['Only authorized builder', 'Zero visual posts', 'Modern design', 'Premium finish'],
+    ctaText: 'Get MegaView Info',
+    href: '/megaview',
     highlighted: false,
   },
 ]

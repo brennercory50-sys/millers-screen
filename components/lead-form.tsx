@@ -21,7 +21,6 @@ export default function LeadForm() {
     projectType: '',
     city: '',
     message: '',
-    emailMarketingConsent: false,
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
@@ -43,15 +42,14 @@ export default function LeadForm() {
     setStatus('loading')
     setErrorMessage('')
 
-    const payload = {
-      fullName: formData?.fullName?.trim?.() ?? '',
-      phone: formData?.phone?.trim?.() ?? '',
-      email: formData?.email?.trim?.() ?? '',
-      projectType: formData?.projectType ?? '',
-      city: formData?.city?.trim?.() ?? '',
-      message: formData?.message?.trim?.() ?? '',
-      emailMarketingConsent: formData?.emailMarketingConsent ?? false,
-    }
+      const payload = {
+        fullName: formData?.fullName?.trim?.() ?? '',
+        phone: formData?.phone?.trim?.() ?? '',
+        email: formData?.email?.trim?.() ?? '',
+        projectType: formData?.projectType ?? '',
+        city: formData?.city?.trim?.() ?? '',
+        message: formData?.message?.trim?.() ?? '',
+      }
 
     try {
       const response = await fetch('/api/leads', {
@@ -74,7 +72,6 @@ export default function LeadForm() {
         projectType: '',
         city: '',
         message: '',
-        emailMarketingConsent: false,
       })
     } catch (error) {
       console.error('Form submission error:', error)
@@ -235,21 +232,6 @@ export default function LeadForm() {
             className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors resize-none"
             placeholder="Pool size, location, timeline... anything helpful"
           />
-        </div>
-
-        <div className="pt-2">
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              name="emailMarketingConsent"
-              checked={formData?.emailMarketingConsent ?? false}
-              onChange={handleChange}
-              className="mt-1 w-5 h-5 rounded border-line bg-bg-1 text-accent-red focus:ring-accent-red cursor-pointer"
-            />
-            <span className="text-sm text-muted leading-relaxed">
-              Yes, I&apos;d like to receive occasional email updates, promotions, and project offers from Miller&apos;s Screen. I understand I can unsubscribe at any time.
-            </span>
-          </label>
         </div>
 
         <button

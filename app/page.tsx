@@ -4,10 +4,9 @@ import ServicePackages from '@/components/service-packages'
 import MegaviewBanner from '@/components/megaview-banner'
 import FinancingBanner from '@/components/financing-banner'
 import GalleryPreview from '@/components/gallery-preview'
-import ContactStrip from '@/components/contact-strip'
 import TestimonialsSection from '@/components/testimonials-section'
 import FAQSection from '@/components/faq-section'
-import QuickQuoteForm from '@/components/quick-quote-form'
+import LeadForm from '@/components/lead-form'
 import { Award, Star, CheckCircle } from 'lucide-react'
 import { generateFAQSchema } from '@/lib/seo'
 
@@ -32,60 +31,58 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqData) }}
       />
       <HeroSection
-        headline="SCREEN REPAIR & ENCLOSURES"
-        headlineLine2="DONE RIGHT THE FIRST TIME."
-        subheadline="Pool screens, lanais, and repairs completed fast. No hassle, no waiting. Serving Volusia County for 40+ years."
+        headline="SCREEN ENCLOSURES"
+        headlineLine2="BUILT RIGHT. BUILT TO LAST."
+        subheadline="Pool enclosures, screen rooms, and MegaView® installations by Volusia County's most experienced crew. Licensed, permitted, in-house."
         image="/projects/project-122978.jpg"
         ctaPrimary={{ label: 'Get My Free Quote', href: '/contact#form' }}
         ctaSecondary={{ label: 'Call Now', href: 'tel:386-756-8770' }}
-        trustBullets={['1,000+ jobs completed', '5-star rated locally', 'Fast turnaround']}
+        trustBullets={['40+ years Volusia County', 'In-house crews only', 'Licensed CBC#1262142']}
         isHomepage
       />
 
-      {/* Inline testimonial strip right under hero */}
       <TestimonialsSection />
 
       <AuthorityStrip />
       
-      {/* Awards & Accreditations Section */}
+      {/* Trust Badges Section */}
       <section className="py-8 md:py-10 border-b border-line bg-bg-1">
         <div className="section-container">
-          <p className="text-center text-sm text-muted uppercase tracking-wider mb-5">Awards & Accreditations</p>
-          <div className="flex flex-wrap items-center justify-center gap-5 md:gap-10">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-accent-red flex items-center justify-center flex-shrink-0">
-                <Award className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 rounded-lg bg-accent-red flex items-center justify-center flex-shrink-0">
+                <Award className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-xs text-muted">2024 & 2025</p>
-                <p className="font-semibold text-text-primary text-sm">Choice Awards Winner</p>
+                <p className="text-xs text-muted">Licensed</p>
+                <p className="font-bold text-text-primary text-sm">CBC#1262142</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-green-600 flex items-center justify-center flex-shrink-0">
-                <CheckCircle className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 rounded-lg bg-green-600 flex items-center justify-center flex-shrink-0">
+                <CheckCircle className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-xs text-muted">HomeAdvisor</p>
-                <p className="font-semibold text-text-primary text-sm">Elite Service</p>
+                <p className="text-xs text-muted">In-House</p>
+                <p className="font-bold text-text-primary text-sm">No Subcontractors</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
-                <CheckCircle className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center flex-shrink-0">
+                <CheckCircle className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-xs text-muted">HomeAdvisor</p>
-                <p className="font-semibold text-text-primary text-sm">Screened & Approved</p>
+                <p className="text-xs text-muted">MegaView®</p>
+                <p className="font-bold text-text-primary text-sm">Only Authorized Builder</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-yellow-600 flex items-center justify-center flex-shrink-0">
-                <Star className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 rounded-lg bg-yellow-600 flex items-center justify-center flex-shrink-0">
+                <Star className="w-6 h-6 text-white" />
               </div>
               <div>
-                <p className="text-xs text-muted">News-Journal</p>
-                <p className="font-semibold text-text-primary text-sm">Readers&apos; Choice 2014-2016</p>
+                <p className="text-xs text-muted">BBB</p>
+                <p className="font-bold text-text-primary text-sm">A+ Rated</p>
               </div>
             </div>
           </div>
@@ -95,17 +92,9 @@ export default function HomePage() {
       <ServicePackages />
       <MegaviewBanner />
 
-      {/* Quick Quote Form Section */}
-      <section id="quick-quote" className="py-12 md:py-20 bg-bg-1">
-        <div className="section-container max-w-2xl">
-          <QuickQuoteForm />
-        </div>
-      </section>
-
       <FAQSection />
       <FinancingBanner />
       <GalleryPreview />
-      <ContactStrip />
     </>
   )
 }

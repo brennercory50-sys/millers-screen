@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
 import HeroSection from '@/components/hero-section'
 import ContentBlock from '@/components/content-block'
 import TeamCard from '@/components/team-card'
@@ -163,32 +162,6 @@ export default function AboutPage() {
           <TeamSection title="Concrete Division" icon={HardHat} members={concreteDivision} />
           <TeamSection title="Shop Crew" icon={Building} members={shopCrew} />
           <TeamSection title="Helpers" icon={Users} members={helpers} />
-
-          <div className="mt-12 pt-8 border-t border-line">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-accent-red/10 flex items-center justify-center">
-                <span className="text-lg">🐾</span>
-              </div>
-              <h3 className="text-xl font-bold text-text-primary uppercase tracking-wide">Company Mascot</h3>
-            </div>
-            <div className="group flex flex-col sm:flex-row items-center gap-6 p-6 rounded-xl bg-panel ring-1 ring-line hover:ring-accent-red transition-all duration-500 hover:shadow-lg hover:shadow-accent-red/10 max-w-xl">
-              <div className="relative w-28 h-28 rounded-full overflow-hidden bg-bg-0 ring-4 ring-accent-red/30 group-hover:ring-accent-red transition-all duration-500 flex-shrink-0">
-                <Image
-                  src="/team/chewie.jpg"
-                  alt="Chewie - Company Mascot"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="text-center sm:text-left">
-                <h4 className="text-xl font-bold text-text-primary">Chewie</h4>
-                <p className="text-accent-red text-sm font-semibold mb-2">Chief Morale Officer</p>
-                <p className="text-muted text-sm leading-relaxed">
-                  The real boss around here. Greets every customer, inspects every truck, and makes sure the shop stays happy. Prefers belly rubs over paychecks.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
