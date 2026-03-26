@@ -14,7 +14,7 @@ export interface Project {
   build: string
   label: string
   image: string
-  beforeImage?: string
+
 }
 
 export const CATEGORIES: Category[] = [
@@ -35,7 +35,6 @@ export const projects: Project[] = [
     build: 'Standard',
     label: 'Mansard Pool Enclosure',
     image: '/projects/project-122978.jpg',
-    beforeImage: '/projects/project-72576.jpg',
   },
   {
     id: '2',
@@ -52,7 +51,6 @@ export const projects: Project[] = [
     build: 'Premium',
     label: 'MegaView Premium',
     image: '/projects/project-122977.jpg',
-    beforeImage: '/projects/project-72577.jpg',
   },
   {
     id: '4',
@@ -157,7 +155,6 @@ export const projects: Project[] = [
     build: 'Premium',
     label: 'MegaView Premium',
     image: '/projects/project-72563.jpg',
-    beforeImage: '/projects/project-72578.jpg',
   },
   {
     id: '17',
@@ -206,7 +203,6 @@ export const projects: Project[] = [
     build: 'Premium',
     label: 'MegaView Premium',
     image: '/projects/project-72569.jpg',
-    beforeImage: '/projects/project-72579.jpg',
   },
   {
     id: '23',
@@ -255,15 +251,9 @@ export const projects: Project[] = [
     build: 'Premium',
     label: 'MegaView Premium',
     image: '/projects/project-72575.jpg',
-    beforeImage: '/projects/project-72580.jpg',
   },
 ]
 
 export function getProjectsByCategory(category: Category): Project[] {
   return projects.filter((p) => p.category === category)
-}
-
-export function getCategoryCoverImage(category: Category): string {
-  const categoryProjects = getProjectsByCategory(category)
-  return categoryProjects[0]?.image || '/projects/project-122978.jpg'
 }

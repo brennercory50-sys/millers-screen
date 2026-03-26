@@ -146,11 +146,7 @@ export default function ShowcaseClient() {
                           {project.style}
                         </span>
                       </div>
-                      {project.beforeImage && (
-                        <div className="absolute top-2 right-2 bg-accent-red text-white text-[10px] font-medium px-2 py-0.5 rounded-md">
-                          Before/After
-                        </div>
-                      )}
+
                     </motion.button>
                   ))}
                 </div>
