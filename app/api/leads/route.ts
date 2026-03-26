@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
+import { getSupabase } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 
@@ -7,15 +7,7 @@ export async function POST(request: Request) {
   try {
     const data = await request?.json?.()
 
-    const { fullName, phone, email, projectType, city, message, emailMarketingConsent } = data ?? {}
-
-    if (!process.env.DATABASE_URL) {
-      console.error('DATABASE_URL not configured')
-      return NextResponse.json(
-        { success: false, message: 'Database not configured' },
-        { status: 503 }
-      )
-    }
+    const { fullName, phone, email, projectType, city, message } = data ?? {}
 
     if (!fullName || !phone || !email || !projectType) {
       return NextResponse.json(
@@ -24,34 +16,45 @@ export async function POST(request: Request) {
       )
     }
 
-    let lead
-    try {
-      lead = await prisma.lead.create({
-        data: {
-          fullName: fullName ?? '',
-          phone: phone ?? '',
-          email: email ?? '',
-          projectType: projectType ?? '',
-          city: city ?? '',
-          message: message ?? '',
-          leadSource: 'quote_form',
-          emailMarketingConsent: emailMarketingConsent ?? false,
-          emailMarketingConsentAt: emailMarketingConsent ? new Date() : null,
-        },
-      })
-    } catch (dbError) {
-      console.error('Database error:', dbError)
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      console.error('Supabase not configured')
       return NextResponse.json(
-        { success: false, message: 'Failed to save lead to database' },
+        { success: false, message: 'Database not configured' },
+        { status: 503 }
+      )
+    }
+
+    const supabaseClient = getSupabase()
+    if (!supabaseClient) {
+      return NextResponse.json(
+        { success: false, message: 'Database not configured' },
+        { status: 503 }
+      )
+    }
+
+    const { data: lead, error } = await supabaseClient
+      .from('leads')
+      .insert({
+        full_name: fullName ?? '',
+        phone: phone ?? '',
+        email: email ?? '',
+        project_type: projectType ?? '',
+        city: city ?? null,
+        message: message ?? null,
+      })
+      .select()
+      .single()
+
+    if (error) {
+      console.error('Database error:', error)
+      return NextResponse.json(
+        { success: false, message: 'Failed to save lead' },
         { status: 500 }
       )
     }
 
-    const appUrl = process.env.NEXTAUTH_URL ?? ''
+    const appUrl = process.env.NEXT_PUBLIC_SITE_URL ?? ''
     const hostname = appUrl ? new URL(appUrl)?.hostname ?? 'millersscreen' : 'millersscreen'
-    const appName = hostname?.split?.('.')?.[0] ?? 'millersscreen'
-
-    const consentText = emailMarketingConsent ? 'Yes - opted in' : 'No'
 
     const htmlBody = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0B0D10; color: #E9EEF5; padding: 20px;">
@@ -79,10 +82,6 @@ export async function POST(request: Request) {
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">City:</td>
               <td style="padding: 10px 0; color: #E9EEF5;">${city ?? 'Not specified'}</td>
-            </tr>
-            <tr>
-              <td style="padding: 10px 0; color: #A9B3C1;">Marketing Consent:</td>
-              <td style="padding: 10px 0; color: ${emailMarketingConsent ? '#22c55e' : '#A9B3C1'}; font-weight: bold;">${consentText}</td>
             </tr>
           </table>
         </div>
