@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
+import { getSupabase } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 
@@ -16,58 +16,37 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  const supabase = getSupabase()
+  if (!supabase) {
+    return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+  }
+
   try {
     const { searchParams } = new URL(request?.url ?? '')
-    const status = searchParams?.get('status') ?? 'all'
     const search = searchParams?.get('search') ?? ''
-    const source = searchParams?.get('source') ?? 'all'
-    const optIn = searchParams?.get('optIn') ?? 'all'
 
-    const where: Record<string, unknown> = {}
-
-    if (status && status !== 'all') {
-      where.status = status
-    }
-
-    if (source && source !== 'all') {
-      where.leadSource = source
-    }
-
-    if (optIn === 'true') {
-      where.emailMarketingConsent = true
-    } else if (optIn === 'false') {
-      where.emailMarketingConsent = false
-    }
+    let query = supabase
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false })
 
     if (search) {
-      where.OR = [
-        { fullName: { contains: search, mode: 'insensitive' } },
-        { email: { contains: search, mode: 'insensitive' } },
-        { phone: { contains: search, mode: 'insensitive' } },
-      ]
+      query = query.or(`full_name.ilike.%${search}%,email.ilike.%${search}%,phone.ilike.%${search}%`)
     }
 
-    const leads = await prisma?.lead?.findMany?.({
-      where,
-      orderBy: { createdAt: 'desc' },
-    })
+    const { data: leads, error: leadsError } = await query
 
-    const totals = await prisma?.lead?.groupBy?.({
-      by: ['status'],
-      _count: true,
-    })
-
-    const total = await prisma?.lead?.count?.()
-    const emailOptIns = await prisma?.lead?.count?.({
-      where: { emailMarketingConsent: true },
-    })
+    if (leadsError) {
+      console.error('Failed to fetch leads:', leadsError)
+      return NextResponse.json({ error: 'Failed to fetch leads' }, { status: 500 })
+    }
 
     return NextResponse.json({
       leads: leads ?? [],
       stats: {
-        total: total ?? 0,
-        emailOptIns: emailOptIns ?? 0,
-        byStatus: totals ?? [],
+        total: leads?.length ?? 0,
+        emailOptIns: 0,
+        byStatus: [],
       },
     })
   } catch (error) {
@@ -81,23 +60,30 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
+  const supabase = getSupabase()
+  if (!supabase) {
+    return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+  }
+
   try {
     const data = await request?.json?.()
-    const { id, status, followUpStage, notes } = data ?? {}
+    const { id, notes } = data ?? {}
 
     if (!id) {
       return NextResponse.json({ error: 'Lead ID required' }, { status: 400 })
     }
 
-    const updateData: Record<string, unknown> = {}
-    if (status !== undefined) updateData.status = status
-    if (followUpStage !== undefined) updateData.followUpStage = followUpStage
-    if (notes !== undefined) updateData.notes = notes
+    const { data: lead, error } = await supabase
+      .from('leads')
+      .update({ message: notes })
+      .eq('id', id)
+      .select()
+      .single()
 
-    const lead = await prisma?.lead?.update?.({
-      where: { id },
-      data: updateData,
-    })
+    if (error) {
+      console.error('Failed to update lead:', error)
+      return NextResponse.json({ error: 'Failed to update lead' }, { status: 500 })
+    }
 
     return NextResponse.json({ success: true, lead })
   } catch (error) {
