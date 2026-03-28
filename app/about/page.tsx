@@ -52,6 +52,7 @@ const installation = [
   { name: 'Michael', role: 'Head Installer', image: '/team/michael.jpg', bio: 'The fastest screen installer in Volusia County. Quality never suffers though—he just makes it look easy.' },
   { name: 'Devon', role: 'Head Installer', image: '/team/devon.jpg', bio: 'Handles our screen room projects. Takes pride in clean corners and straight lines. His attention to detail is unmatched.' },
   { name: 'Blake R', role: 'Installer', image: '/team/blake-r.jpg', bio: 'Young gun learning the ropes fast. Already running his own crews on smaller jobs. One to watch.' },
+  { name: 'Niko', role: 'The GOAT', image: '/team/niko.jpg', bio: 'Legendary installer with unmatched skill. The gold standard for quality and speed.', galleryImages: ['/team/niko-2.jpg', '/team/niko-3.jpg', '/team/niko-4.jpg'] },
   { name: 'Brendon', role: 'Warranty Division', image: '/team/brendon.jpg', bio: 'Handles all warranty calls and repairs. If something\'s not right, Brendon makes it right. Fast.' },
 ]
 

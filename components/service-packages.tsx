@@ -11,7 +11,7 @@ const packages = [
     price: 'Starting at $150',
     icon: Wrench,
     features: ['Screen patches & fixes', 'Door repairs', 'Minor frame work', 'Fast turnaround'],
-    ctaText: 'Get Same-Day Repair',
+    ctaText: 'Schedule Repair',
     href: '/contact#form',
     highlighted: false,
   },
