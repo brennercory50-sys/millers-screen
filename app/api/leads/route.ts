@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/db'
+import { getSupabase } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 
@@ -9,29 +9,52 @@ export async function POST(request: Request) {
 
     const { fullName, phone, email, projectType, city, message } = data ?? {}
 
-    if (!fullName || !phone || !projectType) {
+    if (!fullName || !phone || !email || !projectType) {
       return NextResponse.json(
-        { success: false, message: 'Name, phone, and service type are required' },
+        { success: false, message: 'Name, phone, email, and service type are required' },
         { status: 400 }
       )
     }
 
-    // Save to database
-    const lead = await prisma?.lead?.create?.({
-      data: {
-        fullName: fullName ?? '',
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+      console.error('Supabase not configured')
+      return NextResponse.json(
+        { success: false, message: 'Database not configured' },
+        { status: 503 }
+      )
+    }
+
+    const supabaseClient = getSupabase()
+    if (!supabaseClient) {
+      return NextResponse.json(
+        { success: false, message: 'Database not configured' },
+        { status: 503 }
+      )
+    }
+
+    const { data: lead, error } = await supabaseClient
+      .from('leads')
+      .insert({
+        full_name: fullName ?? '',
         phone: phone ?? '',
         email: email ?? '',
-        projectType: projectType ?? '',
-        city: city ?? '',
-        message: message ?? '',
-      },
-    })
+        project_type: projectType ?? '',
+        city: city ?? null,
+        message: message ?? null,
+      })
+      .select()
+      .single()
 
-    // Send email notification
-    const appUrl = process.env.NEXTAUTH_URL ?? ''
+    if (error) {
+      console.error('Database error:', error)
+      return NextResponse.json(
+        { success: false, message: 'Failed to save lead' },
+        { status: 500 }
+      )
+    }
+
+    const appUrl = process.env.NEXT_PUBLIC_SITE_URL ?? ''
     const hostname = appUrl ? new URL(appUrl)?.hostname ?? 'millersscreen' : 'millersscreen'
-    const appName = hostname?.split?.('.')?.[0] ?? 'millersscreen'
 
     const htmlBody = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0B0D10; color: #E9EEF5; padding: 20px;">
@@ -64,7 +87,7 @@ export async function POST(request: Request) {
         </div>
         <div style="background: #11151B; padding: 20px; border-radius: 8px;">
           <h3 style="color: #A9B3C1; margin-top: 0; font-size: 14px;">Project Details:</h3>
-          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${message ?? ''}</p>
+          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${message ?? 'No additional details provided'}</p>
         </div>
         <p style="color: #A9B3C1; font-size: 12px; margin-top: 20px; text-align: center;">
           Submitted at: ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })}

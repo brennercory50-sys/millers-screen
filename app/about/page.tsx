@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
 import HeroSection from '@/components/hero-section'
 import ContentBlock from '@/components/content-block'
 import TeamCard from '@/components/team-card'
@@ -50,26 +49,28 @@ const installation = [
   { name: 'Brandon', role: 'Head Installer', image: '/team/brandon.jpg', bio: 'Leads crews on the biggest pool enclosure jobs. His frames are plumb, his screen is tight, and his work speaks for itself.' },
   { name: 'Robby', role: 'Head Installer', image: '/team/robby.jpg', bio: 'Specializes in the tricky jobs other companies won\'t touch. Odd angles? No problem. He figures it out.' },
   { name: 'Michael', role: 'Head Installer', image: '/team/michael.jpg', bio: 'The fastest screen installer in Volusia County. Quality never suffers though—he just makes it look easy.' },
-  { name: 'Devon', role: 'Head Installer', image: '/team/devon.jpg', bio: 'Handles our screen room projects. Takes pride in clean corners and straight lines. His attention to detail is unmatched.' },
-  { name: 'Blake R', role: 'Installer', image: '/team/blake-r.jpg', bio: 'Young gun learning the ropes fast. Already running his own crews on smaller jobs. One to watch.' },
   { name: 'Niko', role: 'The GOAT', image: '/team/niko.jpg', bio: 'Legendary installer with unmatched skill. The gold standard for quality and speed.', galleryImages: ['/team/niko-2.jpg', '/team/niko-3.jpg', '/team/niko-4.jpg'] },
-  { name: 'Brendon', role: 'Warranty Division', image: '/team/brendon.jpg', bio: 'Handles all warranty calls and repairs. If something\'s not right, Brendon makes it right. Fast.' },
+  { name: 'Blake R', role: 'Installer', image: '/team/blake-r.jpg', bio: 'Young gun learning the ropes fast. Already running his own crews on smaller jobs. One to watch.' },
+  { name: 'JoJo', role: 'Warranty / Inspector', image: '/team/jojo.jpg', bio: 'Handles all warranty calls and inspections. If something\'s not right, JoJo makes it right. Fast.' },
+  { name: 'Shane', role: 'Installer', image: '/team/shane.jpg', bio: 'New to the team but learning fast. Ready to help on any job.' },
 ]
 
 const concreteDivision = [
   { name: 'Dale', role: 'Concrete Division', image: '/team/dale.jpg', bio: 'Handles all concrete work for our enclosure projects. From footers to slabs, Dale delivers a solid foundation every time.' },
+  { name: 'Ricky', role: 'Helper', image: '/team/ricky.jpg', bio: 'Keeps our equipment running. If it\'s got an engine or motor, Ricky can fix it.' },
 ]
 
 const shopCrew = [
+  { name: 'Brandon', role: 'Shop Crew', image: '/team/brandon-shop.jpg', bio: 'Assists with aluminum prep and fabrication. Keeps the shop running smoothly so the crews have everything they need.' },
   { name: 'Thomas', role: 'Shop Crew', image: '/team/thomas.jpg', bio: 'Cuts and preps all the aluminum in our shop. Every piece that leaves here is cut to spec, every time.' },
   { name: 'Derek', role: 'Shop Crew', image: '/team/derek.jpg', bio: 'Loads the trucks and keeps inventory stocked. The crews always have what they need because Derek stays on top of it.' },
-  { name: 'Ricky', role: 'Shop Crew', image: '/team/ricky.jpg', bio: 'Keeps our equipment running. If it\'s got an engine or motor, Ricky can fix it.' },
 ]
 
 const helpers = [
   { name: 'Brandon F', role: 'Helper', image: '/team/brandon-f.jpg', bio: 'Learning the trade from the ground up. Already knows more about screen work than most guys with five years in.' },
   { name: 'Gage', role: 'Helper', image: '/team/gage.jpg', bio: 'Eager to learn and quick to pitch in. The crews fight over who gets him on their jobs.' },
   { name: 'Cory', role: 'Helper', image: '/team/cory.jpg', bio: 'Started last summer and hasn\'t slowed down. Strong work ethic and always on time.' },
+  { name: 'Hunter', role: 'Helper', image: '/team/hunter.jpg', bio: 'Eager to learn the trade. Ready to help wherever needed.' },
 ]
 
 function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Users; members: Array<{ name: string; role: string; subtitle?: string; image: string; memorial?: boolean; bio?: string }> }) {
@@ -160,32 +161,6 @@ export default function AboutPage() {
           <TeamSection title="Concrete Division" icon={HardHat} members={concreteDivision} />
           <TeamSection title="Shop Crew" icon={Building} members={shopCrew} />
           <TeamSection title="Helpers" icon={Users} members={helpers} />
-
-          <div className="mt-12 pt-8 border-t border-line">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-accent-red/10 flex items-center justify-center">
-                <span className="text-lg">🐾</span>
-              </div>
-              <h3 className="text-xl font-bold text-text-primary uppercase tracking-wide">Company Mascot</h3>
-            </div>
-            <div className="group flex flex-col sm:flex-row items-center gap-6 p-6 rounded-xl bg-panel ring-1 ring-line hover:ring-accent-red transition-all duration-500 hover:shadow-lg hover:shadow-accent-red/10 max-w-xl">
-              <div className="relative w-28 h-28 rounded-full overflow-hidden bg-bg-0 ring-4 ring-accent-red/30 group-hover:ring-accent-red transition-all duration-500 flex-shrink-0">
-                <Image
-                  src="/team/chewie.jpg"
-                  alt="Chewie - Company Mascot"
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <div className="text-center sm:text-left">
-                <h4 className="text-xl font-bold text-text-primary">Chewie</h4>
-                <p className="text-accent-red text-sm font-semibold mb-2">Chief Morale Officer</p>
-                <p className="text-muted text-sm leading-relaxed">
-                  The real boss around here. Greets every customer, inspects every truck, and makes sure the shop stays happy. Prefers belly rubs over paychecks.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

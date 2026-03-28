@@ -6,9 +6,12 @@ import { Phone, Mail, MapPin, Facebook } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 const quickLinks = [
-  { label: 'About', href: '/about' },
+  { label: 'Pool Enclosures', href: '/pool-enclosures' },
+  { label: 'Screen Rooms', href: '/screen-rooms' },
   { label: 'MegaView®', href: '/megaview' },
   { label: 'Showcase', href: '/showcase' },
+  { label: 'Financing', href: '/financing' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ]
 

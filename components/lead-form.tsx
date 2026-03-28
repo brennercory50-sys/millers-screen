@@ -26,8 +26,15 @@ export default function LeadForm() {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e?.target ?? {}
-    setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: value ?? '' }))
+    const target = e?.target ?? {}
+    const { name, value, type } = target
+    
+    if (type === 'checkbox') {
+      const checked = (target as HTMLInputElement)?.checked ?? false
+      setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: checked }))
+    } else {
+      setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: value ?? '' }))
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -35,11 +42,20 @@ export default function LeadForm() {
     setStatus('loading')
     setErrorMessage('')
 
+      const payload = {
+        fullName: formData?.fullName?.trim?.() ?? '',
+        phone: formData?.phone?.trim?.() ?? '',
+        email: formData?.email?.trim?.() ?? '',
+        projectType: formData?.projectType ?? '',
+        city: formData?.city?.trim?.() ?? '',
+        message: formData?.message?.trim?.() ?? '',
+      }
+
     try {
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       const result = await response?.json?.()
@@ -150,16 +166,18 @@ export default function LeadForm() {
           </div>
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-muted mb-1">
-              Email <span className="text-muted">(optional)</span>
+              Email *
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              required
               value={formData?.email ?? ''}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors"
               placeholder="john@example.com"
+              autoComplete="email"
             />
           </div>
         </div>
@@ -233,6 +251,10 @@ export default function LeadForm() {
             </>
           )}
         </button>
+
+        <p className="text-xs text-muted text-center">
+          By submitting this form, you agree to be contacted about your quote request.
+        </p>
       </div>
 
       <p className="mt-4 text-xs text-muted text-center">

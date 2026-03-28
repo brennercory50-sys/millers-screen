@@ -202,7 +202,6 @@ export default function RootLayout({
         <Footer />
         <MobileCTABar />
         <ChatbotWidget />
-        {/* <EmailPopup /> */}
       </body>
     </html>
   )

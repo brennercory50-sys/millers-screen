@@ -3,48 +3,16 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { X, ArrowRight, Play } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight, Play, X } from 'lucide-react'
 import HeroSection from '@/components/hero-section'
-
-const filters = ['All', 'Pool Enclosures', 'Screen Rooms', 'MegaView®']
-
-const projects = [
-  { category: 'Pool Enclosures', image: '/projects/project-122978.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-122980.jpg' },
-  { category: 'MegaView®', image: '/projects/project-122977.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-122981.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72552.jpg' },
-  { category: 'Screen Rooms', image: '/projects/project-72553.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72554.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72555.jpg' },
-  { category: 'Screen Rooms', image: '/projects/project-72556.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72557.jpg' },
-  { category: 'MegaView®', image: '/projects/project-72558.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72559.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72560.jpg' },
-  { category: 'Screen Rooms', image: '/projects/project-72561.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72562.jpg' },
-  { category: 'MegaView®', image: '/projects/project-72563.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72564.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72565.jpg' },
-  { category: 'Screen Rooms', image: '/projects/project-72566.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72567.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72568.jpg' },
-  { category: 'MegaView®', image: '/projects/project-72569.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72570.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72571.jpg' },
-  { category: 'Screen Rooms', image: '/projects/project-72572.jpg' },
-  { category: 'Pool Enclosures', image: '/projects/project-72573.jpg' },
-]
+import { CATEGORIES, Category, Project, getProjectsByCategory } from '@/lib/projects'
 
 export default function ShowcaseClient() {
-  const [activeFilter, setActiveFilter] = useState('All')
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
-  const filteredProjects = activeFilter === 'All'
-    ? projects
-    : projects?.filter?.(p => p?.category === activeFilter) ?? []
+  const filteredProjects = selectedCategory ? getProjectsByCategory(selectedCategory) : []
 
   return (
     <>
@@ -76,96 +44,210 @@ export default function ShowcaseClient() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16">
+      <section className="py-12 md:py-16 bg-bg-0">
         <div className="section-container">
-          <div className="flex flex-wrap gap-2 mb-8">
-            {filters?.map?.((filter) => (
-              <button
-                key={filter ?? ''}
-                onClick={() => setActiveFilter(filter ?? 'All')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                  activeFilter === filter
-                    ? 'bg-accent-red text-white'
-                    : 'bg-panel text-muted hover:text-text-primary hover:bg-steel-highlight'
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="text-center mb-10"
+          >
+            <span className="text-sm font-semibold text-accent-red uppercase tracking-wider">Real Project Gallery</span>
+            <h2 className="text-text-primary text-3xl md:text-4xl font-bold mt-2">
+              Browse Screen Room & Enclosure Styles
+            </h2>
+            <p className="text-muted text-lg mt-3 max-w-2xl mx-auto">
+              Tap a style below to instantly view real projects we&apos;ve built.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+            {CATEGORIES.map((category, index) => (
+              <motion.button
+                key={category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                onClick={() => setSelectedCategory(category)}
+                className={`relative aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer transition-all duration-300 ${
+                  selectedCategory === category
+                    ? 'ring-2 ring-accent-red scale-[1.02]'
+                    : 'hover:scale-[1.02] hover:shadow-xl'
                 }`}
               >
-                {filter ?? ''}
-              </button>
-            )) ?? null}
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            <AnimatePresence mode="popLayout">
-              {filteredProjects?.map?.((project, index) => (
-                <motion.button
-                  key={`${project?.image ?? ''}-${index}`}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.2 }}
-                  onClick={() => setSelectedImage(project?.image ?? null)}
-                  className="relative aspect-[4/3] rounded-img overflow-hidden group"
-                >
-                  <Image
-                    src={project?.image ?? ''}
-                    alt={project?.category ?? 'Project'}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                    <div className="absolute bottom-3 left-3">
-                      <span className="text-sm font-medium text-white">
-                        {project?.category ?? ''}
-                      </span>
-                    </div>
+                <Image
+                  src={`/projects/project-${getCategoryCoverIndex(category)}.jpg`}
+                  alt={category}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute inset-0 bg-accent-red/0 group-hover:bg-accent-red/10 transition-colors duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+                  <span className="text-white font-bold text-sm md:text-base drop-shadow-lg">
+                    {category}
+                  </span>
+                </div>
+                {selectedCategory === category && (
+                  <div className="absolute top-2 right-2 w-6 h-6 bg-accent-red rounded-full flex items-center justify-center">
+                    <div className="w-2 h-2 bg-white rounded-full" />
                   </div>
-                </motion.button>
-              )) ?? null}
-            </AnimatePresence>
+                )}
+              </motion.button>
+            ))}
           </div>
 
-          <div className="mt-12 text-center">
-            <Link href="/contact#form" className="btn-primary">
-              Start Your Project
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </div>
+          <AnimatePresence mode="wait">
+            {selectedCategory && (
+              <motion.div
+                key={selectedCategory}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="mt-12 md:mt-16"
+              >
+                <div className="text-center mb-8">
+                  <h3 className="text-text-primary text-2xl md:text-3xl font-bold">
+                    {selectedCategory} Projects
+                  </h3>
+                  <p className="text-muted mt-2">
+                    Real completed examples of {selectedCategory.toLowerCase()} builds.
+                  </p>
+                  <p className="text-muted/70 text-sm mt-1">
+                    Looking for something similar?{' '}
+                    <Link href="/contact#form" className="text-accent-red hover:underline">
+                      Request a free quote for this style.
+                    </Link>
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+                  {filteredProjects.map((project, index) => (
+                    <motion.button
+                      key={project.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.2, delay: index * 0.03 }}
+                      onClick={() => setSelectedProject(project)}
+                      className="relative aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer bg-panel hover:shadow-xl transition-shadow duration-300"
+                    >
+                      <Image
+                        src={project.image}
+                        alt={project.label}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span className="text-white font-medium text-xs md:text-sm px-2 text-center">
+                          {project.style}
+                        </span>
+                      </div>
+
+                    </motion.button>
+                  ))}
+                </div>
+
+                <div className="text-center mt-10">
+                  <button
+                    onClick={() => setSelectedCategory(null)}
+                    className="text-muted hover:text-text-primary transition-colors text-sm"
+                  >
+                    View All Styles
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {!selectedCategory && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center mt-12"
+            >
+              <Link href="/contact#form" className="btn-primary">
+                Start Your Project
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </motion.div>
+          )}
         </div>
       </section>
 
       <AnimatePresence>
-        {selectedImage && (
+        {selectedProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedImage(null)}
-            className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
+            onClick={() => setSelectedProject(null)}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4"
           >
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 p-2 text-white hover:text-accent-red transition-colors"
-            >
-              <X className="w-8 h-8" />
-            </button>
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative max-w-5xl max-h-[85vh] w-full h-full"
-              onClick={(e) => e?.stopPropagation?.()}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-6xl max-h-[90vh] flex flex-col"
             >
-              <Image
-                src={selectedImage ?? ''}
-                alt="Selected project"
-                fill
-                className="object-contain"
-              />
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute -top-12 right-0 p-2 text-white/70 hover:text-white transition-colors"
+              >
+                <X className="w-8 h-8" />
+              </button>
+
+              <div className="relative flex-1 min-h-0 bg-black rounded-lg overflow-hidden aspect-video">
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.label}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <h3 className="text-white text-xl font-semibold">
+                    {selectedProject.label}
+                  </h3>
+                  <p className="text-muted text-sm">
+                    {selectedProject.category} • {selectedProject.style}
+                  </p>
+                </div>
+
+                <Link
+                  href="/contact#form"
+                  onClick={() => setSelectedProject(null)}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-accent-red text-white rounded hover:bg-accent-red-hover transition-colors"
+                >
+                  Get a Quote
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
     </>
   )
+}
+
+function getCategoryCoverIndex(category: Category): string {
+  const covers: Record<Category, string> = {
+    'Mansard': '122978',
+    'Dome': '72555',
+    'Hip': '72552',
+    'Gable': '122981',
+    'Pool Enclosures': '72552',
+    'Screen Rooms': '72553',
+    'MegaView': '122977',
+  }
+  return covers[category]
 }
