@@ -73,7 +73,17 @@ const helpers = [
   { name: 'Hunter', role: 'Helper', image: '/team/hunter.jpg', bio: 'Eager to learn the trade. Ready to help wherever needed.' },
 ]
 
-function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Users; members: Array<{ name: string; role: string; subtitle?: string; image: string; memorial?: boolean; bio?: string }> }) {
+type TeamMemberType = {
+  name: string
+  role: string
+  subtitle?: string
+  image: string
+  memorial?: boolean
+  bio?: string
+  galleryImages?: string[]
+}
+
+function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Users; members: TeamMemberType[] }) {
   return (
     <div className="mb-16">
       <div className="flex items-center gap-3 mb-6">
