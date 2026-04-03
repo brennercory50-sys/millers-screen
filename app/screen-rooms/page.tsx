@@ -36,6 +36,21 @@ const roomImages = [
   '/projects/project-72566.jpg',
   '/projects/project-72572.jpg',
   '/projects/project-72560.jpg',
+  '/projects/project-72581.jpg',
+  '/projects/project-72582.jpg',
+  '/projects/project-72583.jpg',
+  '/projects/project-72587.jpg',
+  '/projects/project-72588.jpg',
+  '/projects/project-72589.jpg',
+  '/projects/project-72590.jpg',
+  '/projects/project-72591.jpg',
+  '/projects/project-72592.jpg',
+  '/projects/project-72593.jpg',
+  '/projects/project-72594.jpg',
+  '/projects/project-72595.jpg',
+  '/projects/project-72596.jpg',
+  '/projects/project-72597.jpg',
+  '/projects/project-72598.jpg',
 ]
 
 export default function ScreenRoomsPage() {

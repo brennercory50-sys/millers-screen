@@ -2,11 +2,21 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { RefreshCw, Home, ArrowRight, Star } from 'lucide-react'
+import { RefreshCw, Home, ArrowRight, Star, Wrench } from 'lucide-react'
 
 const packages = [
   {
-    title: 'Rescreen',
+    title: 'Basic Repair',
+    description: 'Small screen fixes, patches, and minor frame repairs.',
+    price: 'Starting at $150',
+    icon: Wrench,
+    features: ['Screen patches & fixes', 'Door repairs', 'Minor frame work', 'Fast turnaround'],
+    ctaText: 'Schedule Repair',
+    href: '/contact#form',
+    highlighted: false,
+  },
+  {
+    title: 'Standard Rescreen',
     description: 'Full panel replacement for worn-out or damaged screens.',
     price: 'Custom Quote',
     icon: RefreshCw,

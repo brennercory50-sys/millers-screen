@@ -3,7 +3,7 @@ import HeroSection from '@/components/hero-section'
 import ContentBlock from '@/components/content-block'
 import TeamCard from '@/components/team-card'
 import { Users, Heart, Award, Briefcase, Wrench, Building, HardHat } from 'lucide-react'
-import { TEAM_DATA, TeamCategory } from '@/lib/team'
+import { TEAM_DATA, TeamCategory, TeamMember } from '@/lib/team'
 
 const iconMap: Record<TeamCategory, typeof Award> = {
   'Leadership': Award,
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
 }
 
-function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Award; members: typeof TEAM_DATA[0]['members'] }) {
+function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Award; members: TeamMember[] }) {
   return (
     <div className="mb-16">
       <div className="flex items-center gap-3 mb-6">
