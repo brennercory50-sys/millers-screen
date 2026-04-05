@@ -127,6 +127,7 @@ export const TEAM_DATA: TeamSection[] = [
         subtitle: 'THE GOAT',
         image: '/team/niko.jpg',
         bio: 'Handles our screen room projects. Takes pride in clean corners and straight lines. His attention to detail is unmatched.',
+        gallery: ['/team/niko-2.jpg', '/team/niko-3.jpg', '/team/niko-4.jpg'],
       },
       {
         id: 'blake-r',
