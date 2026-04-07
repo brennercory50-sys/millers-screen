@@ -236,14 +236,14 @@ export const TEAM_DATA: TeamSection[] = [
     icon: 'Users',
     members: [
       {
-        id: 'brandon-b2-pending',
-        name: 'Brandon "B2" LAST_NAME_PENDING',
-        firstName: 'Brandon',
-        nickname: 'B2',
-        lastName: 'LAST_NAME_PENDING',
+        id: 'brendon-bartlett',
+        name: 'Brendon Bartlett',
+        firstName: 'Brendon',
+        lastName: 'Bartlett',
         role: 'Helper',
-        image: '/team/brandon-b2-pending.jpg',
+        image: '/team/brendon-bartlett.jpg',
         bio: 'Learning the trade from the ground up. Already knows more about screen work than most guys with five years in.',
+        gallery: ['/team/brendon-bartlett-2.jpg', '/team/brendon-bartlett-3.jpg', '/team/brendon-bartlett-4.jpg'],
       },
       {
         id: 'gage',
@@ -261,14 +261,6 @@ export const TEAM_DATA: TeamSection[] = [
         image: '/team/cory.jpg',
         bio: 'Started last summer and hasn\'t slowed down. Strong work ethic and always on time.',
         gallery: ['/team/cory-2.jpg', '/team/cory-3.jpg', '/team/cory-4.jpg'],
-      },
-      {
-        id: 'brendon',
-        name: 'Brendon',
-        firstName: 'Brendon',
-        role: 'Helper',
-        image: '/team/brendon.jpg',
-        bio: 'Handles all warranty calls and repairs. If something\'s not right, Brendon makes it right. Fast.',
       },
       {
         id: 'hunter',
