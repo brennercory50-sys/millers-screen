@@ -95,7 +95,7 @@ export default function EmployeeModal({ member, isOpen, onClose }: EmployeeModal
                 src={member.image}
                 alt={member.name}
                 fill
-                className={member.imagePosition ? undefined : 'object-[50%_20%]'}
+                className={member.imagePosition ? 'object-cover' : 'object-cover object-[50%_20%]'}
                 style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
                 priority
                 onError={() => setImageError(true)}

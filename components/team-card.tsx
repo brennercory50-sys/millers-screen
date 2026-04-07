@@ -27,7 +27,7 @@ export default function TeamCard({ member }: TeamCardProps) {
           src={member.image}
           alt={member.name}
           fill
-          className={member.imagePosition ? 'object-cover transition-all duration-700 group-hover:scale-105' : 'object-[50%_20%] transition-all duration-700 group-hover:scale-105'}
+          className={member.imagePosition ? 'object-cover transition-all duration-700 group-hover:scale-105' : 'object-cover object-[50%_20%] transition-all duration-700 group-hover:scale-105'}
           style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
         />
         
