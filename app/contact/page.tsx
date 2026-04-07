@@ -93,7 +93,7 @@ export default function ContactPage() {
             <div>
               <h2 className="text-text-primary mb-4">Request an Estimate</h2>
               <p className="text-muted mb-6 leading-relaxed">
-                Fill out the form with your project details and we'll get back to you promptly. For immediate assistance, give us a call.
+                Fill out the form with your project details and we&apos;ll get back to you promptly. For immediate assistance, give us a call.
               </p>
               
               <div className="space-y-4">

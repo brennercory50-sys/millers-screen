@@ -7,7 +7,7 @@ Premium screen enclosure contractor website for Volusia County, Florida.
 - **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **Database**: PostgreSQL with Prisma ORM
+- **Database**: PostgreSQL with Supabase
 - **Deployment**: Render
 
 ## Getting Started
@@ -36,6 +36,11 @@ Required environment variables:
 | `NOTIF_ID_LEAD_FORM_SUBMISSION` | Notification ID for lead emails |
 | `NOTIF_ID_EMAIL_SIGNUP_10_OFF` | Notification ID for email signup |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics measurement ID |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anonymous key |
+| `ADMIN_SECRET` | Admin dashboard secret |
+| `NEXTAUTH_SECRET` | NextAuth session secret |
 
 ### Installation
 
@@ -45,13 +50,7 @@ npm install
 
 ### Database Setup
 
-```bash
-# Generate Prisma client
-npx prisma generate
-
-# Push schema to database
-npx prisma db push
-```
+Supabase handles database migrations. Ensure your Supabase project is running and the connection variables are set in `.env`.
 
 ### Development
 
@@ -85,7 +84,7 @@ npm start
 
 | Setting | Value |
 |---------|-------|
-| **Build Command** | `npm install && npx prisma generate && npm run build` |
+| **Build Command** | `npm install && npm run build` |
 | **Start Command** | `npm start` |
 | **Node Version** | 18 |
 
@@ -103,10 +102,9 @@ Create a PostgreSQL database on Render and copy the connection string to `DATABA
 │   ├── [city]/[service]/ # Dynamic service area pages
 │   └── *.tsx             # Static pages
 ├── components/            # React components
-├── lib/                  # Utility functions and database
-├── prisma/              # Database schema
-├── public/              # Static assets
-└── scripts/             # Build scripts
+├── lib/                   # Utility functions and Supabase client
+├── public/                # Static assets
+└── scripts/               # Build scripts
 ```
 
 ## License

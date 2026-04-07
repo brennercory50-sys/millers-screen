@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
@@ -76,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script src="https://apps.abacus.ai/chatllm/appllm-lib.js"></script>
+        <Script src="https://apps.abacus.ai/chatllm/appllm-lib.js" strategy="lazyOnload" />
         
         {/* LocalBusiness Schema */}
         <script

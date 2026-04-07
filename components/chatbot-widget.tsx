@@ -85,13 +85,13 @@ export default function ChatbotWidget() {
         setStage('initial')
       }, 300)
     }
-  }, [isOpen])
+  }, [isOpen, messages.length, setMessages, setStage])
 
   useEffect(() => {
     if (isOpen && formRef.current) {
       formRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-  }, [stage])
+  }, [stage, isOpen])
 
   useEffect(() => {
     if (!isOpen && !triggered) {
@@ -308,7 +308,7 @@ export default function ChatbotWidget() {
                   <Bot className="w-4 h-4 text-white" />
                 </div>
                 <div>
-                  <span className="font-semibold text-text-primary text-sm">Miller's Screen</span>
+                  <span className="font-semibold text-text-primary text-sm">Miller&apos;s Screen</span>
                   <p className="text-xs text-green-400 flex items-center gap-1">
                     <span className="w-2 h-2 bg-green-400 rounded-full" />
                     Quick Response
@@ -460,7 +460,7 @@ export default function ChatbotWidget() {
                 >
                   <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-3" />
                   <h4 className="font-bold text-text-primary mb-1">Quote Request Sent!</h4>
-                  <p className="text-sm text-muted mb-4">We'll reach out shortly.</p>
+                  <p className="text-sm text-muted mb-4">We&apos;ll reach out shortly.</p>
                   <a
                     href="tel:386-756-8770"
                     className="inline-flex items-center gap-2 bg-green-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-700 transition-colors text-sm"

@@ -57,7 +57,7 @@ export default function TestimonialsSection() {
               </div>
 
               <p className="text-text-primary text-lg md:text-xl leading-relaxed mb-8 italic">
-                "{testimonials[current]?.quote ?? ''}"
+                {`"${testimonials[current]?.quote ?? ''}"`}
               </p>
 
               <div className="flex items-center justify-between">

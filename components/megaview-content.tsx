@@ -109,7 +109,7 @@ export default function MegaviewContent() {
             >
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
-                  What You're Seeing
+                  What You&apos;re Seeing
                 </h2>
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
@@ -135,7 +135,7 @@ export default function MegaviewContent() {
 
               <div className="border-t border-line pt-8">
                 <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
-                  What You Don't See
+                  What You Don&apos;t See
                 </h2>
                 <ul className="space-y-3 text-muted">
                   <li className="flex items-start gap-3">
@@ -173,7 +173,7 @@ export default function MegaviewContent() {
               We Are The ONLY Company In Volusia County Offering MegaView®
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              This means you're getting a system most companies cannot install — built for homeowners who want the cleanest possible enclosure.
+              This means you&apos;re getting a system most companies cannot install — built for homeowners who want the cleanest possible enclosure.
             </p>
           </motion.div>
         </div>

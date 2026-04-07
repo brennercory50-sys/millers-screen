@@ -295,7 +295,7 @@ export default async function ServiceAreaPage({ params }: Props) {
                   </div>
                 </div>
                 <blockquote className="text-text-primary italic mb-4">
-                  "Miller's Screen did an excellent job on our pool enclosure. Professional crew, clean work, finished ahead of schedule. Highly recommend for anyone in Daytona Beach!"
+                  &ldquo;Miller&apos;s Screen did an excellent job on our pool enclosure. Professional crew, clean work, finished ahead of schedule. Highly recommend for anyone in Daytona Beach!&rdquo;
                 </blockquote>
                 <p className="text-sm text-muted">— Verified Customer, {cityData.name}</p>
               </div>
@@ -334,7 +334,7 @@ export default async function ServiceAreaPage({ params }: Props) {
             Ready to Start Your {cityData.name} Project?
           </h2>
           <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-            Get your free, no-obligation estimate today. We'll visit your property, discuss your needs, and provide a detailed quote.
+            Get your free, no-obligation estimate today. We&apos;ll visit your property, discuss your needs, and provide a detailed quote.
           </p>
           <p className="text-white/60 text-sm mb-6 flex items-center justify-center gap-2">
             <Clock className="w-4 h-4" />

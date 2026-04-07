@@ -58,6 +58,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Permits',
         image: '/team/meagan-miller.jpg',
         bio: 'The permit wizard. Knows every code inspector in Volusia County by name. Can navigate city hall faster than anyone. Keeps the paperwork flowing so the crews can keep building.',
+        gallery: ['/team/meagan-2.jpg', '/team/meagan-3.jpg'],
       },
     ],
   },
@@ -89,6 +90,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Sales',
         image: '/team/bowen.jpg',
         bio: 'Straight shooter who tells it like it is. Won\'t try to sell you something you don\'t need. Knows screen enclosures inside and out.',
+        gallery: ['/team/bowen-2.jpg', '/team/bowen-3.jpg', '/team/bowen-4.jpg'],
       },
       {
         id: 'mark',
@@ -131,14 +133,6 @@ export const TEAM_DATA: TeamSection[] = [
         bio: 'Specializes in the tricky jobs other companies won\'t touch. Odd angles? No problem. He figures it out.',
       },
       {
-        id: 'michael',
-        name: 'Michael',
-        firstName: 'Michael',
-        role: 'Head Installer',
-        image: '/team/michael.jpg',
-        bio: 'The fastest screen installer in Volusia County. Quality never suffers though—he just makes it look easy.',
-      },
-      {
         id: 'niko',
         name: 'Niko',
         firstName: 'Niko',
@@ -157,14 +151,6 @@ export const TEAM_DATA: TeamSection[] = [
         image: '/team/blake-r.jpg',
         bio: 'Young gun learning the ropes fast. Already running his own crews on smaller jobs. One to watch.',
         gallery: ['/team/blake-r-2.jpg', '/team/blake-r-3.jpg', '/team/blake-r-4.jpg'],
-      },
-      {
-        id: 'jojo',
-        name: 'JoJo',
-        firstName: 'JoJo',
-        role: 'Warranty / Inspector',
-        image: '/team/jojo.jpg',
-        bio: 'Handles all warranty calls and inspections. If something\'s not right, JoJo makes it right. Fast.',
       },
       {
         id: 'shane',
@@ -271,6 +257,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Helper',
         image: '/team/hunter.jpg',
         bio: 'Eager to learn the trade. Ready to help wherever needed.',
+        gallery: ['/team/hunter-2.jpg'],
       },
     ],
   },

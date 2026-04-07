@@ -34,7 +34,7 @@ export default function WarrantyPage() {
                 <h2 className="text-xl font-bold text-text-primary">Workmanship Warranty</h2>
               </div>
               <p className="text-muted leading-relaxed">
-                Miller's Screen provides a one-year warranty on workmanship. Warranty period begins the day the job is finished.
+                Miller&apos;s Screen provides a one-year warranty on workmanship. Warranty period begins the day the job is finished.
               </p>
             </div>
 

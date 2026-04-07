@@ -66,7 +66,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           deployment_token: process.env.ABACUSAI_API_KEY ?? '',
           app_id: process.env.WEB_APP_ID ?? '',
-          notification_id: process.env.NOTIF_ID_EMAIL_SIGNUP ?? '',
+          notification_id: process.env.NOTIF_ID_EMAIL_SIGNUP_10_OFF ?? '',
           subject: 'New Email Signup',
           body: htmlBody,
           is_html: true,

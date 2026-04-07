@@ -189,4 +189,4 @@ export function generateFAQSchema(page: string): Array<{ question: string; answe
   return faqMap[page] || faqMap.home
 }
 
-export { generateTitle, generateDescription, KEYWORDS }
+

@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Award, Users, FileCheck, Shield, Phone } from 'lucide-react'
 import { motion, useInView } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
@@ -113,12 +114,12 @@ export default function AuthorityStrip() {
           transition={{ delay: 0.3 }}
           className="mt-8 pt-6 border-t border-line flex flex-col sm:flex-row items-center gap-4"
         >
-          <a
+          <Link
             href="/contact#form"
             className="btn-primary text-base px-6 py-3 min-h-[48px]"
           >
             Get Your Free Estimate →
-          </a>
+          </Link>
           <a
             href="tel:386-756-8770"
             className="btn-secondary text-base px-6 py-3 min-h-[48px] flex items-center gap-2"

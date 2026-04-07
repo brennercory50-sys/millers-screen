@@ -52,6 +52,7 @@ prisma/*.db-journal
 
 # Abacus
 .abacus.donotdelete
+.abacus.*
 
 # OS
 Thumbs.db
