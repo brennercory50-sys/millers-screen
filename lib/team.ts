@@ -197,6 +197,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Helper',
         image: '/team/ricky.jpg',
         bio: 'Keeps our equipment running. If it\'s got an engine or motor, Ricky can fix it.',
+        gallery: ['/team/ricky-2.jpg', '/team/ricky-3.jpg'],
       },
     ],
   },
