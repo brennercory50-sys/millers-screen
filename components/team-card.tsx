@@ -11,6 +11,7 @@ interface TeamCardProps {
 
 export default function TeamCard({ member }: TeamCardProps) {
   const [modalOpen, setModalOpen] = useState(false)
+  const hasGallery = member.gallery && member.gallery.length > 0
 
   const handleClick = () => {
     setModalOpen(true)
@@ -52,9 +53,11 @@ export default function TeamCard({ member }: TeamCardProps) {
           {member.subtitle && <p className="text-xs text-muted mt-0.5">{member.subtitle}</p>}
         </div>
         
-        <div className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 bg-accent-red/0 opacity-0 group-hover:bg-accent-red group-hover:opacity-100">
-          <span className="text-white text-xs font-bold">+</span>
-        </div>
+        {hasGallery && (
+          <div className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 bg-accent-red opacity-0 group-hover:opacity-100">
+            <span className="text-white text-xs font-bold">+</span>
+          </div>
+        )}
       </div>
 
       <EmployeeModal

@@ -71,6 +71,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Designer',
         image: '/team/zach.jpg',
         bio: 'Turns your backyard dreams into CAD drawings. Has an eye for what works and what won\'t. His designs have won over even the pickiest HOAs.',
+        gallery: ['/team/zach-2.jpg', '/team/zach-3.jpg', '/team/zach-4.jpg', '/team/zach-5.jpg'],
       },
       {
         id: 'bowen',
@@ -149,6 +150,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Installer',
         image: '/team/shane.jpg',
         bio: 'New to the team but learning fast. Ready to help on any job.',
+        gallery: ['/team/shane-2.jpg', '/team/shane-3.jpg', '/team/shane-4.jpg'],
       },
     ],
   },
@@ -162,6 +164,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Concrete Division',
         image: '/team/dale.jpg',
         bio: 'Handles all concrete work for our enclosure projects. From footers to slabs, Dale delivers a solid foundation every time.',
+        gallery: ['/team/dale-2.jpg', '/team/dale-3.jpg', '/team/dale-4.jpg'],
       },
       {
         id: 'ricky',
@@ -223,6 +226,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Helper',
         image: '/team/cory.jpg',
         bio: 'Started last summer and hasn\'t slowed down. Strong work ethic and always on time.',
+        gallery: ['/team/cory-2.jpg', '/team/cory-3.jpg', '/team/cory-4.jpg'],
       },
       {
         id: 'brendon',
