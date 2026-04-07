@@ -19,6 +19,7 @@ export interface TeamMember {
   memorial?: boolean
   gallery?: string[]
   specialties?: string[]
+  imagePosition?: string
 }
 
 export interface TeamSection {

@@ -27,7 +27,8 @@ export default function TeamCard({ member }: TeamCardProps) {
           src={member.image}
           alt={member.name}
           fill
-          className="object-cover object-top transition-all duration-700 group-hover:scale-105"
+          className={member.imagePosition ? 'object-cover transition-all duration-700 group-hover:scale-105' : 'object-[50%_20%] transition-all duration-700 group-hover:scale-105'}
+          style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
         />
         
         <div className="absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/30 to-transparent" />
