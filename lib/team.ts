@@ -48,7 +48,7 @@ export const TEAM_DATA: TeamSection[] = [
         firstName: 'Blake',
         role: 'President',
         image: '/team/blake-miller.jpg',
-        bio: 'Grew up on job sites learning the trade from his dad. Took over operations in 2020 and hasn\'t looked back. When he\'s not running the show, you\'ll find him on the water or coaching little league.',
+        bio: 'Blake is a dedicated husband and proud father of two who puts family first in everything he does. Outside of work, he enjoys spending quality time with his family, along with fishing and hunting whenever he gets the chance. He\'s also a big fan of boxing and UFC, and some of his favorite foods are brisket, seafood boils, and sushi.',
       },
       {
         id: 'meagan-miller',
@@ -78,7 +78,7 @@ export const TEAM_DATA: TeamSection[] = [
         firstName: 'Zach',
         role: 'Designer',
         image: '/team/zach.jpg',
-        bio: 'Turns your backyard dreams into CAD drawings. Has an eye for what works and what won\'t. His designs have won over even the pickiest HOAs.',
+        bio: 'Zach is a dedicated draftsman at Miller\'s Screen who takes pride in doing quality work and helping projects come together the right way. Outside of work, family is what matters most to him, and he enjoys spending as much time with them as he can. He also likes staying busy, working with his hands, and taking on projects that keep him active and involved.',
         gallery: ['/team/zach-2.jpg', '/team/zach-3.jpg', '/team/zach-4.jpg', '/team/zach-5.jpg'],
       },
       {
@@ -171,7 +171,7 @@ export const TEAM_DATA: TeamSection[] = [
         firstName: 'Shane',
         role: 'Installer',
         image: '/team/shane.jpg',
-        bio: 'New to the team but learning fast. Ready to help on any job.',
+        bio: 'Shane is a family-oriented man who values time with his loved ones above all else. Most of his free time is spent with his family and daughter, making memories and enjoying every moment together. He also enjoys being outdoors, especially fishing and spending time at the beach, and takes pride in working hard and staying active both on and off the job.',
         gallery: ['/team/shane-2.jpg', '/team/shane-3.jpg', '/team/shane-4.jpg'],
       },
     ],
