@@ -9,6 +9,9 @@ export type TeamCategory =
 export interface TeamMember {
   id: string
   name: string
+  firstName: string
+  nickname?: string
+  lastName?: string
   role: string
   subtitle?: string
   image: string
@@ -32,6 +35,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'chip-miller',
         name: 'Chip Miller',
+        firstName: 'Chip',
         role: '"Legend" Rest in Paradise',
         subtitle: '1952-2022',
         image: '/team/chip-miller.jpg',
@@ -41,6 +45,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'blake-miller',
         name: 'Blake',
+        firstName: 'Blake',
         role: 'President',
         image: '/team/blake-miller.jpg',
         bio: 'Grew up on job sites learning the trade from his dad. Took over operations in 2020 and hasn\'t looked back. When he\'s not running the show, you\'ll find him on the water or coaching little league.',
@@ -48,6 +53,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'meagan-miller',
         name: 'Meagan Miller',
+        firstName: 'Meagan',
         role: 'Permits',
         image: '/team/meagan-miller.jpg',
         bio: 'The permit wizard. Knows every code inspector in Volusia County by name. Can navigate city hall faster than anyone. Keeps the paperwork flowing so the crews can keep building.',
@@ -61,6 +67,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'jen',
         name: 'Jen',
+        firstName: 'Jen',
         role: 'Office Manager',
         image: '/team/jen.jpg',
         bio: 'Runs the front desk like a well-oiled machine. If you\'ve called our office, you\'ve talked to Jen. She remembers every customer and their project details.',
@@ -68,6 +75,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'zach',
         name: 'Zach',
+        firstName: 'Zach',
         role: 'Designer',
         image: '/team/zach.jpg',
         bio: 'Turns your backyard dreams into CAD drawings. Has an eye for what works and what won\'t. His designs have won over even the pickiest HOAs.',
@@ -76,6 +84,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'bowen',
         name: 'Bowen',
+        firstName: 'Bowen',
         role: 'Sales',
         image: '/team/bowen.jpg',
         bio: 'Straight shooter who tells it like it is. Won\'t try to sell you something you don\'t need. Knows screen enclosures inside and out.',
@@ -83,6 +92,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'mark',
         name: 'Mark',
+        firstName: 'Mark',
         role: 'Sales',
         image: '/team/mark.jpg',
         bio: 'Been selling enclosures for 15 years. Can eyeball a job and give you a solid estimate on the spot. Customers love his no-nonsense approach.',
@@ -90,6 +100,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'dave',
         name: 'Dave',
+        firstName: 'Dave',
         role: 'Sales',
         image: '/team/dave.jpg',
         bio: 'The MegaView® specialist. If you want the clearest views possible, Dave\'s your guy. He\'ll show you why it\'s worth the upgrade.',
@@ -101,15 +112,19 @@ export const TEAM_DATA: TeamSection[] = [
     icon: 'Wrench',
     members: [
       {
-        id: 'brandon',
-        name: 'Brandon',
+        id: 'brandon-bearclaw-miller',
+        name: 'Brandon "Bear Claw" Miller',
+        firstName: 'Brandon',
+        nickname: 'Bear Claw',
+        lastName: 'Miller',
         role: 'Head Installer',
-        image: '/team/brandon.jpg',
+        image: '/team/brandon-bearclaw-miller.jpg',
         bio: 'Leads crews on the biggest pool enclosure jobs. His frames are plumb, his screen is tight, and his work speaks for itself.',
       },
       {
         id: 'robby',
         name: 'Robby',
+        firstName: 'Robby',
         role: 'Head Installer',
         image: '/team/robby.jpg',
         bio: 'Specializes in the tricky jobs other companies won\'t touch. Odd angles? No problem. He figures it out.',
@@ -117,6 +132,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'michael',
         name: 'Michael',
+        firstName: 'Michael',
         role: 'Head Installer',
         image: '/team/michael.jpg',
         bio: 'The fastest screen installer in Volusia County. Quality never suffers though—he just makes it look easy.',
@@ -124,6 +140,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'niko',
         name: 'Niko',
+        firstName: 'Niko',
         role: 'Head Installer',
         subtitle: 'THE GOAT',
         image: '/team/niko.jpg',
@@ -133,6 +150,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'blake-r',
         name: 'Blake R',
+        firstName: 'Blake',
         role: 'Installer',
         image: '/team/blake-r.jpg',
         bio: 'Young gun learning the ropes fast. Already running his own crews on smaller jobs. One to watch.',
@@ -140,6 +158,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'jojo',
         name: 'JoJo',
+        firstName: 'JoJo',
         role: 'Warranty / Inspector',
         image: '/team/jojo.jpg',
         bio: 'Handles all warranty calls and inspections. If something\'s not right, JoJo makes it right. Fast.',
@@ -147,6 +166,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'shane',
         name: 'Shane',
+        firstName: 'Shane',
         role: 'Installer',
         image: '/team/shane.jpg',
         bio: 'New to the team but learning fast. Ready to help on any job.',
@@ -161,6 +181,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'dale',
         name: 'Dale',
+        firstName: 'Dale',
         role: 'Concrete Division',
         image: '/team/dale.jpg',
         bio: 'Handles all concrete work for our enclosure projects. From footers to slabs, Dale delivers a solid foundation every time.',
@@ -169,6 +190,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'ricky',
         name: 'Ricky',
+        firstName: 'Ricky',
         role: 'Helper',
         image: '/team/ricky.jpg',
         bio: 'Keeps our equipment running. If it\'s got an engine or motor, Ricky can fix it.',
@@ -180,15 +202,19 @@ export const TEAM_DATA: TeamSection[] = [
     icon: 'Building',
     members: [
       {
-        id: 'brandon-shop',
-        name: 'Brandon',
+        id: 'brandon-brenden-pending',
+        name: 'Brandon "Brenden" LAST_NAME_PENDING',
+        firstName: 'Brandon',
+        nickname: 'Brenden',
+        lastName: 'LAST_NAME_PENDING',
         role: 'Shop Crew',
-        image: '/team/brandon-shop.jpg',
+        image: '/team/brandon-brenden-pending.jpg',
         bio: 'Assists with aluminum prep and fabrication. Keeps the shop running smoothly so the crews have everything they need.',
       },
       {
         id: 'thomas',
         name: 'Thomas',
+        firstName: 'Thomas',
         role: 'Shop Crew',
         image: '/team/thomas.jpg',
         bio: 'Cuts and preps all the aluminum in our shop. Every piece that leaves here is cut to spec, every time.',
@@ -196,6 +222,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'derek',
         name: 'Derek',
+        firstName: 'Derek',
         role: 'Shop Crew',
         image: '/team/derek.jpg',
         bio: 'Loads the trucks and keeps inventory stocked. The crews always have what they need because Derek stays on top of it.',
@@ -207,15 +234,19 @@ export const TEAM_DATA: TeamSection[] = [
     icon: 'Users',
     members: [
       {
-        id: 'brandon-f',
-        name: 'Brandon F',
+        id: 'brandon-b2-pending',
+        name: 'Brandon "B2" LAST_NAME_PENDING',
+        firstName: 'Brandon',
+        nickname: 'B2',
+        lastName: 'LAST_NAME_PENDING',
         role: 'Helper',
-        image: '/team/brandon-f.jpg',
+        image: '/team/brandon-b2-pending.jpg',
         bio: 'Learning the trade from the ground up. Already knows more about screen work than most guys with five years in.',
       },
       {
         id: 'gage',
         name: 'Gage',
+        firstName: 'Gage',
         role: 'Helper',
         image: '/team/gage.jpg',
         bio: 'Eager to learn and quick to pitch in. The crews fight over who gets him on their jobs.',
@@ -223,6 +254,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'cory',
         name: 'Cory',
+        firstName: 'Cory',
         role: 'Helper',
         image: '/team/cory.jpg',
         bio: 'Started last summer and hasn\'t slowed down. Strong work ethic and always on time.',
@@ -231,6 +263,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'brendon',
         name: 'Brendon',
+        firstName: 'Brendon',
         role: 'Helper',
         image: '/team/brendon.jpg',
         bio: 'Handles all warranty calls and repairs. If something\'s not right, Brendon makes it right. Fast.',
@@ -238,6 +271,7 @@ export const TEAM_DATA: TeamSection[] = [
       {
         id: 'hunter',
         name: 'Hunter',
+        firstName: 'Hunter',
         role: 'Helper',
         image: '/team/hunter.jpg',
         bio: 'Eager to learn the trade. Ready to help wherever needed.',
