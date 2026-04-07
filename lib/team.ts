@@ -149,11 +149,13 @@ export const TEAM_DATA: TeamSection[] = [
       },
       {
         id: 'blake-r',
-        name: 'Blake R',
+        name: 'Blake R "Thor"',
         firstName: 'Blake',
+        nickname: 'Thor',
         role: 'Installer',
         image: '/team/blake-r.jpg',
         bio: 'Young gun learning the ropes fast. Already running his own crews on smaller jobs. One to watch.',
+        gallery: ['/team/blake-r-2.jpg', '/team/blake-r-3.jpg', '/team/blake-r-4.jpg'],
       },
       {
         id: 'jojo',
