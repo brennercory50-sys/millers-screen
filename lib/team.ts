@@ -49,7 +49,7 @@ export const TEAM_DATA: TeamSection[] = [
         firstName: 'Blake',
         role: 'President',
         image: '/team/blake-miller.jpg',
-        bio: 'Blake is a dedicated husband and proud father of two who puts family first in everything he does. Outside of work, he enjoys spending quality time with his family, along with fishing and hunting whenever he gets the chance. He\'s also a big fan of boxing and UFC, and some of his favorite foods are brisket, seafood boils, and sushi.',
+        bio: 'Known to many as Thor, Blake is a dedicated husband and proud father of two who puts family first in everything he does. Outside of work, he enjoys spending quality time with his family, along with fishing and hunting whenever he gets the chance. He\'s also a big fan of boxing and UFC, and some of his favorite foods are brisket, seafood boils, and sushi.',
       },
       {
         id: 'meagan-miller',
