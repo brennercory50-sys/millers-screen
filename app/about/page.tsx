@@ -24,16 +24,16 @@ export const metadata: Metadata = {
   },
 }
 
-function TeamSection({ title, icon: Icon, members }: { title: string; icon: typeof Award; members: TeamMember[] }) {
+function TeamSection({ title, icon: Icon, members }: { title: TeamCategory; icon: typeof Award; members: TeamMember[] }) {
   return (
-    <div className="mb-16">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 rounded-lg bg-accent-red/10 flex items-center justify-center">
-          <Icon className="w-5 h-5 text-accent-red" />
+    <div className="mb-12 md:mb-16">
+      <div className="flex items-center gap-3 mb-4 md:mb-6">
+        <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-accent-red/10 flex items-center justify-center flex-shrink-0">
+          <Icon className="w-4 h-4 md:w-5 md:h-5 text-accent-red" />
         </div>
-        <h3 className="text-xl font-bold text-text-primary uppercase tracking-wide">{title}</h3>
+        <h3 className="text-lg md:text-xl font-bold text-text-primary uppercase tracking-wide leading-tight">{title}</h3>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-3 md:gap-5">
         {members.map((member) => (
           <TeamCard key={member.id} member={member} />
         ))}
@@ -86,7 +86,7 @@ export default function AboutPage() {
               </div>
               <span className="text-sm font-semibold text-accent-red uppercase tracking-wider">Our Team</span>
             </div>
-            <h2 className="text-text-primary text-3xl md:text-4xl font-bold">MEET THE PEOPLE BEHIND THE WORK</h2>
+            <h2 className="text-text-primary text-2xl sm:text-3xl md:text-4xl font-bold leading-tight">MEET THE PEOPLE BEHIND THE WORK</h2>
             <p className="text-muted mt-3 max-w-2xl mx-auto">
               <span className="hidden md:inline">Click any team member to learn more about them</span>
               <span className="md:hidden">Tap any team member to read their bio</span>
