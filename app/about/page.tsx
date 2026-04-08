@@ -73,8 +73,18 @@ export default function AboutPage() {
       />
       
       <ContentBlock
-        title="Who we are"
-        copy="With over 40 years of experience in the aluminum construction business, Miller's Screen & Repair is family-owned and family-run. We take pride in our projects and stay involved from the beginning to the final inspection."
+        title="Meet Florida&apos;s Aluminum Construction Pros"
+        copy="With over 40 years of experience in the aluminum construction business, Miller&apos;s Screen & Repair is family-owned and family-run. We take pride in our projects and are personally involved in every aspect of the project from beginning to end. We have a great Install Team and office staff that make it possible to be &ldquo;One Team One Dream.&rdquo; We all come together to be the best, build the best and give our customer&apos;s the best experience ever in choosing us to meet all of their aluminum needs. Give us a call today and experience the difference it makes working with Miller&apos;s Screens!"
+      />
+
+      <ContentBlock
+        title="Why Choose Miller's Screen"
+        copy="Stainless Steel Fasteners Always Used • Expert Layout & Design • Committed to Customer Satisfaction • No Subcontracting • State Certified Contractor • Quality Control Systems • Exclusive S.P.E Sidewall Construction • Prompt and Courteous Service • Fair Pricing • Family Owned/Operated • Locally Owned"
+      />
+
+      <ContentBlock
+        title="Our Services"
+        copy="Screen Pool Enclosures • Florida Screen Room • Screen Rooms • Carports • Vinyl Rooms • Concrete Slabs • Room Additions • Pavers"
       />
 
       <section id="team" className="py-16 md:py-24 bg-bg-1">
