@@ -50,6 +50,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'President',
         image: '/team/blake-miller.jpg',
         bio: 'Known to many as Thor, Blake is a dedicated husband and proud father of two who puts family first in everything he does. Outside of work, he enjoys spending quality time with his family, along with fishing and hunting whenever he gets the chance. He\'s also a big fan of boxing and UFC, and some of his favorite foods are brisket, seafood boils, and sushi.',
+        gallery: ['/team/blake-president-1.jpg', '/team/blake-president-2.jpg', '/team/blake-president-3.jpg'],
       },
       {
         id: 'meagan-miller',
@@ -58,7 +59,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Permits',
         image: '/team/meagan-miller.jpg',
         bio: 'The permit wizard. Knows every code inspector in Volusia County by name. Can navigate city hall faster than anyone. Keeps the paperwork flowing so the crews can keep building.',
-        gallery: ['/team/meagan-2.jpg', '/team/meagan-3.jpg'],
+        gallery: ['/team/meagan-2.jpg', '/team/meagan-3.jpg', '/team/meagan-4.jpg', '/team/meagan-5.jpg'],
       },
     ],
   },
@@ -73,6 +74,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Office Manager',
         image: '/team/jen.jpg',
         bio: 'Runs the front desk like a well-oiled machine. If you\'ve called our office, you\'ve talked to Jen. She remembers every customer and their project details.',
+        gallery: ['/team/jen-1.jpg', '/team/jen-2.jpg'],
       },
       {
         id: 'zach',
@@ -123,6 +125,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Head Installer',
         image: '/team/brandon-bearclaw-miller.jpg',
         bio: 'Leads crews on the biggest pool enclosure jobs. His frames are plumb, his screen is tight, and his work speaks for itself.',
+        gallery: ['/team/bearclaw-1.jpg'],
       },
       {
         id: 'robby',
@@ -131,6 +134,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Head Installer',
         image: '/team/robby.jpg',
         bio: 'Specializes in the tricky jobs other companies won\'t touch. Odd angles? No problem. He figures it out.',
+        gallery: ['/team/robby-1.jpg'],
       },
       {
         id: 'niko',
@@ -159,7 +163,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Installer',
         image: '/team/shane.jpg',
         bio: 'Shane is a family-oriented man who values time with his loved ones above all else. Most of his free time is spent with his family and daughter, making memories and enjoying every moment together. He also enjoys being outdoors, especially fishing and spending time at the beach, and takes pride in working hard and staying active both on and off the job.',
-        gallery: ['/team/shane-2.jpg', '/team/shane-3.jpg', '/team/shane-4.jpg'],
+        gallery: ['/team/shane-2.jpg', '/team/shane-3.jpg', '/team/shane-4.jpg', '/team/shane-5.jpg', '/team/shane-6.jpg'],
       },
     ],
   },
