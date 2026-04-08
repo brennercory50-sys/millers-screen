@@ -4,6 +4,7 @@ import { useTeamModal } from '@/context/TeamModalContext'
 import { TEAM_DATA, TeamCategory, TeamMember } from '@/lib/team'
 import TeamCard from '@/components/team-card'
 import EmployeeModal from '@/components/employee-modal'
+import { AnimatePresence } from 'framer-motion'
 import { Users, Award, Briefcase, Wrench, Building, HardHat } from 'lucide-react'
 
 const iconMap: Record<TeamCategory, typeof Award> = {
@@ -68,11 +69,15 @@ export default function TeamSectionClient() {
         </div>
       </section>
 
-      <EmployeeModal
-        member={selectedMember}
-        isOpen={!!selectedMember}
-        onClose={closeModal}
-      />
+      <AnimatePresence>
+        {selectedMember && (
+          <EmployeeModal
+            member={selectedMember}
+            isOpen={true}
+            onClose={closeModal}
+          />
+        )}
+      </AnimatePresence>
     </>
   )
 }
