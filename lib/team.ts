@@ -49,7 +49,7 @@ export const TEAM_DATA: TeamSection[] = [
         firstName: 'Blake',
         role: 'President',
         image: '/team/blake-miller.jpg',
-        bio: 'Known to many as Thor, Blake is a dedicated husband and proud father of two who puts family first in everything he does. Outside of work, he enjoys spending quality time with his family, along with fishing and hunting whenever he gets the chance. He\'s also a big fan of boxing and UFC, and some of his favorite foods are brisket, seafood boils, and sushi.',
+        bio: 'Second-generation owner who took over the family business and grew it into Volusia County\'s most trusted screen enclosure company. Brings the same handshake values his dad started with — but now with a fleet of crews and a whole lot more enclosures.',
         gallery: ['/team/blake-president-1.jpg', '/team/blake-president-2.jpg', '/team/blake-president-3.jpg'],
       },
       {
