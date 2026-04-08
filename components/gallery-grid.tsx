@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { X } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -12,6 +12,30 @@ interface GalleryGridProps {
 
 export default function GalleryGrid({ title, images }: GalleryGridProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    )
+
+    const items = document.querySelectorAll('.gallery-item')
+    items.forEach((item) => {
+      item.classList.add('reveal-on-scroll')
+      observer.observe(item)
+    })
+
+    return () => {
+      items.forEach((item) => observer.unobserve(item))
+    }
+  }, [])
 
   return (
     <section className="py-12 md:py-16">
@@ -36,14 +60,36 @@ export default function GalleryGrid({ title, images }: GalleryGridProps) {
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
               onClick={() => setSelectedImage(image ?? null)}
-              className="relative aspect-[4/3] rounded-img overflow-hidden group"
+              className="gallery-item relative aspect-[4/3] rounded-xl overflow-hidden group"
+              style={{
+                background: 'linear-gradient(145deg, #1e1e1e, #161616)',
+                border: '1px solid rgba(255,255,255,.06)',
+                boxShadow: '0 4px 20px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.04)',
+                transition: 'transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)'
+                e.currentTarget.style.boxShadow = '0 12px 32px rgba(0,0,0,.5), 0 2px 8px rgba(180,30,30,.15), inset 0 1px 0 rgba(255,255,255,.06)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = ''
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.04)'
+              }}
             >
-              <Image
-                src={image ?? ''}
-                alt={`Project ${index + 1}`}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
+              <div className="relative w-full h-full">
+                <Image
+                  src={image ?? ''}
+                  alt={`Project ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div 
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(to top, #161616 0%, transparent 40%)'
+                  }}
+                />
+              </div>
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
             </motion.button>
           )) ?? null}

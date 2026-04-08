@@ -41,7 +41,7 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-bg-0/95 backdrop-blur-sm border-b border-line">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-bg-0/85 backdrop-blur-md border-b border-white/06">
       <div className="section-container">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
@@ -80,13 +80,13 @@ export default function Header() {
                     transition={{ duration: 0.15 }}
                     className="absolute top-full left-0 pt-2"
                   >
-                    <div className="bg-bg-0 border border-line rounded-md shadow-lg py-1 min-w-[180px]">
+                    <div className="bg-bg-0/95 backdrop-blur-md border border-white/06 rounded-lg shadow-xl py-1 min-w-[180px]">
                       {services.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
                           onClick={() => setIsServicesOpen(false)}
-                          className="block px-4 py-2.5 text-sm text-muted hover:text-text-primary hover:bg-panel transition-colors"
+                          className="block px-4 py-2.5 text-sm text-muted hover:text-text-primary hover:bg-white/[0.06] transition-colors"
                         >
                           {item.label}
                         </Link>

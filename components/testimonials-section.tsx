@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react'
 
 const testimonials = [
@@ -23,6 +23,22 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   const [current, setCurrent] = useState(0)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(entries[0].target)
+        }
+      },
+      { threshold: 0.1 }
+    )
+    const section = document.getElementById('testimonials-section')
+    if (section) observer.observe(section)
+    return () => { if (section) observer.unobserve(section) }
+  }, [])
 
   const next = () => {
     setCurrent((prev) => (prev + 1) % testimonials.length)
@@ -33,20 +49,34 @@ export default function TestimonialsSection() {
   }
 
   return (
-    <section className="py-16 md:py-20 bg-bg-1">
+    <section id="testimonials-section" className="reveal-on-scroll py-16 md:py-20">
       <div className="section-container">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-lg bg-accent-red/10 flex items-center justify-center">
             <Quote className="w-5 h-5 text-accent-red" />
           </div>
-          <span className="text-sm font-semibold text-accent-red uppercase tracking-wider">Testimonials</span>
+          <span className="section-eyebrow">Testimonials</span>
         </div>
-        <h2 className="text-text-primary text-3xl md:text-4xl font-bold mb-10">WHAT OUR CUSTOMERS SAY</h2>
+        <h2 className="text-text-primary text-3xl md:text-4xl font-medium mb-10">WHAT OUR CUSTOMERS SAY</h2>
 
         <div className="relative max-w-4xl mx-auto">
-          {/* Quote */}
-          <div className="bg-panel rounded-lg p-8 md:p-12 border border-line relative">
-            <Quote className="absolute top-6 left-6 w-12 h-12 text-accent-red/20" />
+          {/* Quote Card */}
+          <div 
+            className="relative p-8 md:p-12"
+            style={{
+              background: 'linear-gradient(145deg, #1e1e1e, #161616)',
+              border: '1px solid rgba(255,255,255,.06)',
+              boxShadow: '0 4px 20px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.04)',
+              borderRadius: '12px',
+              transition: 'transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s ease',
+              transitionDelay: '0.1s',
+            }}
+          >
+            {/* Large decorative quote */}
+            <Quote 
+              className="absolute top-[-20px] left-[-10px] text-[120px] leading-none pointer-events-none"
+              style={{ color: 'rgba(200,30,30,.1)' }}
+            />
             
             <div className="relative z-10">
               {/* Stars */}
@@ -62,7 +92,7 @@ export default function TestimonialsSection() {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-bold text-text-primary">{testimonials[current]?.author ?? ''}</p>
+                  <p className="font-medium text-text-primary">{testimonials[current]?.author ?? ''}</p>
                   <p className="text-muted text-sm">{testimonials[current]?.location ?? ''}</p>
                 </div>
 
@@ -70,14 +100,22 @@ export default function TestimonialsSection() {
                 <div className="flex gap-2">
                   <button
                     onClick={prev}
-                    className="w-10 h-10 rounded-lg bg-bg-1 border border-line flex items-center justify-center text-muted hover:text-text-primary hover:border-accent-red/50 transition-colors"
+                    className="w-10 h-10 rounded-lg flex items-center justify-center text-muted hover:text-text-primary hover:border-accent-red/50 transition-colors"
+                    style={{
+                      background: 'linear-gradient(145deg, #1e1e1e, #161616)',
+                      border: '1px solid rgba(255,255,255,.06)',
+                    }}
                     aria-label="Previous testimonial"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     onClick={next}
-                    className="w-10 h-10 rounded-lg bg-bg-1 border border-line flex items-center justify-center text-muted hover:text-text-primary hover:border-accent-red/50 transition-colors"
+                    className="w-10 h-10 rounded-lg flex items-center justify-center text-muted hover:text-text-primary hover:border-accent-red/50 transition-colors"
+                    style={{
+                      background: 'linear-gradient(145deg, #1e1e1e, #161616)',
+                      border: '1px solid rgba(255,255,255,.06)',
+                    }}
                     aria-label="Next testimonial"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -93,7 +131,14 @@ export default function TestimonialsSection() {
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`min-w-[36px] min-h-[36px] rounded-full transition-colors flex items-center justify-center ${i === current ? 'bg-accent-red' : 'bg-line hover:bg-muted'}`}
+                className={`min-w-[36px] min-h-[36px] rounded-full transition-all flex items-center justify-center ${i === current ? '' : 'hover:bg-muted/30'}`}
+                style={{
+                  background: i === current 
+                    ? 'linear-gradient(135deg, #d42020, #9a1515)'
+                    : 'rgba(255,255,255,0.06)',
+                  boxShadow: i === current ? '0 2px 8px rgba(200,20,20,.4)' : 'none',
+                  transition: 'all .3s cubic-bezier(.22,1,.36,1)',
+                }}
                 aria-label={`Go to testimonial ${i + 1}`}
               />
             ))}

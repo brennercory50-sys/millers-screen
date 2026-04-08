@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -34,8 +35,22 @@ export default function HeroSection({
   isHomepage,
   urgencyBadge = 'Free Estimates • Licensed & Insured',
 }: HeroSectionProps) {
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e
+      const x = (clientX / window.innerWidth) * 100
+      const y = (clientY / window.innerHeight) * 100
+      setMousePosition({ x, y })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   return (
-    <section         className={`relative ${isHomepage ? 'min-h-[60vh] md:min-h-[90vh]' : 'min-h-[50vh] md:min-h-[70vh]'} flex items-center`}>
+    <section className={`relative ${isHomepage ? 'min-h-[60vh] md:min-h-[90vh]' : 'min-h-[50vh] md:min-h-[70vh]'} flex items-center`}>
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -46,6 +61,11 @@ export default function HeroSection({
           priority
         />
         <div className="absolute inset-0 bg-gradient-to-r from-bg-0 via-bg-0/90 to-bg-0/40" />
+        {/* Bonus C - Mouse-follow glow */}
+        <div 
+          className="hero-glow"
+          style={{ '--mouse-x': `${mousePosition.x}%`, '--mouse-y': `${mousePosition.y}%` } as React.CSSProperties}
+        />
       </div>
 
       {/* Content */}
@@ -53,14 +73,15 @@ export default function HeroSection({
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl"
         >
-          <h1 className="text-text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-2">
+          {/* Hero gradient title - site-wide */}
+          <h1 className="text-text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-2 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
             {headline ?? ''}
           </h1>
           {headlineLine2 && (
-            <h1 className="text-text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-4 md:mb-6">
+            <h1 className="text-text-primary text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] mb-4 md:mb-6 bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
               {headlineLine2}
             </h1>
           )}
