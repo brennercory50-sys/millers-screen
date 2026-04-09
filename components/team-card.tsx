@@ -63,18 +63,20 @@ export default function TeamCard({ member }: TeamCardProps) {
       }}
     >
       <div className="relative w-full h-full">
-        <Image
-          src={member.image}
-          alt={member.name}
-          fill
-          className={member.imagePosition ? 'object-cover transition-all duration-700 group-hover:scale-105' : 'object-cover object-[50%_20%] transition-all duration-700 group-hover:scale-105'}
-          style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
-        />
+        {member.image && (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className={member.imagePosition ? 'object-cover transition-all duration-700 group-hover:scale-105' : 'object-cover object-[50%_20%] transition-all duration-700 group-hover:scale-105'}
+            style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-bg-0 via-bg-0/30 to-transparent" />
-        <div className="absolute inset-0 pointer-events-none" 
+        <div className="absolute inset-0 pointer-events-none"
           style={{
             background: 'linear-gradient(to top, #161616 0%, transparent 40%)'
-          }} 
+          }}
         />
       </div>
 

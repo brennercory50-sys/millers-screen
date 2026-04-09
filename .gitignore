@@ -54,6 +54,9 @@ prisma/*.db-journal
 .abacus.donotdelete
 .abacus.*
 
+# Claude Code local settings
+.claude/settings.local.json
+
 # OS
 Thumbs.db
 
