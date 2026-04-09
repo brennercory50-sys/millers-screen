@@ -14,7 +14,7 @@ export interface TeamMember {
   lastName?: string
   role: string
   subtitle?: string
-  image: string
+  image?: string
   bio: string
   memorial?: boolean
   gallery?: string[]
@@ -161,7 +161,6 @@ export const TEAM_DATA: TeamSection[] = [
         name: 'Shane',
         firstName: 'Shane',
         role: 'Installer',
-        image: '/team/shane.jpg',
         bio: 'Shane is a family-oriented man who values time with his loved ones above all else. Most of his free time is spent with his family and daughter, making memories and enjoying every moment together. He also enjoys being outdoors, especially fishing and spending time at the beach, and takes pride in working hard and staying active both on and off the job.',
         gallery: ['/team/shane-2.jpg', '/team/shane-3.jpg', '/team/shane-5.jpg', '/team/shane-6.jpg'],
       },
@@ -176,7 +175,6 @@ export const TEAM_DATA: TeamSection[] = [
         name: 'Dale',
         firstName: 'Dale',
         role: 'Concrete Division',
-        image: '/team/dale.jpg',
         bio: 'Handles all concrete work for our enclosure projects. From footers to slabs, Dale delivers a solid foundation every time.',
         gallery: ['/team/dale-2.jpg', '/team/dale-3.jpg', '/team/dale-5.jpg'],
       },
