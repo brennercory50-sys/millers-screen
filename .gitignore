@@ -56,3 +56,6 @@ prisma/*.db-journal
 
 # OS
 Thumbs.db
+
+# Claude
+.claude/
