@@ -17,12 +17,12 @@ services:
     env: node
     region: florida
     plan: starter
-    buildCommand: npm install --legacy-peer-deps && npm run build
+    buildCommand: npm install && npm run build
     startCommand: npm start
     healthCheckPath: /
     envVars:
       - key: NODE_VERSION
-        value: "18"
+        value: "20"
       - key: NEXT_PUBLIC_GA_MEASUREMENT_ID
         sync: false
       - key: DATABASE_URL
