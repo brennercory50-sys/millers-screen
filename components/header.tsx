@@ -15,6 +15,7 @@ const services = [
 const navItems = [
   { label: 'Services', hasDropdown: true },
   { label: 'MegaView®', href: '/megaview', featured: true },
+  { label: 'Jobs', href: '/jobs' },
   { label: 'Gallery', href: '/showcase' },
   { label: 'Financing', href: '/financing' },
   { label: 'About', href: '/about' },

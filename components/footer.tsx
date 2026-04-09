@@ -10,6 +10,7 @@ const quickLinks = [
   { label: 'Screen Rooms', href: '/screen-rooms' },
   { label: 'Concrete / Pavers', href: '/concrete-pavers' },
   { label: 'MegaView®', href: '/megaview' },
+  { label: 'Jobs', href: '/jobs' },
   { label: 'Showcase', href: '/showcase' },
   { label: 'Financing', href: '/financing' },
   { label: 'About', href: '/about' },
