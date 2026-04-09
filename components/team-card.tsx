@@ -101,7 +101,7 @@ export default function TeamCard({ member }: TeamCardProps) {
 
       {hasGallery && (
         <div 
-          className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 opacity-80 group-hover:opacity-100"
+          className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100"
           style={{
             background: 'linear-gradient(135deg, #d42020, #9a1515)',
             boxShadow: '0 2px 8px rgba(200,20,20,.4)',
