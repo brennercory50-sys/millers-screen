@@ -1,6 +1,10 @@
 import { NextResponse } from 'next/server'
+import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit'
 
 export const dynamic = 'force-dynamic'
+
+const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
+const RATE_LIMIT_MAX = 10 // 10 requests per minute per IP
 
 const SYSTEM_PROMPT = `You are a quick quote assistant for Miller's Screen, Volusia County's premier screen enclosure contractor with 40+ years experience.
 
@@ -38,6 +42,25 @@ QUICK CLOSERS (use when visitor seems ready):
 - "Need it sooner? Call us directly at 386-756-8770"`
 
 export async function POST(request: Request) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] 
+    ?? request.headers.get('x-real-ip') 
+    ?? 'unknown'
+  
+  const rateLimitResult = checkRateLimit(ip, {
+    windowMs: RATE_LIMIT_WINDOW,
+    maxRequests: RATE_LIMIT_MAX,
+  })
+  
+  if (!rateLimitResult.success) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { 
+        status: 429,
+        headers: getRateLimitHeaders(rateLimitResult),
+      }
+    )
+  }
+
   try {
     const { messages } = await request?.json?.() ?? {}
 

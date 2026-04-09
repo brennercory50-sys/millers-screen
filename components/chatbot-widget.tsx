@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { MessageCircle, X, Send, Phone, ChevronRight, CheckCircle, Clock, Bot } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { toast } from 'sonner'
 
 interface QuickAction {
   id: string
@@ -195,6 +196,7 @@ export default function ChatbotWidget() {
       }
     } catch (error) {
       console.error('Lead submit error:', error)
+      toast.error('Failed to submit. Please try again or call us.')
     } finally {
       setIsSubmitting(false)
     }
@@ -278,6 +280,7 @@ export default function ChatbotWidget() {
       }
     } catch (error) {
       console.error('Chat error:', error)
+      toast.error('Failed to send message. Please try again.')
     } finally {
       setIsTyping(false)
     }

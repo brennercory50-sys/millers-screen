@@ -1,14 +1,29 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 import { motion } from 'framer-motion'
-import { RefreshCw, AlertCircle } from 'lucide-react'
+import { RefreshCw, AlertCircle, ChevronLeft, ChevronRight } from 'lucide-react'
 import JobsList from '@/components/JobsList'
 import type { JobProject } from '@/lib/companycam'
 
-async function fetchJobsData(): Promise<{ jobs: JobProject[]; locations: any[]; error?: string }> {
+interface PaginationMeta {
+  page: number
+  limit: number
+  total: number
+  hasMore: boolean
+}
+
+interface JobsData {
+  jobs: JobProject[]
+  locations: any[]
+  pagination?: PaginationMeta
+  error?: string
+}
+
+async function fetchJobsData(page: number = 1, limit: number = 20): Promise<JobsData> {
   try {
-    const response = await fetch('/api/companycam')
+    const response = await fetch(`/api/companycam?page=${page}&limit=${limit}`)
     if (!response.ok) {
       const data = await response.json()
       return { jobs: [], locations: [], error: data.error || 'Failed to fetch jobs' }
@@ -20,29 +35,18 @@ async function fetchJobsData(): Promise<{ jobs: JobProject[]; locations: any[]; 
 }
 
 export default function JobsClient() {
-  const [jobs, setJobs] = useState<JobProject[]>([])
-  const [locations, setLocations] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+  const [page, setPage] = useState(1)
 
-  const loadData = async () => {
-    setLoading(true)
-    setError(null)
-    const data = await fetchJobsData()
-    if (data.error) {
-      setError(data.error)
-    } else {
-      setJobs(data.jobs || [])
-      setLocations(data.locations || [])
-      setLastUpdated(new Date())
-    }
-    setLoading(false)
-  }
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['jobs', page],
+    queryFn: () => fetchJobsData(page),
+    refetchInterval: 60000,
+  })
 
-  useEffect(() => {
-    loadData()
-  }, [])
+  const jobs = data?.jobs ?? []
+  const locations = data?.locations ?? []
+  const pagination = data?.pagination
+  const errorMessage = error ? 'Failed to load jobs' : data?.error
 
   return (
     <div className="min-h-screen bg-background">
@@ -68,23 +72,17 @@ export default function JobsClient() {
               </p>
             </div>
             <button
-              onClick={loadData}
-              disabled={loading}
+              onClick={() => refetch()}
+              disabled={isLoading}
               className="flex items-center gap-2 px-4 py-2 bg-panel hover:bg-panel/80 text-text-primary rounded-lg transition-colors"
             >
-              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
               Refresh
             </button>
           </div>
         </motion.div>
 
-        {lastUpdated && (
-          <p className="text-text-secondary/60 text-sm mb-6">
-            Last updated: {lastUpdated.toLocaleTimeString()}
-          </p>
-        )}
-
-        {error ? (
+        {errorMessage ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -94,13 +92,39 @@ export default function JobsClient() {
             <h3 className="text-lg font-semibold text-text-primary mb-2">
               Unable to load jobs
             </h3>
-            <p className="text-text-secondary mb-4">{error}</p>
+            <p className="text-text-secondary mb-4">{errorMessage}</p>
             <p className="text-text-secondary/70 text-sm">
               Make sure COMPANYCAM_API_KEY is configured in the environment variables.
             </p>
           </motion.div>
         ) : (
-          <JobsList jobs={jobs} locations={locations} loading={loading} />
+          <>
+            <JobsList jobs={jobs} locations={locations} loading={isLoading} />
+            
+            {pagination && pagination.total > pagination.limit && (
+              <div className="mt-8 flex items-center justify-center gap-4">
+                <button
+                  onClick={() => setPage(p => Math.max(1, p - 1))}
+                  disabled={page === 1 || isLoading}
+                  className="flex items-center gap-2 px-4 py-2 bg-panel hover:bg-panel/80 rounded-lg disabled:opacity-50"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </button>
+                <span className="text-text-secondary">
+                  Page {pagination.page} ({pagination.total} total jobs)
+                </span>
+                <button
+                  onClick={() => setPage(p => p + 1)}
+                  disabled={!pagination.hasMore || isLoading}
+                  className="flex items-center gap-2 px-4 py-2 bg-panel hover:bg-panel/80 rounded-lg disabled:opacity-50"
+                >
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            )}
+          </>
         )}
 
         <div className="mt-12 flex items-center justify-center gap-2 text-text-secondary/60 text-sm">

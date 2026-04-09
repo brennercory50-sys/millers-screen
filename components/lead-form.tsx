@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Send, CheckCircle, AlertCircle, Phone, Clock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { toast } from 'sonner'
 
 const projectTypes = [
   'Pool Enclosure',
@@ -61,9 +62,11 @@ export default function LeadForm() {
       const result = await response?.json?.()
 
       if (!response?.ok) {
+        toast.error(result?.message ?? 'Failed to submit form. Please try again.')
         throw new Error(result?.message ?? 'Failed to submit form')
       }
 
+      toast.success('Quote request sent! We\'ll call you within 1 hour.')
       setStatus('success')
       setFormData({
         fullName: '',

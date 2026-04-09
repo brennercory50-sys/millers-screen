@@ -1,20 +1,45 @@
 import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
+import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit'
+import { validateLeadRequest } from '@/lib/validations'
 
 export const dynamic = 'force-dynamic'
 
+const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
+const RATE_LIMIT_MAX = 5 // 5 requests per minute per IP
+
 export async function POST(request: Request) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0] 
+    ?? request.headers.get('x-real-ip') 
+    ?? 'unknown'
+  
+  const rateLimitResult = checkRateLimit(ip, {
+    windowMs: RATE_LIMIT_WINDOW,
+    maxRequests: RATE_LIMIT_MAX,
+  })
+  
+  if (!rateLimitResult.success) {
+    return NextResponse.json(
+      { success: false, message: 'Too many requests. Please try again later.' },
+      { 
+        status: 429,
+        headers: getRateLimitHeaders(rateLimitResult),
+      }
+    )
+  }
+
   try {
     const data = await request?.json?.()
 
-    const { fullName, phone, email, projectType, city, message } = data ?? {}
-
-    if (!fullName || !phone || !email || !projectType) {
+    const validation = validateLeadRequest(data)
+    if (!validation.success) {
       return NextResponse.json(
-        { success: false, message: 'Name, phone, email, and service type are required' },
+        { success: false, message: validation.error },
         { status: 400 }
       )
     }
+
+    const { fullName, phone, email, projectType, city, message } = validation.data
 
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error('Supabase not configured')

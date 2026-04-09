@@ -7,6 +7,7 @@ import MobileCTABar from '@/components/mobile-cta-bar'
 import ChatbotWidget from '@/components/chatbot-widget'
 import GoogleAnalytics from '@/components/google-analytics'
 import { TeamModalProvider } from '@/context/TeamModalContext'
+import { Providers } from '@/components/providers'
 
 export const dynamic = 'force-dynamic'
 
@@ -210,9 +211,11 @@ export default function RootLayout({
         <GoogleAnalytics />
         <Header />
         <main className="flex-1 pt-16 md:pt-20">
-          <TeamModalProvider>
-            {children}
-          </TeamModalProvider>
+          <Providers>
+            <TeamModalProvider>
+              {children}
+            </TeamModalProvider>
+          </Providers>
         </main>
         <Footer />
         <MobileCTABar />

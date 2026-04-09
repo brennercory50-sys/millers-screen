@@ -49,8 +49,13 @@ function getAddress(project: CompanyCamProject): string {
   ].filter(Boolean).join(', ')
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request?.url ?? '')
+    const page = parseInt(searchParams?.get('page') ?? '1')
+    const limit = parseInt(searchParams?.get('limit') ?? '20')
+    const offset = (page - 1) * limit
+
     const apiKey = await getApiKey()
     if (!apiKey) {
       return NextResponse.json(
@@ -60,7 +65,7 @@ export async function GET() {
     }
 
     const [photosData, projectsData] = await Promise.all([
-      fetchWithAuth('/photos?sort=created_at desc&per_page=100'),
+      fetchWithAuth(`/photos?sort=created_at desc&per_page=${limit}&page=${page}`),
       fetchWithAuth('/projects?per_page=500'),
     ])
 
@@ -143,12 +148,20 @@ export async function GET() {
 
     const locations = Array.from(locationsMap.values())
 
+    const totalPhotos = photosData.total_count ?? photosData.photos?.length ?? 0
+
     return NextResponse.json({
       jobs,
       locations,
       filters: {
         crewMembers: Array.from(crewSet).sort(),
         jobTypes: Array.from(jobTypeSet),
+      },
+      pagination: {
+        page,
+        limit,
+        total: totalPhotos,
+        hasMore: photosData.photos?.length === limit,
       },
     })
   } catch (error) {
