@@ -241,7 +241,7 @@ export const TEAM_DATA: TeamSection[] = [
         firstName: 'Gage',
         role: 'Helper',
         image: '/team/gage.jpg',
-        bio: 'Eager to learn and quick to pitch in. The crews fight over who gets him on their jobs.',
+        bio: "Loves being outside — fishing and beach days are a must. Into surfing and skateboarding too. Hard-driven worker and a total people person. Likes to hang out with his girlfriend, mom, and older brother as much as possible, and his dog is his only son. Born and raised in St. Louis — love my Miller boys.",
         gallery: ['/team/gage-2.jpg', '/team/gage-3.jpg', '/team/gage-4.jpg', '/team/gage-5.jpg'],
       },
       {
