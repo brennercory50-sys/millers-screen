@@ -242,6 +242,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Helper',
         image: '/team/gage.jpg',
         bio: 'Eager to learn and quick to pitch in. The crews fight over who gets him on their jobs.',
+        gallery: ['/team/gage-2.jpg', '/team/gage-3.jpg', '/team/gage-4.jpg', '/team/gage-5.jpg'],
       },
       {
         id: 'cory',
