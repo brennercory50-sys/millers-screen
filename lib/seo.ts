@@ -13,6 +13,7 @@ const KEYWORDS = {
   poolEnclosures: ['pool enclosure', 'pool cage', 'pool screen enclosure', 'screen pool enclosure', 'florida pool enclosure', 'daytona beach pool enclosure'],
   screenRooms: ['screen room', 'screen enclosure', 'patio enclosure', 'lanai', 'florida screen room', 'outdoor living space'],
   megaview: ['megaview enclosure', 'cableless enclosure', 'unobstructed view enclosure', 'modern screen enclosure', 'premium pool enclosure'],
+  concretePavers: ['concrete contractors', 'paver installation', 'driveway pavers', 'patio pavers', 'concrete patio', 'florida paver contractor'],
   general: ['screen repair', 'rescreen', 'volusia county', 'daytona beach', 'florida', 'aluminum construction', 'pool cage', 'screen enclosure contractor'],
 }
 
@@ -26,6 +27,9 @@ function generateTitle(page: string, location?: string): string {
       ? `${location} Screen Room Builder | Custom Patio Enclosures`
       : "Custom Screen Rooms & Patio Enclosures | Volusia County",
     megaview: "MegaView® Enclosures Volusia County | Exclusive Cable-Free Design",
+    concretePavers: location
+      ? `${location} Concrete & Paver Contractor | Professional Installation`
+      : "Concrete & Paver Installation | Volusia County",
     showcase: "Our Screen Enclosure Projects | View Completed Jobs",
     financing: "Financing Options for Screen Enclosures | Easy Payment Plans",
     warranty: "Warranty & Maintenance | Miller's Screen",
@@ -45,6 +49,9 @@ function generateDescription(page: string, location?: string): string {
       ? `Custom ${location} screen room builder. Transform your patio into a comfortable outdoor living space. Permitted installs, premium materials, expert craftsmanship. Free estimate. Call 386-756-8770.`
       : "Custom screen rooms and patio enclosures in Volusia County. Expert design, quality construction, and professional installation. Create the outdoor living space you've always wanted. Get your free estimate.",
     megaview: "Miller's Screen is the ONLY authorized MegaView® builder in Volusia County. Experience the clearest views with our exclusive cable-supported, post-free enclosure design. Request a MegaView consultation today.",
+    concretePavers: location
+      ? `Professional ${location} concrete and paver contractor. Driveways, patios, walkways, and pool decks. Quality craftsmanship, durable materials. Free estimate. Call 386-756-8770.`
+      : "Expert concrete and paver installation in Volusia County, FL. Driveways, patios, pool decks, and walkways. Professional contractors with quality materials and craftsmanship. Get your free estimate today.",
     showcase: "Browse our portfolio of completed pool enclosures, screen rooms, and MegaView® projects. 1000+ completed jobs across Volusia County. See the quality of our craftsmanship.",
     financing: "Affordable financing options for your screen enclosure project. 0% interest for 18 months available. Get the outdoor space you want now and pay over time. Apply today.",
     warranty: "Miller's Screen workmanship warranty and maintenance guide. One-year warranty on all installations. Learn how to care for your screen enclosure.",
@@ -156,6 +163,24 @@ export function generateFAQSchema(page: string): Array<{ question: string; answe
       {
         question: "Are MegaView enclosures as strong as traditional ones?",
         answer: "Yes, MegaView enclosures are engineered to meet or exceed Florida's building codes for screen enclosures. The cable support system has been tested for wind loads and meets all structural requirements. We provide the same warranty on MegaView installations as our traditional enclosures."
+      },
+    ],
+    concretePavers: [
+      {
+        question: "How much does concrete or paver installation cost in Volusia County?",
+        answer: "Concrete and paver costs in Volusia County vary based on project size, materials, and design complexity. Driveways typically start around $3,000-$5,000, while patios and pool decks range from $5,000-$15,000+. We provide free detailed estimates with no obligation."
+      },
+      {
+        question: "What are the benefits of pavers over concrete?",
+        answer: "Pavers offer several advantages over poured concrete: they're more resistant to cracking in Florida's climate, can be easily replaced if damaged, come in endless colors and styles, and add more visual appeal. They also allow for better drainage and are less slippery around pools."
+      },
+      {
+        question: "Do I need a permit for concrete or paver work?",
+        answer: "Most residential concrete and paver projects don't require permits in Volusia County. However, if the project involves significant grading, drainage modifications, or is part of a larger construction project, permits may be needed. We'll advise you on permit requirements during your estimate."
+      },
+      {
+        question: "How long does concrete or paver installation take?",
+        answer: "Project timelines vary by size: a typical driveway takes 3-5 days, while larger patios or pool decks may take 1-2 weeks. We use our own experienced crew for reliable scheduling and quality results."
       },
     ],
     home: [

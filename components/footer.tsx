@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 const quickLinks = [
   { label: 'Pool Enclosures', href: '/pool-enclosures' },
   { label: 'Screen Rooms', href: '/screen-rooms' },
+  { label: 'Concrete / Pavers', href: '/concrete-pavers' },
   { label: 'MegaView®', href: '/megaview' },
   { label: 'Showcase', href: '/showcase' },
   { label: 'Financing', href: '/financing' },

@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 const services = [
   { label: 'Pool Enclosures', href: '/pool-enclosures' },
   { label: 'Screen Rooms', href: '/screen-rooms' },
+  { label: 'Concrete / Pavers', href: '/concrete-pavers' },
 ]
 
 const navItems = [

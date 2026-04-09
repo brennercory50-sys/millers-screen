@@ -67,6 +67,18 @@ const SERVICES: Record<string, { name: string; pluralName: string; description: 
       'Professional installation',
     ],
   },
+  'concrete-pavers': {
+    name: 'Concrete / Pavers',
+    pluralName: 'Concrete / Pavers',
+    description: 'Add beauty and functionality to your outdoor space with professional concrete and paver installations. From driveways to patios, we deliver durable, lasting results.',
+    benefits: [
+      'Professional concrete work',
+      'Decorative paver installations',
+      'Driveways and walkways',
+      'Patios and pool decks',
+      'Quality materials and craftsmanship',
+    ],
+  },
 }
 
 const BASE_PROJECTS = [
