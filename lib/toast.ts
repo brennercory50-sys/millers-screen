@@ -18,9 +18,10 @@ export function toastPromise<T>(
   successMessage: string,
   errorMessage: string = 'Something went wrong'
 ): Promise<T> {
-  return toast.promise(promise, {
+  toast.promise(promise, {
     loading: loadingMessage,
     success: successMessage,
     error: errorMessage,
   })
+  return promise
 }

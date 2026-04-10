@@ -62,7 +62,7 @@ export default function AdminLeadsPage() {
     },
   })
 
-  const leads = data?.leads ?? []
+  const leads: Lead[] = data?.leads ?? []
   const pagination: PaginationMeta = data?.pagination ?? { page: 1, pageSize: 20, total: 0, totalPages: 0 }
   const stats = data?.stats ?? { total: 0, emailOptIns: 0, byStatus: [] }
 

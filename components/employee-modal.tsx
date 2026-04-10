@@ -93,7 +93,7 @@ export default function EmployeeModal({ member, isOpen, onClose }: EmployeeModal
         </button>
 
         <div className="relative flex-shrink-0" style={{ height: '280px' }}>
-          {!imageError ? (
+          {!imageError && member.image ? (
             <Image
               src={member.image}
               alt={member.name}

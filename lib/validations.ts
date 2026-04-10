@@ -22,20 +22,23 @@ export const leadSchema = z.object({
 
 export type LeadFormData = z.infer<typeof leadSchema>
 
-export function validateLeadRequest(data: unknown) {
+export function validateLeadRequest(data: unknown):
+  | { success: true; data: LeadFormData }
+  | { success: false; error: string; errors: Record<string, (string | undefined)[]> }
+{
   const result = leadSchema.safeParse(data)
-  
+
   if (!result.success) {
     const errors = result.error.flatten().fieldErrors
     const firstError = Object.values(errors).flat()[0]
-    
+
     return {
       success: false,
       error: firstError ?? 'Invalid request data',
       errors,
     }
   }
-  
+
   return {
     success: true,
     data: result.data,
