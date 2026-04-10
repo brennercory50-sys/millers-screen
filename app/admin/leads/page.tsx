@@ -187,7 +187,7 @@ export default function AdminLeadsPage() {
                     <td colSpan={6} className="p-8 text-center text-muted">No leads found</td>
                   </tr>
                 ) : (
-                  leads.map(lead => (
+                  leads.map((lead: Lead) => (
                     <tr key={lead.id} className="border-b border-line hover:bg-bg-0/50 transition-colors">
                       <td className="p-4 text-sm text-muted">
                         {new Date(lead.created_at).toLocaleDateString()}

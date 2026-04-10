@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
 import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit'
-import { validateLeadRequest } from '@/lib/validations'
+import { validateLeadRequest, type LeadFormData } from '@/lib/validations'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const { fullName, phone, email, projectType, city, message } = validation.data
+    const { fullName, phone, email, projectType, city, message } = validation.data as LeadFormData
 
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error('Supabase not configured')

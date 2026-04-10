@@ -18,4 +18,4 @@
 - Adding new services: Edit header, footer, and dynamic page config
 
 ## Deployment
-- GitHub → Render (auto-deploys)
+- GitHub → Railway (auto-deploys)

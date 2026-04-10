@@ -95,7 +95,7 @@ export default function EmployeeModal({ member, isOpen, onClose }: EmployeeModal
         <div className="relative flex-shrink-0" style={{ height: '280px' }}>
           {!imageError && member.image ? (
             <Image
-              src={member.image}
+              src={member.image || '/placeholder.png'}
               alt={member.name}
               fill
               className={member.imagePosition ? 'object-cover' : 'object-cover object-[50%_20%]'}
