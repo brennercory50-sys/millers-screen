@@ -133,8 +133,8 @@ export const TEAM_DATA: TeamSection[] = [
         firstName: 'Robby',
         role: 'Head Installer',
         image: '/team/robby.jpg',
-        bio: 'Specializes in the tricky jobs other companies won\'t touch. Odd angles? No problem. He figures it out.',
-        gallery: ['/team/robby-1.jpg'],
+        bio: "I began working with Miller's Screen within the first five years of the company's founding, when Blake and his father Chip were running the business together. I started as a helper just before my daughter was born and have since worked my way up to a top-level installer.\n\nToday, I'm capable of handling all aspects of aluminum construction. I take pride in delivering work that is both structurally sound and visually clean, customizing each project to meet the customer's needs.\n\nOutside of work, I'm a proud father to my 12-year-old daughter. I spend my time supporting her interests in art, music, writing, and digital design, while also creating my own art and recording music. I also enjoy getting away to the mountains each year.\n\nWhat I enjoy most about this work is the creativity—being able to build something that not only functions well but looks great too. It's rewarding to be part of a team that takes pride in quality and detail like Miller's Screen.",
+        gallery: ['/images/robby1.jpg', '/images/robby2.jpg', '/images/robby3.jpg'],
       },
       {
         id: 'niko',
