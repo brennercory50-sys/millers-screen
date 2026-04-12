@@ -1,17 +1,14 @@
 import { NextResponse } from 'next/server'
-import type { CompanyCamPhoto, CompanyCamProject, JobLocation, JobProject, JobType, JobsData } from '@/lib/companycam'
+import type { CompanyCamProject, ProjectCard, JobLocation } from '@/lib/companycam'
+import { formatAddress, getImageUrl } from '@/lib/companycam'
 
 const COMPANYCAM_API_BASE = 'https://api.companycam.com/v2'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 60
 
-async function getApiKey(): Promise<string | null> {
-  return process.env.COMPANYCAM_API_KEY ?? null
-}
-
 async function fetchWithAuth(endpoint: string): Promise<any> {
-  const apiKey = await getApiKey()
+  const apiKey = process.env.COMPANYCAM_API_KEY
   if (!apiKey) {
     throw new Error('CompanyCam API key not configured')
   }
@@ -31,32 +28,9 @@ async function fetchWithAuth(endpoint: string): Promise<any> {
   return response.json()
 }
 
-function inferJobType(projectName: string): JobType {
-  const name = projectName.toLowerCase()
-  if (name.includes('pool') || name.includes('enclosure')) return 'pool-enclosure'
-  if (name.includes('screen room') || name.includes('screenroom')) return 'screen-room'
-  if (name.includes('concrete') || name.includes('paver')) return 'concrete-pavers'
-  if (name.includes('repair') || name.includes('fix') || name.includes('patch')) return 'repairs'
-  return 'other'
-}
-
-function getAddress(project: CompanyCamProject): string {
-  return [
-    project.address,
-    project.city,
-    project.state,
-    project.zip,
-  ].filter(Boolean).join(', ')
-}
-
 export async function GET(request: Request) {
   try {
-    const { searchParams } = new URL(request?.url ?? '')
-    const page = parseInt(searchParams?.get('page') ?? '1')
-    const limit = parseInt(searchParams?.get('limit') ?? '20')
-    const offset = (page - 1) * limit
-
-    const apiKey = await getApiKey()
+    const apiKey = process.env.COMPANYCAM_API_KEY
     if (!apiKey) {
       return NextResponse.json(
         { error: 'CompanyCam API not configured. Add COMPANYCAM_API_KEY to environment.' },
@@ -64,110 +38,64 @@ export async function GET(request: Request) {
       )
     }
 
-    const [photosData, projectsData] = await Promise.all([
-      fetchWithAuth(`/photos?sort=created_at desc&per_page=${limit}&page=${page}`),
-      fetchWithAuth('/projects?per_page=500'),
-    ])
+    const { searchParams } = new URL(request.url)
+    const page = parseInt(searchParams.get('page') ?? '1')
+    const perPage = parseInt(searchParams.get('per_page') ?? '50')
 
-    const projectsMap = new Map<string, CompanyCamProject>()
-    if (projectsData.projects) {
-      projectsData.projects.forEach((project: CompanyCamProject) => {
-        projectsMap.set(String(project.id), project)
-      })
-    }
+    // CompanyCam returns a flat array of projects, NOT { projects: [...] }
+    const rawProjects: CompanyCamProject[] = await fetchWithAuth(
+      `/projects?per_page=${perPage}&page=${page}&sort=updated_at+desc`
+    )
 
-    const photos: CompanyCamPhoto[] = (photosData.photos || []).map((photo: CompanyCamPhoto) => {
-      const project = photo.project_id ? projectsMap.get(String(photo.project_id)) : undefined
-      return {
-        ...photo,
-        project,
-      }
-    })
+    console.log(`[CompanyCam] Fetched ${rawProjects.length} projects (page ${page})`)
 
-    const jobsMap = new Map<string, JobProject>()
-    const photoCountByProject = new Map<string, number>()
-    const crewSet = new Set<string>()
-    const jobTypeSet = new Set<JobType>()
+    // Filter to active, non-archived projects
+    const activeProjects = rawProjects.filter(p => p.status === 'active' && !p.archived)
 
-    photos.forEach((photo) => {
-      const projectId = String(photo.project_id)
-      if (!photo.project) return
+    const projects: ProjectCard[] = activeProjects.map((p) => ({
+      id: p.id,
+      name: p.name,
+      address: formatAddress(p.address),
+      city: p.address.city || '',
+      state: p.address.state || '',
+      coverImageUrl: getImageUrl(p.feature_image, 'web'),
+      thumbnailUrl: getImageUrl(p.feature_image, 'thumbnail'),
+      latitude: p.coordinates?.lat ?? 0,
+      longitude: p.coordinates?.lon ?? 0,
+      photoCount: p.photo_count ?? 0,
+      createdAt: p.created_at,
+      updatedAt: p.updated_at,
+      creatorName: p.creator_name || 'Unknown',
+      publicUrl: p.public_url || '',
+      status: p.archived ? 'archived' as const : 'active' as const,
+    }))
 
-      photoCountByProject.set(projectId, (photoCountByProject.get(projectId) || 0) + 1)
-
-      if (photo.creator_name) {
-        crewSet.add(photo.creator_name)
-      }
-
-      if (!jobsMap.has(projectId)) {
-        const jobType = inferJobType(photo.project.name)
-        jobTypeSet.add(jobType)
-
-        const address = getAddress(photo.project)
-        const latitude = photo.latitude || photo.project.latitude
-        const longitude = photo.longitude || photo.project.longitude
-
-        jobsMap.set(projectId, {
-          id: projectId,
-          projectName: photo.project.name,
-          address: address || 'Address not set',
-          jobType,
-          crew: photo.creator_name || 'Unknown',
-          latestPhotoUrl: photo.thumbnail_url || photo.url,
-          latestPhotoDate: photo.created_at,
-          photoCount: 1,
-          latitude,
-          longitude,
-        })
-      } else {
-        const existingJob = jobsMap.get(projectId)!
-        if (photo.created_at > existingJob.latestPhotoDate) {
-          existingJob.latestPhotoDate = photo.created_at
-          existingJob.latestPhotoUrl = photo.thumbnail_url || photo.url
-          existingJob.crew = photo.creator_name || existingJob.crew
-        }
-      }
-    })
-
-    const jobs = Array.from(jobsMap.values()).sort((a, b) => b.latestPhotoDate - a.latestPhotoDate)
-
-    const locationsMap = new Map<string, JobLocation>()
-    jobs.forEach((job) => {
-      if (job.latitude && job.longitude) {
-        locationsMap.set(job.id, {
-          id: parseInt(job.id),
-          projectName: job.projectName,
-          address: job.address,
-          latitude: job.latitude,
-          longitude: job.longitude,
-          latestPhotoUrl: job.latestPhotoUrl,
-          latestPhotoDate: job.latestPhotoDate,
-        })
-      }
-    })
-
-    const locations = Array.from(locationsMap.values())
-
-    const totalPhotos = photosData.total_count ?? photosData.photos?.length ?? 0
+    const locations: JobLocation[] = projects
+      .filter(p => p.latitude && p.longitude)
+      .map(p => ({
+        id: p.id,
+        projectName: p.name,
+        address: p.address,
+        latitude: p.latitude,
+        longitude: p.longitude,
+        coverImageUrl: p.coverImageUrl,
+        updatedAt: p.updatedAt,
+      }))
 
     return NextResponse.json({
-      jobs,
+      projects,
       locations,
-      filters: {
-        crewMembers: Array.from(crewSet).sort(),
-        jobTypes: Array.from(jobTypeSet),
-      },
       pagination: {
         page,
-        limit,
-        total: totalPhotos,
-        hasMore: photosData.photos?.length === limit,
+        perPage,
+        count: projects.length,
+        hasMore: rawProjects.length === perPage,
       },
     })
   } catch (error) {
     console.error('CompanyCam API error:', error)
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to fetch jobs data' },
+      { error: error instanceof Error ? error.message : 'Failed to fetch projects' },
       { status: 500 }
     )
   }

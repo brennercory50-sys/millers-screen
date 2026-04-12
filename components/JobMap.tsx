@@ -40,7 +40,7 @@ function MapContent({ locations }: { locations: JobLocation[] }) {
     if (!L || !map || locations.length === 0) return
 
     const bounds = L.latLngBounds(locations.map(loc => [loc.latitude, loc.longitude]))
-    
+
     if (bounds.isValid()) {
       map.fitBounds(bounds, { padding: [50, 50] })
     } else {
@@ -56,7 +56,6 @@ function MapContent({ locations }: { locations: JobLocation[] }) {
 
     locations.forEach((location) => {
       const marker = L.marker([location.latitude, location.longitude], { icon }).addTo(map)
-      
       marker.on('click', () => {
         setSelectedLocation(location)
       })
@@ -74,23 +73,17 @@ function MapContent({ locations }: { locations: JobLocation[] }) {
   return (
     <div className="relative">
       <div id="job-map" className="h-[400px] w-full rounded-lg overflow-hidden" />
-      
       {selectedLocation && (
         <div className="absolute bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-80 bg-panel/95 backdrop-blur rounded-lg p-4 shadow-lg z-[1000]">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h4 className="font-semibold text-text-primary">
-                {selectedLocation.projectName}
-              </h4>
-              <div className="flex items-center gap-1 text-text-secondary text-sm mt-1">
+              <h4 className="font-semibold text-text-primary">{selectedLocation.projectName}</h4>
+              <div className="flex items-center gap-1 text-muted text-sm mt-1">
                 <MapPin className="w-4 h-4" />
                 <span>{selectedLocation.address}</span>
               </div>
             </div>
-            <button
-              onClick={() => setSelectedLocation(null)}
-              className="text-text-secondary hover:text-text-primary"
-            >
+            <button onClick={() => setSelectedLocation(null)} className="text-muted hover:text-text-primary">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -114,11 +107,8 @@ export default function JobMap({ locations, loading }: JobMapProps) {
   if (!locations || locations.length === 0) {
     return (
       <div className="text-center py-16">
-        <MapPin className="w-16 h-16 mx-auto text-text-secondary mb-4" />
-        <p className="text-text-secondary text-lg">No job locations found</p>
-        <p className="text-text-secondary/70 text-sm mt-2">
-          Add addresses to your projects to see them on the map
-        </p>
+        <MapPin className="w-16 h-16 mx-auto text-muted mb-4" />
+        <p className="text-muted text-lg">No job locations found</p>
       </div>
     )
   }

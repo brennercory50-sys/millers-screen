@@ -1,99 +1,116 @@
+// Types matching actual CompanyCam API v2 response shapes
+
+export interface CompanyCamAddress {
+  street_address_1: string | null
+  street_address_2: string | null
+  city: string | null
+  state: string | null
+  postal_code: string | null
+  country: string | null
+}
+
+export interface CompanyCamImageVariant {
+  type: 'original' | 'web' | 'thumbnail'
+  uri: string
+  url: string
+}
+
 export interface CompanyCamProject {
-  id: number
+  id: string
+  company_id: string
+  creator_id: string
+  creator_type: string
+  creator_name: string
+  status: string
+  archived: boolean
+  public: boolean
   name: string
-  address?: string
-  city?: string
-  state?: string
-  zip?: string
-  latitude?: number
-  longitude?: number
+  address: CompanyCamAddress
+  feature_image: CompanyCamImageVariant[]
+  slug: string
+  project_url: string
+  public_url: string
+  coordinates: { lat: number; lon: number }
   created_at: number
   updated_at: number
+  photo_count: number
 }
 
 export interface CompanyCamPhoto {
   id: string
   project_id: string
-  project?: CompanyCamProject
+  uri?: string[]
   url: string
-  thumbnail_url: string
+  thumbnail_url?: string
   title?: string
-  description?: string
-  latitude?: number
-  longitude?: number
   created_at: number
   updated_at: number
-  captured_at?: number
-  creator_id?: string
-  creator_type?: string
   creator_name?: string
+  project?: {
+    name?: string
+    address?: string
+    city?: string
+    state?: string
+    zip?: string
+  }
 }
 
-export interface CompanyCamPhotosResponse {
-  photos: CompanyCamPhoto[]
-  total_count: number
-  page: number
-  per_page: number
-}
-
-export interface CompanyCamProjectsResponse {
-  projects: CompanyCamProject[]
-  total_count: number
-  page: number
-  per_page: number
+// Normalized project shape for the frontend
+export interface ProjectCard {
+  id: string
+  name: string
+  address: string
+  city: string
+  state: string
+  coverImageUrl: string
+  thumbnailUrl: string
+  latitude: number
+  longitude: number
+  photoCount: number
+  createdAt: number
+  updatedAt: number
+  creatorName: string
+  publicUrl: string
+  status: 'active' | 'archived'
 }
 
 export interface JobLocation {
-  id: number
+  id: string
   projectName: string
   address: string
   latitude: number
   longitude: number
-  latestPhotoUrl?: string
-  latestPhotoDate?: number
+  coverImageUrl: string
+  updatedAt: number
 }
 
-export type JobType = 'pool-enclosure' | 'screen-room' | 'concrete-pavers' | 'repairs' | 'other'
-
-export interface JobProject {
-  id: string
-  projectName: string
-  address: string
-  jobType: JobType
-  crew: string
-  latestPhotoUrl: string
-  latestPhotoDate: number
-  photoCount: number
-  latitude?: number
-  longitude?: number
+export function formatAddress(addr: CompanyCamAddress): string {
+  return [addr.street_address_1, addr.city, addr.state, addr.postal_code]
+    .filter(Boolean)
+    .join(', ')
 }
 
-export interface JobsData {
-  jobs: JobProject[]
-  locations: JobLocation[]
-  filters: {
-    crewMembers: string[]
-    jobTypes: JobType[]
-  }
+export function getImageUrl(images: CompanyCamImageVariant[], type: 'web' | 'thumbnail' | 'original' = 'web'): string {
+  const match = images.find(img => img.type === type)
+  return match?.url || images[0]?.url || ''
 }
 
-function inferJobType(projectName: string): JobType {
-  const name = projectName.toLowerCase()
-  if (name.includes('pool') || name.includes('enclosure')) return 'pool-enclosure'
-  if (name.includes('screen room') || name.includes('room')) return 'screen-room'
-  if (name.includes('concrete') || name.includes('paver')) return 'concrete-pavers'
-  if (name.includes('repair') || name.includes('fix')) return 'repairs'
-  return 'other'
-}
+export function formatTimestamp(timestamp: number): string {
+  const date = new Date(timestamp * 1000)
+  const now = new Date()
+  const diffMs = now.getTime() - date.getTime()
+  const diffMins = Math.floor(diffMs / 60000)
+  const diffHours = Math.floor(diffMins / 60)
+  const diffDays = Math.floor(diffHours / 24)
 
-export function getJobTypeLabel(type: JobType): string {
-  switch (type) {
-    case 'pool-enclosure': return 'Pool Enclosure'
-    case 'screen-room': return 'Screen Room'
-    case 'concrete-pavers': return 'Concrete / Pavers'
-    case 'repairs': return 'Repairs'
-    default: return 'Other'
-  }
-}
+  if (diffMins < 1) return 'Just now'
+  if (diffMins < 60) return `${diffMins}m ago`
+  if (diffHours < 24) return `${diffHours}h ago`
+  if (diffDays < 7) return `${diffDays}d ago`
 
-export { inferJobType }
+  return date.toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+  })
+}
