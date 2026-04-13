@@ -8,7 +8,7 @@ Premium screen enclosure contractor website for Volusia County, Florida.
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Database**: PostgreSQL with Supabase
-- **Deployment**: Render
+- **Deployment**: Railway
 
 ## Getting Started
 
@@ -70,17 +70,12 @@ npm run build
 npm start
 ```
 
-## Deployment to Render
+## Deployment
 
-### One-Click Deploy
+Deploy via Railway or similar platform:
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-
-### Manual Deploy
-
-1. Create a new Web Service on Render
-2. Connect your GitHub repository
-3. Configure the following:
+1. Connect your GitHub repository
+2. Configure the following:
 
 | Setting | Value |
 |---------|-------|
@@ -88,11 +83,11 @@ npm start
 | **Start Command** | `npm start` |
 | **Node Version** | 18 |
 
-4. Add environment variables from `.env.example`
+3. Add environment variables from `.env.example`
 
 ### Database
 
-Create a PostgreSQL database on Render and copy the connection string to `DATABASE_URL`.
+Supabase PostgreSQL - copy the connection string to `DATABASE_URL`.
 
 ## Project Structure
 
