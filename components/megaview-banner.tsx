@@ -56,6 +56,7 @@ export default function MegaviewBanner() {
                 src="/images/megaview-1.jpg"
                 alt="MegaView enclosure with open views"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

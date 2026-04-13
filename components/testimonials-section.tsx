@@ -49,7 +49,7 @@ export default function TestimonialsSection() {
   }
 
   return (
-    <section id="testimonials-section" className="reveal-on-scroll py-16 md:py-20">
+    <section id="testimonials-section" className={`reveal-on-scroll py-16 md:py-20${isVisible ? ' is-visible' : ''}`}>
       <div className="section-container">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-lg bg-accent-red/10 flex items-center justify-center">

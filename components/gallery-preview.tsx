@@ -65,6 +65,7 @@ export default function GalleryPreview() {
                     src={project?.image ?? ''}
                     alt={project?.alt ?? ''}
                     fill
+                    sizes="(max-width: 1024px) 50vw, 25vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />

@@ -63,7 +63,7 @@ export default function ServicePackages() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
           {packages.map((pkg, index) => {
             const Icon = pkg.icon
             return (

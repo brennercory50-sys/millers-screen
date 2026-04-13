@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -15,15 +15,23 @@ const trustBadges = [
 
 export default function HomeHero() {
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 })
+  const rafRef = useRef<number | null>(null)
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth) * 100
-      const y = (e.clientY / window.innerHeight) * 100
-      setMousePosition({ x, y })
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      rafRef.current = requestAnimationFrame(() => {
+        setMousePosition({
+          x: (e.clientX / window.innerWidth) * 100,
+          y: (e.clientY / window.innerHeight) * 100,
+        })
+      })
     }
     window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   return (
@@ -34,6 +42,7 @@ export default function HomeHero() {
           src="/images/home-hero.jpg"
           alt="Custom pool enclosure by Miller's Screen"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
           className="object-cover"
           priority
           quality={80}
