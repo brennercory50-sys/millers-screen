@@ -10,9 +10,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 // --- Nav Data ---
 
 const services = [
-  { label: 'Pool Enclosures', href: '/pool-enclosures' },
   { label: 'Screen Rooms', href: '/screen-rooms' },
   { label: 'Concrete / Pavers', href: '/concrete-pavers' },
+  { label: 'MegaView®', href: '/megaview' },
 ]
 
 type NavItem = {
