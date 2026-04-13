@@ -1,7 +1,6 @@
-import { Clock, Star, Shield, Heart, DollarSign } from 'lucide-react'
+import { Star, Shield, Heart, DollarSign } from 'lucide-react'
 
 const trustItems = [
-  { icon: Clock, title: 'SAME-WEEK', subtitle: 'INSTALLS' },
   { icon: Star, title: '5-STAR RATED', subtitle: 'LOCAL COMPANY' },
   { icon: Shield, title: 'PREMIUM QUALITY', subtitle: 'BUILT TO LAST' },
   { icon: Heart, title: 'FAMILY OWNED', subtitle: '& OPERATED' },
