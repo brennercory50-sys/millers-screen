@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { Inter } from 'next/font/google'
 import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+})
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import MobileCTABar from '@/components/mobile-cta-bar'
@@ -196,7 +203,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen flex flex-col">
+      <body className={`${inter.className} min-h-screen flex flex-col`}>
         <div className="bg-layer">
           <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
             <polygon points="0,0 1050,0 750,250 0,170" fill="rgba(25,70,160,.25)"/>

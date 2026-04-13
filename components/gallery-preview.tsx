@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+const BLUR_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjMiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjMiIGZpbGw9IiMwRjEzMTgiLz48L3N2Zz4='
+
 const projects = [
   {
     image: '/projects/project-122978.jpg',
@@ -66,6 +68,8 @@ export default function GalleryPreview() {
                     alt={project?.alt ?? ''}
                     fill
                     sizes="(max-width: 1024px) 50vw, 25vw"
+                    placeholder="blur"
+                    blurDataURL={BLUR_PLACEHOLDER}
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300" />

@@ -24,6 +24,7 @@ const testimonials = [
 export default function TestimonialsSection() {
   const [current, setCurrent] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -39,6 +40,14 @@ export default function TestimonialsSection() {
     if (section) observer.observe(section)
     return () => { if (section) observer.unobserve(section) }
   }, [])
+
+  useEffect(() => {
+    if (isPaused) return
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [isPaused])
 
   const next = () => {
     setCurrent((prev) => (prev + 1) % testimonials.length)
@@ -61,8 +70,10 @@ export default function TestimonialsSection() {
 
         <div className="relative max-w-4xl mx-auto">
           {/* Quote Card */}
-          <div 
+          <div
             className="relative p-8 md:p-12"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
             style={{
               background: 'linear-gradient(145deg, #1e1e1e, #161616)',
               border: '1px solid rgba(255,255,255,.06)',

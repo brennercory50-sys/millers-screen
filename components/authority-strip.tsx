@@ -7,9 +7,9 @@ import { useRef, useEffect, useState } from 'react'
 
 const stats = [
   { value: 40, suffix: '+', label: 'Years Experience', icon: Award },
-  { value: 1000, suffix: '+', label: 'Projects Done', icon: FileCheck },
+  { value: 1000, suffix: '+', label: 'Projects Completed', icon: FileCheck },
   { value: 100, suffix: '%', label: 'In-House Crews', icon: Users },
-  { value: 5000, suffix: '+', label: 'Happy Customers', icon: ThumbsUp },
+  { value: 1000, suffix: '+', label: 'Happy Customers', icon: ThumbsUp },
 ]
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
