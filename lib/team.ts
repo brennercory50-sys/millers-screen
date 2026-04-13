@@ -59,7 +59,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Permits',
         image: '/team/meagan-miller.jpg',
         bio: 'The permit wizard. Knows every code inspector in Volusia County by name. Can navigate city hall faster than anyone. Keeps the paperwork flowing so the crews can keep building.',
-        gallery: ['/team/meagan-2.jpg', '/team/meagan-3.jpg', '/team/meagan-4.jpg', '/team/meagan-5.jpg'],
+        gallery: ['/team/meagan-2.jpg', '/team/meagan-3.jpg'],
       },
     ],
   },
