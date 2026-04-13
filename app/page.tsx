@@ -1,12 +1,11 @@
 import HomeHero from '@/components/home-hero'
 import TrustStrip from '@/components/trust-strip'
+import GalleryCarousel from '@/components/gallery-carousel'
+import TestimonialsSection from '@/components/testimonials-section'
 import AuthorityStrip from '@/components/authority-strip'
-import ServicePackages from '@/components/service-packages'
-import MegaviewBanner from '@/components/megaview-banner'
+import FAQSection from '@/components/faq-section'
 import FinancingBanner from '@/components/financing-banner'
 import GalleryPreview from '@/components/gallery-preview'
-import TestimonialsSection from '@/components/testimonials-section'
-import FAQSection from '@/components/faq-section'
 import { generateFAQSchema } from '@/lib/seo'
 
 export default function HomePage() {
@@ -31,14 +30,9 @@ export default function HomePage() {
       />
       <HomeHero />
       <TrustStrip />
-
+      <GalleryCarousel />
       <TestimonialsSection />
-
       <AuthorityStrip />
-
-      <ServicePackages />
-      <MegaviewBanner />
-
       <FAQSection />
       <FinancingBanner />
       <GalleryPreview />

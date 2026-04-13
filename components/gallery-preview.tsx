@@ -28,16 +28,16 @@ const projects = [
 
 export default function GalleryPreview() {
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-12 md:py-16 bg-bg-1">
       <div className="section-container">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-10">
+        <div className="flex items-center justify-between mb-8">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-text-primary"
+            className="text-xl md:text-2xl font-bold text-text-primary"
           >
-            Recent Projects
+            More Projects
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -45,13 +45,13 @@ export default function GalleryPreview() {
             viewport={{ once: true }}
           >
             <Link href="/showcase" className="inline-flex items-center gap-2 text-accent-red font-semibold hover:gap-3 transition-all">
-              View All Projects
-              <ArrowRight className="w-5 h-5" />
+              View All
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-4 lg:grid-cols-4 gap-2 md:gap-4">
           {projects?.map?.((project, index) => (
             <motion.div
               key={index}
