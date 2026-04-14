@@ -10,16 +10,8 @@ const defaultFaqs = [
     answer: "Yes, a building permit is required for pool enclosures in Volusia County, Florida. At Miller's Screen, we handle all permitting for you. Our team submits the permit application, provides engineering drawings, and coordinates with local building departments in Daytona Beach, Port Orange, Ormond Beach, New Smyrna Beach, DeLand, Deltona, and throughout Volusia County. This is included in our service at no extra charge."
   },
   {
-    question: "How long does it take to build a pool enclosure?",
-    answer: "Most pool enclosure projects take 1-3 days for installation once permits are approved. The permitting process typically takes 2-4 weeks depending on your municipality. Total timeline from signing to completion is usually 3-6 weeks. We use our own in-house crews (no subcontractors) which means faster, more reliable scheduling."
-  },
-  {
     question: "What is a MegaView enclosure?",
     answer: "MegaView is a premium frameless screen enclosure system that provides unobstructed views of your pool and backyard. Unlike traditional enclosures with vertical screen panels every 10 feet, MegaView uses horizontal cable supports allowing for massive uninterrupted spans. Miller's Screen is the ONLY authorized MegaView builder in Volusia County."
-  },
-  {
-    question: "Do you offer financing for screen enclosures?",
-    answer: "Yes! We offer 0% interest financing for 18 months with no payments during that period. This makes it easy to get your dream pool enclosure or screen room without the financial burden upfront. Ask about our financing options when you schedule your free estimate."
   },
   {
     question: "What areas do you serve?",
