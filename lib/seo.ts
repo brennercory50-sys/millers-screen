@@ -19,7 +19,7 @@ const KEYWORDS = {
 
 function generateTitle(page: string, location?: string): string {
   const titles: Record<string, string> = {
-    home: "Volusia County's #1 Screen Enclosure Contractor | Miller's Screen",
+    home: "Volusia County's Trusted Screen Enclosure Contractor | Miller's Screen",
     poolEnclosures: location 
       ? `${location} Pool Enclosure Contractor | Licensed & Insured`
       : "Pool Enclosure Experts in Volusia County | Licensed & Permitted",

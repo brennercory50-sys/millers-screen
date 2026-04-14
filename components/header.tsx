@@ -11,6 +11,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const services = [
   { label: 'Screen Rooms', href: '/screen-rooms' },
+  { label: 'Rescreening', href: '/rescreen' },
+  { label: 'Repairs', href: '/repair' },
   { label: 'Concrete / Pavers', href: '/concrete-pavers' },
   { label: 'MegaView®', href: '/megaview' },
 ]

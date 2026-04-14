@@ -90,6 +90,29 @@ export default function ScreenRoomsPage() {
         title="Built to match your home"
         copy="A well-designed screen room should look intentional — proportioned correctly, clean corners, strong attachment points, and a finish that doesn't scream 'add-on.'"
       />
+
+      {/* Inline Estimate CTA */}
+      <section className="py-12 md:py-16 bg-bg-1">
+        <div className="section-container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-text-primary text-2xl md:text-3xl font-bold mb-4">
+              Ready to Expand Your Living Space?
+            </h2>
+            <p className="text-muted mb-6">
+              A screen room adds usable square footage to your home while preserving the outdoor feel.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="/contact#form" className="btn-primary">
+                Request an Estimate
+              </a>
+              <a href="tel:386-756-8770" className="btn-secondary">
+                Call 386-756-8770
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <GalleryGrid title="Recent screen rooms" images={roomImages} />
       <FAQSection />
       <CTABlock

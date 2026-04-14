@@ -24,11 +24,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(baseUrl),
     title: {
-      default: "Volusia County's #1 Screen Enclosure Contractor | Miller's Screen",
+      default: "Volusia County's Trusted Screen Enclosure Contractor | Miller's Screen",
       template: "%s | Miller's Screen"
     },
-    description: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, and MegaView® installations. 40+ years experience, in-house crews, licensed & permitted. Free estimates.",
-    keywords: ['pool enclosure', 'screen room', 'volusia county', 'daytona beach', 'florida', 'megaview', 'rescreen', 'aluminum construction'],
+    description: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, MegaView®, rescreening & repairs. 40+ years experience, in-house crews, licensed & permitted. Free estimates.",
+    keywords: ['pool enclosure', 'screen room', 'volusia county', 'daytona beach', 'florida', 'megaview', 'rescreening', 'screen repair', 'aluminum construction'],
     authors: [{ name: "Miller's Screen" }],
     creator: "Miller's Screen",
     publisher: "Miller's Screen",
@@ -51,8 +51,8 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       locale: 'en_US',
       siteName: "Miller's Screen",
-      title: "Volusia County's #1 Screen Enclosure Contractor | Miller's Screen",
-      description: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, and MegaView® installations. 40+ years experience, in-house crews, licensed & permitted. Free estimates.",
+      title: "Volusia County's Trusted Screen Enclosure Contractor | Miller's Screen",
+      description: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, MegaView®, rescreening & repairs. 40+ years experience, in-house crews, licensed & permitted. Free estimates.",
       url: baseUrl,
       images: [{ 
         url: '/og-image.png', 
@@ -61,12 +61,12 @@ export async function generateMetadata(): Promise<Metadata> {
         alt: "Miller's Screen - Premium Screen Enclosures in Volusia County"
       }],
     },
-    twitter: {
+twitter: {
       card: 'summary_large_image',
       site: '@MillersScreen',
       creator: '@MillersScreen',
-      title: "Volusia County's #1 Screen Enclosure Contractor | Miller's Screen",
-      description: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, and MegaView® installations. 40+ years experience.",
+      title: "Volusia County's Trusted Screen Enclosure Contractor | Miller's Screen",
+      description: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, MegaView®, rescreening & repairs. 40+ years experience, in-house crews.",
       images: ['/og-image.png'],
     },
     other: {
@@ -190,15 +190,7 @@ export default function RootLayout({
               "@type": "WebSite",
               "@id": "https://millersscreen.com/#website",
               "name": "Miller's Screen",
-              "url": "https://millersscreen.com",
-              "potentialAction": {
-                "@type": "SearchAction",
-                "target": {
-                  "@type": "EntryPoint",
-                  "urlTemplate": "https://millersscreen.com/search?q={search_term_string}"
-                },
-                "query-input": "required name=search_term_string"
-              }
+              "url": "https://millersscreen.com"
             })
           }}
         />

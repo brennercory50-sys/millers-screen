@@ -2,6 +2,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Check, MapPin } from 'lucide-react'
+import FAQSection from '@/components/faq-section'
+import { generateFAQSchema } from '@/lib/seo'
 
 export const metadata: Metadata = {
   title: "Concrete & Paver Services in Volusia County | Driveways, Patios & More",
@@ -58,9 +60,26 @@ const benefits = [
   'Quality materials',
 ]
 
+const faqData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": generateFAQSchema('concretePavers').map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+}
+
 export default function ConcretePaversPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+      />
       {/* Hero */}
       <section className="relative min-h-[60vh] md:min-h-[70vh] flex items-center">
         <div className="absolute inset-0 z-0">
@@ -241,6 +260,8 @@ export default function ConcretePaversPage() {
           </div>
         </div>
       </section>
+
+      <FAQSection />
     </>
   )
 }
