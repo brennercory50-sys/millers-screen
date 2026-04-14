@@ -6,6 +6,15 @@ import { Check, Award, Phone, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import FAQSection from '@/components/faq-section'
 
+const megaviewGallery = [
+  { src: '/images/megaview-2.jpg', alt: 'MegaView pool enclosure at sunset' },
+  { src: '/images/megaview-3.jpg', alt: 'MegaView enclosure side view' },
+  { src: '/images/megaview-4.jpg', alt: 'MegaView enclosure construction' },
+  { src: '/images/megaview-5.jpg', alt: 'MegaView waterfront enclosure' },
+  { src: '/images/megaview-6.jpg', alt: 'MegaView enclosure with landscaping' },
+  { src: '/projects/project-72569.jpg', alt: 'MegaView premium build' },
+]
+
 const benefits = [
   { icon: Check, text: 'No vertical bars blocking your view' },
   { icon: Check, text: 'Cleaner, more modern appearance' },
@@ -259,6 +268,42 @@ export default function MegaviewContent() {
                 <p className="text-text-primary text-sm mt-1 font-medium">No bars. Just your view.</p>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery */}
+      <section className="py-16 md:py-24 bg-bg-1">
+        <div className="section-container">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl md:text-4xl font-bold text-text-primary text-center mb-12"
+          >
+            MegaView Installs Across Volusia County
+          </motion.h2>
+
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+            {megaviewGallery.map((img, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="relative aspect-[4/3] rounded-lg overflow-hidden group"
+              >
+                <Image
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  sizes="(max-width: 1024px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
