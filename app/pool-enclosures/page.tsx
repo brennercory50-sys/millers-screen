@@ -39,8 +39,6 @@ const poolImages = [
   '/projects/project-72584.jpg',
   '/projects/project-72585.jpg',
   '/projects/project-72586.jpg',
-  '/projects/project-72599.jpg',
-  '/projects/project-72600.jpg',
 ]
 
 export default function PoolEnclosuresPage() {
