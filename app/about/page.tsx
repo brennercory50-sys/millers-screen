@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
 import HeroSection from '@/components/hero-section'
-import ContentBlock from '@/components/content-block'
 import TeamSectionClient from '@/components/team-section-client'
 import { Heart } from 'lucide-react'
 
@@ -38,64 +37,122 @@ export default function AboutPage() {
         }}
       />
       <HeroSection
-        headline="MEET THE TEAM"
-        subheadline="Florida&apos;s aluminum construction pros."
+        headline="ABOUT MILLER'S SCREEN"
+        subheadline="Florida's family-owned aluminum construction experts since 1984."
         image="/projects/project-122978.jpg"
-        ctaPrimary={{ label: 'Call 386-756-8770', href: 'tel:386-756-8770' }}
-      />
-      
-      <ContentBlock
-        title="Meet Florida&apos;s Aluminum Construction Pros"
-        copy="With over 40 years of experience in the aluminum construction business, Miller&apos;s Screen & Repair is family-owned and family-run. We take pride in our projects and are personally involved in every aspect of the project from beginning to end. We have a great Install Team and office staff that make it possible to be &ldquo;One Team One Dream.&rdquo; We all come together to be the best, build the best and give our customer&apos;s the best experience ever in choosing us to meet all of their aluminum needs. Give us a call today and experience the difference it makes working with Miller&apos;s Screens!"
-      />
-
-      <ContentBlock
-        title="Why Choose Miller's Screen"
-        copy="Stainless Steel Fasteners Always Used • Expert Layout & Design • Committed to Customer Satisfaction • No Subcontracting • State Certified Contractor • Quality Control Systems • Exclusive S.P.E Sidewall Construction • Prompt and Courteous Service • Fair Pricing • Family Owned/Operated • Locally Owned"
+        ctaPrimary={{ label: 'Request an Estimate', href: '/contact#form' }}
+        trustBullets={[
+          'Family Owned & Operated',
+          '40+ Years Experience',
+          '1,000+ Projects Completed',
+          'Licensed & Insured',
+        ]}
       />
 
-      <ContentBlock
-        title="Our Services"
-        copy="Screen Pool Enclosures • Florida Screen Room • Screen Rooms • Carports • Vinyl Rooms • Concrete Slabs • Room Additions • Pavers"
-      />
-
-      <TeamSectionClient />
-
-      <section className="py-16 md:py-20">
+      <section className="py-10 md:py-14 bg-bg-0">
         <div className="section-container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-accent-red mb-2">40+</div>
-              <p className="text-muted">Years Experience</p>
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+            <div className="md:col-span-2">
+              <h2 className="text-text-primary text-2xl md:text-3xl font-bold mb-4">
+                The Name in Florida Aluminum Construction
+              </h2>
+              <p className="text-muted text-lg leading-relaxed mb-5">
+                Miller's Screen & Repair has been family-owned and family-run since 1984. 
+                We take pride in being personally involved in every aspect of your project from 
+                start to finish. Our install team and office staff work as one united team to 
+                deliver the best experience and the best results for our customers.
+              </p>
+              <p className="text-muted text-lg leading-relaxed">
+                From screen pool enclosures to custom screen rooms, concrete work to pavers — 
+                we bring decades of experience to every build. We don't subcontract. 
+                We do it all in-house, and we stand behind our work.
+              </p>
             </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-accent-red mb-2">1000+</div>
-              <p className="text-muted">Projects Done</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-accent-red mb-2">100%</div>
-              <p className="text-muted">In-House Crews</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-black text-accent-red mb-2">5★</div>
-              <p className="text-muted">Customer Rating</p>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-panel rounded-lg p-4 border border-white/5">
+                <div className="text-2xl md:text-3xl font-black text-accent-red mb-1">40+</div>
+                <p className="text-muted text-xs">Years</p>
+              </div>
+              <div className="bg-panel rounded-lg p-4 border border-white/5">
+                <div className="text-2xl md:text-3xl font-black text-accent-red mb-1">1000+</div>
+                <p className="text-muted text-xs">Projects</p>
+              </div>
+              <div className="bg-panel rounded-lg p-4 border border-white/5">
+                <div className="text-2xl md:text-3xl font-black text-accent-red mb-1">100%</div>
+                <p className="text-muted text-xs">In-House</p>
+              </div>
+              <div className="bg-panel rounded-lg p-4 border border-white/5">
+                <div className="text-2xl md:text-3xl font-black text-accent-red mb-1">5★</div>
+                <p className="text-muted text-xs">Rating</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-bg-1">
+      <section className="py-10 md:py-14 bg-bg-1">
         <div className="section-container">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-10 h-10 rounded-lg bg-accent-red/10 flex items-center justify-center">
-              <Heart className="w-5 h-5 text-accent-red" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-panel rounded-lg p-5 border border-white/5">
+              <div className="w-9 h-9 rounded-lg bg-accent-red/10 flex items-center justify-center mb-3">
+                <svg className="w-4 h-4 text-accent-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-text-primary font-bold text-sm mb-1">Stainless Fasteners</h3>
+              <p className="text-muted text-xs">Always used</p>
             </div>
-            <span className="text-sm font-semibold text-accent-red uppercase tracking-wider">Community</span>
+            <div className="bg-panel rounded-lg p-5 border border-white/5">
+              <div className="w-9 h-9 rounded-lg bg-accent-red/10 flex items-center justify-center mb-3">
+                <svg className="w-4 h-4 text-accent-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-text-primary font-bold text-sm mb-1">State Certified</h3>
+              <p className="text-muted text-xs">Licensed contractor</p>
+            </div>
+            <div className="bg-panel rounded-lg p-5 border border-white/5">
+              <div className="w-9 h-9 rounded-lg bg-accent-red/10 flex items-center justify-center mb-3">
+                <svg className="w-4 h-4 text-accent-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="text-text-primary font-bold text-sm mb-1">In-House Crews</h3>
+              <p className="text-muted text-xs">No subcontracting</p>
+            </div>
+            <div className="bg-panel rounded-lg p-5 border border-white/5">
+              <div className="w-9 h-9 rounded-lg bg-accent-red/10 flex items-center justify-center mb-3">
+                <svg className="w-4 h-4 text-accent-red" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                </svg>
+              </div>
+              <h3 className="text-text-primary font-bold text-sm mb-1">Locally Owned</h3>
+              <p className="text-muted text-xs">South Daytona</p>
+            </div>
           </div>
-          <h2 className="text-text-primary text-2xl md:text-3xl font-bold mb-6">WE DO MORE TO SERVE OUR COMMUNITIES</h2>
-          <p className="text-muted leading-relaxed max-w-2xl text-lg">
-            We support the community through local school sponsorships and outreach. We love supporting Volusia County in more ways than one.
-          </p>
+        </div>
+      </section>
+
+      <TeamSectionClient />
+
+      <section className="py-10 md:py-14 bg-bg-0">
+        <div className="section-container">
+          <div className="flex flex-col md:flex-row gap-6 md:items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-lg bg-accent-red/10 flex items-center justify-center flex-shrink-0">
+                <Heart className="w-5 h-5 text-accent-red" />
+              </div>
+              <span className="text-sm font-semibold text-accent-red uppercase tracking-wider">Community</span>
+            </div>
+            <div>
+              <h2 className="text-text-primary text-xl md:text-2xl font-bold mb-2">
+                We Do More to Serve Our Communities
+              </h2>
+              <p className="text-muted">
+                We support local school sponsorships and community outreach. We love supporting Volusia County in more ways than one.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </>
