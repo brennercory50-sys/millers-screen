@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Check, Award, MapPin, Phone, ArrowRight } from 'lucide-react'
+import { Check, Award, Phone, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 import FAQSection from '@/components/faq-section'
 
@@ -13,12 +13,6 @@ const benefits = [
   { icon: Check, text: 'Premium upgrade option' },
 ]
 
-const serviceAreas = [
-  'Daytona Beach',
-  'Port Orange',
-  'New Smyrna Beach',
-  'Ormond Beach',
-]
 
 export default function MegaviewContent() {
   return (
@@ -265,50 +259,6 @@ export default function MegaviewContent() {
                 <p className="text-text-primary text-sm mt-1 font-medium">No bars. Just your view.</p>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery */}
-      <section className="py-16 md:py-24 bg-bg-1">
-        <div className="section-container">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-text-primary text-center mb-4"
-          >
-            Installed Across Volusia County
-          </motion.h2>
-          
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
-            {serviceAreas.map((area, index) => (
-              <span key={index} className="flex items-center gap-2 text-muted">
-                <MapPin className="w-4 h-4 text-accent-red" />
-                {area}
-              </span>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative aspect-[4/3] rounded-lg overflow-hidden group"
-              >
-                <Image
-                  src="/images/megaview-1.jpg"
-                  alt={`MegaView project ${i}`}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
