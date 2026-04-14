@@ -27,7 +27,6 @@ type NavItem = {
 const navItems: NavItem[] = [
   { label: 'Services', hasDropdown: true },
   { label: 'MegaView®', href: '/megaview', featured: true },
-  { label: 'Active Projects', href: '/jobs' },
   { label: 'Financing', href: '/financing' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },

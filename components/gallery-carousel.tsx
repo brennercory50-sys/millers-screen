@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projects } from '@/lib/projects'
@@ -51,7 +52,7 @@ export default function GalleryCarousel() {
     <section className="py-12 md:py-16 bg-bg-1">
       <div className="section-container">
         <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-8 text-center">
-          Our Work
+          Active Projects
         </h2>
 
         <div className="relative">
@@ -127,6 +128,15 @@ export default function GalleryCarousel() {
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
+        </div>
+
+        <div className="flex justify-center mt-8">
+          <Link
+            href="/jobs"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-accent-red hover:bg-accent-red-hover text-white font-semibold rounded-lg transition-colors duration-150"
+          >
+            View All Projects
+          </Link>
         </div>
       </div>
     </section>
