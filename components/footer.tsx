@@ -93,6 +93,16 @@ export default function Footer() {
           <p className="text-muted text-xs">
             © {year} Miller&apos;s Screen. All rights reserved.
           </p>
+          <p className="text-muted text-xs mt-2">
+            Built by <Link 
+              href="https://buildtechsolutions.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:text-text-primary transition-colors"
+            >
+              Build Tech Solutions
+            </Link>
+          </p>
         </div>
       </div>
     </footer>
