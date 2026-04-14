@@ -9,7 +9,18 @@ import { projects } from '@/lib/projects'
 export default function GalleryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
-  const featuredProjects = projects.slice(0, 12)
+  
+  // Deduplicate by label - only ONE entry per unique project name (job)
+  const seen = new Set<string>()
+  const uniqueProjects: typeof projects = []
+  for (const project of projects) {
+    if (!seen.has(project.label)) {
+      seen.add(project.label)
+      uniqueProjects.push(project)
+    }
+  }
+  
+  const featuredProjects = uniqueProjects.slice(0, 12)
 
   const scrollNext = () => {
     setDirection(1)
