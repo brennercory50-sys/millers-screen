@@ -12,10 +12,7 @@ const quickLinks = [
   { label: 'Repairs', href: '/repair' },
   { label: 'Concrete / Pavers', href: '/concrete-pavers' },
   { label: 'MegaView®', href: '/megaview' },
-  { label: 'Jobs', href: '/jobs' },
-  { label: 'Showcase', href: '/showcase' },
   { label: 'Financing', href: '/financing' },
-  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ]
 

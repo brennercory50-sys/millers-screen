@@ -24,6 +24,8 @@
 
 html {
   scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -31,6 +33,8 @@ body {
   background-color: var(--bg-0);
   color: var(--text);
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 body::before {
@@ -44,14 +48,6 @@ body::before {
   opacity: 0.04;
   pointer-events: none;
   z-index: -1;
-}
-
-/* Geometric background layer */
-.bg-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
 }
 
 [data-hydration-error] { display: none !important; }

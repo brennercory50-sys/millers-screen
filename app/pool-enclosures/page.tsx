@@ -84,28 +84,6 @@ export default function PoolEnclosuresPage() {
         ]}
       />
 
-      {/* Inline Estimate CTA */}
-      <section className="py-12 md:py-16 bg-bg-1">
-        <div className="section-container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-text-primary text-2xl md:text-3xl font-bold mb-4">
-              Ready to Get Started?
-            </h2>
-            <p className="text-muted mb-6">
-              We make it easy. Tell us about your project and we'll provide a detailed estimate - no obligation, no pressure.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="/contact#form" className="btn-primary">
-                Request an Estimate
-              </a>
-              <a href="tel:386-756-8770" className="btn-secondary">
-                Call 386-756-8770
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <GalleryGrid title="Recent pool enclosures" images={poolImages} />
       <FAQSection />
       <CTABlock

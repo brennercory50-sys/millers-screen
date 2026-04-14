@@ -196,17 +196,6 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
-        <div className="bg-layer">
-          <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-            <polygon points="0,0 1050,0 750,250 0,170" fill="rgba(25,70,160,.25)"/>
-            <polygon points="700,0 1920,0 1920,200 960,290" fill="rgba(35,90,180,.18)"/>
-            <polygon points="1550,0 1920,0 1920,350 1650,300" fill="rgba(50,120,200,.28)"/>
-            <polygon points="0,0 130,0 0,200" fill="rgba(50,120,200,.20)"/>
-            <polygon points="0,780 850,650 600,1080 0,1080" fill="rgba(190,35,35,.20)"/>
-            <polygon points="1000,830 1920,720 1920,1080 800,1080" fill="rgba(190,35,35,.18)"/>
-            <polygon points="1600,810 1920,780 1920,1080 1500,1080" fill="rgba(210,50,50,.28)"/>
-          </svg>
-        </div>
         <GoogleAnalytics />
         <Header />
         <main className="flex-1 pt-16 md:pt-20">
