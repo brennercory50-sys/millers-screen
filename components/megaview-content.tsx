@@ -4,9 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Check, Award, Phone, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useQuery } from '@tanstack/react-query'
 import FAQSection from '@/components/faq-section'
 
-const megaviewGallery = [
+const STATIC_GALLERY = [
   { src: '/images/megaview-2.jpg', alt: 'MegaView pool enclosure at sunset' },
   { src: '/images/megaview-3.jpg', alt: 'MegaView enclosure side view' },
   { src: '/images/megaview-4.jpg', alt: 'MegaView enclosure construction' },
@@ -14,6 +15,25 @@ const megaviewGallery = [
   { src: '/images/megaview-6.jpg', alt: 'MegaView enclosure with landscaping' },
   { src: '/projects/project-72569.jpg', alt: 'MegaView premium build' },
 ]
+
+interface MegaviewPhoto {
+  id: string
+  url: string
+  thumbnail_url: string
+  title: string
+  project?: { name: string; city: string }
+}
+
+async function fetchMegaviewPhotos(): Promise<MegaviewPhoto[]> {
+  try {
+    const res = await fetch('/api/companycam/megaview')
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.photos ?? []
+  } catch {
+    return []
+  }
+}
 
 const benefits = [
   { icon: Check, text: 'No vertical bars blocking your view' },
@@ -24,6 +44,16 @@ const benefits = [
 
 
 export default function MegaviewContent() {
+  const { data: livePhotos = [], isLoading } = useQuery<MegaviewPhoto[]>({
+    queryKey: ['megaview-photos'],
+    queryFn: fetchMegaviewPhotos,
+    staleTime: 300_000,
+  })
+
+  const gallery = livePhotos.length > 0
+    ? livePhotos.map(p => ({ src: p.thumbnail_url || p.url, alt: p.title || 'MegaView install' }))
+    : STATIC_GALLERY
+
   return (
     <>
       {/* Hero */}
@@ -284,27 +314,35 @@ export default function MegaviewContent() {
             MegaView Installs Across Volusia County
           </motion.h2>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-            {megaviewGallery.map((img, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="relative aspect-[4/3] rounded-lg overflow-hidden group"
-              >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  sizes="(max-width: 1024px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
-              </motion.div>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {[0,1,2,3,4,5].map(i => (
+                <div key={i} className="aspect-[4/3] rounded-lg bg-panel animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              {gallery.map((img, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                  className="relative aspect-[4/3] rounded-lg overflow-hidden group"
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
