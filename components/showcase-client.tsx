@@ -241,13 +241,11 @@ export default function ShowcaseClient() {
 
 function getCategoryCoverIndex(category: Category): string {
   const covers: Record<Category, string> = {
-    'Mansard': '122978',
-    'Dome': '72555',
-    'Hip': '72552',
-    'Gable': '122981',
-    'Pool Enclosures': '72552',
-    'Screen Rooms': '72553',
-    'MegaView': '122977',
+    'Flat': '72566',
+    'Gable': '72558',
+    'Dome': '122977',
+    'Mansard': '72565',
+    'Hip': '122978',
   }
   return covers[category]
 }
