@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Phone, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 // --- Nav Data ---
 
@@ -43,11 +44,6 @@ if (process.env.NODE_ENV === 'development') {
       console.warn('[Nav] Broken href:', href)
     }
   })
-}
-
-// --- cx utility ---
-function cx(...classes: (string | false | undefined | null)[]): string {
-  return classes.filter(Boolean).join(' ')
 }
 
 // --- Header ---
@@ -120,38 +116,38 @@ export default function Header() {
 
   const desktopLinkCls = (href: string, featured?: boolean) => {
     if (featured) {
-      return cx(
+      return cn(
         'px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 text-white',
         isActive(href) ? 'bg-green-700' : 'bg-green-600 hover:bg-green-700'
       )
     }
-    return cx(
+    return cn(
       'px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150',
       isActive(href) ? 'text-green-700 bg-green-50 font-semibold' : 'text-gray-700 hover:text-green-700 hover:bg-green-50'
     )
   }
 
   const dropdownItemCls = (href: string) =>
-    cx(
+    cn(
       'block px-4 py-2.5 text-sm transition-colors duration-150',
       isActive(href) ? 'text-green-700 bg-green-50 font-medium' : 'text-gray-700 hover:text-green-700 hover:bg-green-50'
     )
 
   const mobileLinkCls = (href: string, featured?: boolean) => {
     if (featured) {
-      return cx(
+      return cn(
         'block px-4 py-3 rounded-lg text-sm font-medium mb-1 transition-colors duration-150 text-white',
         isActive(href) ? 'bg-green-700' : 'bg-green-600 hover:bg-green-700'
       )
     }
-    return cx(
+    return cn(
       'block px-4 py-3 rounded-lg text-sm font-medium mb-1 transition-colors duration-150',
       isActive(href) ? 'text-green-700 bg-green-50 font-semibold' : 'text-gray-700 hover:text-green-700 hover:bg-green-50'
     )
   }
 
   const mobileDropdownItemCls = (href: string) =>
-    cx(
+    cn(
       'block px-3 py-2.5 rounded-md text-sm transition-colors duration-150',
       isActive(href) ? 'text-green-700 bg-green-50 font-medium' : 'text-gray-600 hover:text-green-700 hover:bg-green-50'
     )
@@ -159,7 +155,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={cx(
+        className={cn(
           'fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300',
           isScrolled ? 'shadow-md' : 'shadow-sm'
         )}
@@ -195,7 +191,7 @@ export default function Header() {
                         aria-expanded={isServicesOpen}
                         aria-controls="services-dropdown"
                         onClick={() => setIsServicesOpen(p => !p)}
-                        className={cx(
+                        className={cn(
                           'flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150',
                           isServicesOpen ? 'text-green-700 bg-green-50' : 'text-gray-700 hover:text-green-700 hover:bg-green-50'
                         )}
@@ -203,7 +199,7 @@ export default function Header() {
                         {item.label}
                         <ChevronDown
                           size={16}
-                          className={cx('transition-transform duration-200', isServicesOpen ? 'rotate-180' : '')}
+                          className={cn('transition-transform duration-200', isServicesOpen ? 'rotate-180' : '')}
                           aria-hidden="true"
                         />
                       </button>
@@ -327,7 +323,7 @@ export default function Header() {
                         {item.label}
                         <ChevronDown
                           size={18}
-                          className={cx('transition-transform duration-200', isMobileServicesOpen ? 'rotate-180' : '')}
+                          className={cn('transition-transform duration-200', isMobileServicesOpen ? 'rotate-180' : '')}
                           aria-hidden="true"
                         />
                       </button>

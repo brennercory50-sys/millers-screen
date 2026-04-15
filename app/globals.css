@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+/* Inter is loaded via next/font/google in layout.tsx */
 
 :root {
   --bg-0: #080810;
@@ -28,34 +28,6 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #080810;
-  color: #999;
-  min-height: 100vh;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='https://i.ytimg.com/vi/rOwuKvua1hc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&q=85&id=o&app=mv' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cdefs%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.04;
-  pointer-events: none;
-  z-index: -1;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
   background-color: var(--bg-0);
   color: var(--text);
   min-height: 100vh;
@@ -68,7 +40,7 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='https://i.ytimg.com/vi/rOwuKvua1hc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDCzv9CB5CgmkmTVjJOL6V6_M0b5w id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity: 0.04;
   pointer-events: none;
   z-index: -1;
@@ -89,7 +61,7 @@ body::before {
     font-weight: 500;
     letter-spacing: 0.02em;
   }
-  
+
   h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
   h2 { @apply text-3xl md:text-4xl; }
   h3 { @apply text-2xl md:text-3xl; }
@@ -115,7 +87,7 @@ body::before {
   section:nth-child(even) {
     background: linear-gradient(90deg, rgba(180,30,30,.03), transparent 70%);
   }
-  
+
   .btn-primary {
     background: linear-gradient(135deg, #d42020, #9a1515);
     @apply inline-flex items-center justify-center px-6 py-3 text-white font-semibold rounded-md transition-all duration-200;
@@ -130,7 +102,7 @@ body::before {
     transform: translateY(0);
     box-shadow: 0 1px 6px rgba(200,20,20,.3);
   }
-  
+
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 bg-transparent border border-white/20 text-white font-semibold rounded-md transition-all duration-200;
     transition-timing-function: cubic-bezier(.22,1,.36,1);
@@ -138,7 +110,7 @@ body::before {
   .btn-secondary:hover {
     @apply bg-white/10 border-white/40;
   }
-  
+
   .card {
     background: linear-gradient(145deg, #1e1e1e, #161616);
     border: 1px solid rgba(255,255,255,.06);
@@ -162,7 +134,7 @@ body::before {
     background: linear-gradient(to top, #161616 0%, transparent 40%);
     pointer-events: none;
   }
-  
+
   .section-container {
     @apply max-w-[1200px] mx-auto px-4 md:px-6 lg:px-8;
   }
@@ -199,7 +171,7 @@ body::before {
   }
 }
 
-/* Bonus A - Scroll reveal animations */
+/* Scroll reveal animations */
 .reveal-on-scroll {
   opacity: 0;
   transform: translateY(20px);
@@ -210,7 +182,7 @@ body::before {
   transform: translateY(0);
 }
 
-/* Bonus C - Hero mouse-follow glow */
+/* Hero mouse-follow glow */
 .hero-glow {
   position: absolute;
   inset: 0;
@@ -223,7 +195,7 @@ body::before {
   transition: background 0.1s ease-out;
 }
 
-/* Focus glow for accessibility (Bonus B - partial) */
+/* Focus glow for accessibility */
 *:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px rgba(200,20,20,.3), 0 0 12px rgba(200,20,20,.15);
