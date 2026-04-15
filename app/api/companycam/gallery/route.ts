@@ -20,21 +20,30 @@ export interface GalleryApiResponse {
 }
 
 const CATEGORY_KEYWORDS = [
-  { category: 'Mansard',        keywords: ['mansard'] },
-  { category: 'Dome',           keywords: ['dome'] },
-  { category: 'Gable',          keywords: ['gable'] },
-  { category: 'Hip',            keywords: ['hip'] },
-  { category: 'Screen Room',    keywords: ['screen room', 'screen-room', 'elite room', 'elite', 'screened room', 'screen porch'] },
-  { category: 'Pool Enclosure', keywords: ['pool enclosure', 'pool enc', 'pool room'] },
-  { category: 'Flat',           keywords: ['flat', 'low profile', 'patio enclosure'] },
-  { category: 'Rescreen',       keywords: ['rescreen', 're-screen', 'rescreening'] },
-  { category: 'Repair',         keywords: ['repair', 'screen repair'] },
-]
+  { category: 'Under Existing', keywords: ['under existing', 'under-exisiting', 'under exesting', 'existing roof', 'existing gable', 'tie-in', 'tie in', 'tiein'] },
+  { category: 'Elite Room', keywords: ['elite room', 'elite rooms', 'screen room', 'screen-room', 'screened room', 'screen porch', 'screen enclosure'] },
+  { category: 'Mansard', keywords: ['mansard', 'mansered', 'mansared', 'manserted'] },
+  { category: 'Dome', keywords: ['dome', 'domed'] },
+  { category: 'Gable', keywords: ['gable'] },
+  { category: 'Hip', keywords: ['hip'] },
+  { category: 'Flat', keywords: ['flat', 'low profile', 'patio enclosure'] },
+] as const
+
+function normalizeProjectName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, ' ')
+    .replace(/-/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
 
 function classifyProject(name: string): string {
-  const lower = name.toLowerCase()
+  const normalized = normalizeProjectName(name)
   for (const { category, keywords } of CATEGORY_KEYWORDS) {
-    if (keywords.some(kw => lower.includes(kw))) return category
+    if (keywords.some((keyword) => normalized.includes(normalizeProjectName(keyword)))) {
+      return category
+    }
   }
   return 'Other'
 }
