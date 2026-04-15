@@ -4,15 +4,7 @@ import { useState } from 'react'
 import { Send, CheckCircle, AlertCircle, Phone, Clock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
-
-const projectTypes = [
-  'Pool Enclosure',
-  'Screen Room',
-  'MegaView® Enclosure',
-  'Rescreen',
-  'Repair',
-  'Other',
-]
+import { LEAD_PROJECT_TYPES } from '@/lib/validations'
 
 export default function LeadForm() {
   const [formData, setFormData] = useState({
@@ -27,30 +19,23 @@ export default function LeadForm() {
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const target = e?.target ?? {}
-    const { name, value, type } = target
-    
-    if (type === 'checkbox') {
-      const checked = (target as HTMLInputElement)?.checked ?? false
-      setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: checked }))
-    } else {
-      setFormData(prev => ({ ...(prev ?? {}), [name ?? '']: value ?? '' }))
-    }
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e?.preventDefault?.()
+    e.preventDefault()
     setStatus('loading')
     setErrorMessage('')
 
-      const payload = {
-        fullName: formData?.fullName?.trim?.() ?? '',
-        phone: formData?.phone?.trim?.() ?? '',
-        email: formData?.email?.trim?.() ?? '',
-        projectType: formData?.projectType ?? '',
-        city: formData?.city?.trim?.() ?? '',
-        message: formData?.message?.trim?.() ?? '',
-      }
+    const payload = {
+      fullName: formData.fullName.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email.trim(),
+      projectType: formData.projectType,
+      city: formData.city.trim(),
+      message: formData.message.trim(),
+    }
 
     try {
       const response = await fetch('/api/leads', {
@@ -59,27 +44,19 @@ export default function LeadForm() {
         body: JSON.stringify(payload),
       })
 
-      const result = await response?.json?.()
+      const result = await response.json()
 
-      if (!response?.ok) {
+      if (!response.ok) {
         toast.error(result?.message ?? 'Failed to submit form. Please try again.')
         throw new Error(result?.message ?? 'Failed to submit form')
       }
 
-      toast.success('Quote request sent! We\'ll call you within 1 hour.')
+      toast.success("Quote request sent! We'll call you within 1 hour.")
       setStatus('success')
-      setFormData({
-        fullName: '',
-        phone: '',
-        email: '',
-        projectType: '',
-        city: '',
-        message: '',
-      })
+      setFormData({ fullName: '', phone: '', email: '', projectType: '', city: '', message: '' })
     } catch (error) {
-      console.error('Form submission error:', error)
       setStatus('error')
-      setErrorMessage(error instanceof Error ? error?.message ?? 'Something went wrong' : 'Something went wrong')
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong')
     }
   }
 
@@ -143,7 +120,7 @@ export default function LeadForm() {
             id="fullName"
             name="fullName"
             required
-            value={formData?.fullName ?? ''}
+            value={formData.fullName}
             onChange={handleChange}
             className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors"
             placeholder="John Smith"
@@ -160,7 +137,7 @@ export default function LeadForm() {
               id="phone"
               name="phone"
               required
-              value={formData?.phone ?? ''}
+              value={formData.phone}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors"
               placeholder="(386) 555-1234"
@@ -176,7 +153,7 @@ export default function LeadForm() {
               id="email"
               name="email"
               required
-              value={formData?.email ?? ''}
+              value={formData.email}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors"
               placeholder="john@example.com"
@@ -194,16 +171,14 @@ export default function LeadForm() {
               id="projectType"
               name="projectType"
               required
-              value={formData?.projectType ?? ''}
+              value={formData.projectType}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors appearance-none cursor-pointer"
             >
               <option value="">Select project type</option>
-              {projectTypes?.map?.((type) => (
-                <option key={type ?? ''} value={type ?? ''}>
-                  {type ?? ''}
-                </option>
-              )) ?? null}
+              {LEAD_PROJECT_TYPES.map((type) => (
+                <option key={type} value={type}>{type}</option>
+              ))}
             </select>
           </div>
           <div>
@@ -214,7 +189,7 @@ export default function LeadForm() {
               type="text"
               id="city"
               name="city"
-              value={formData?.city ?? ''}
+              value={formData.city}
               onChange={handleChange}
               className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors"
               placeholder="South Daytona"
@@ -230,7 +205,7 @@ export default function LeadForm() {
             id="message"
             name="message"
             rows={3}
-            value={formData?.message ?? ''}
+            value={formData.message}
             onChange={handleChange}
             className="w-full px-4 py-3 bg-bg-1 text-text-primary rounded-md border border-line focus:border-accent-red focus:outline-none transition-colors resize-none"
             placeholder="Pool size, location, timeline... anything helpful"
