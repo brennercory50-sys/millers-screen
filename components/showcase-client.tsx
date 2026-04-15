@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Play, X } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import HeroSection from '@/components/hero-section'
-import { CATEGORIES, Category, getProjectsByCategory } from '@/lib/projects'
 import type { GalleryProject, GalleryApiResponse } from '@/app/api/companycam/gallery/route'
 
 async function fetchGallery(): Promise<GalleryApiResponse> {
@@ -16,12 +15,36 @@ async function fetchGallery(): Promise<GalleryApiResponse> {
   return res.json()
 }
 
-const STATIC_COVERS: Record<string, string> = {
-  Flat:    '/projects/project-72566.jpg',
-  Gable:   '/projects/project-72558.jpg',
-  Dome:    '/projects/project-122977.jpg',
-  Mansard: '/projects/project-72565.jpg',
-  Hip:     '/projects/project-122978.jpg',
+const SHOWCASE_CATEGORIES = [
+  'Flat',
+  'Gable',
+  'Dome',
+  'Mansard',
+  'Hip',
+  'Elite Room',
+  'Under Existing',
+] as const
+
+const STATIC_FALLBACK_IMAGE_IDS: Record<(typeof SHOWCASE_CATEGORIES)[number], string[]> = {
+  Flat: ['72557', '72561', '72562', '72564', '72566', '72568', '72570', '72573', '72580', '72584'],
+  Gable: ['72553', '72554', '72558', '72559', '72563', '72567', '72569', '72571', '72572', '72574'],
+  Dome: ['122977', '72552', '72575', '72576', '72577', '72578', '72579', '72581', '72582', '72583'],
+  Mansard: ['72565', '72585', '72586', '72587', '72588', '72589', '72590', '72591', '72592', '72593'],
+  Hip: ['122978', '122980', '122981', '72555', '72556', '72594', '72595', '72596', '72597', '72598'],
+  'Elite Room': ['72557', '72558', '72559', '72560', '72561', '72562', '72563', '72564', '72565', '72566'],
+  'Under Existing': ['72560', '72567', '72568', '72569', '72570', '72571', '72572', '72573', '72574', '72575'],
+}
+
+function buildStaticFallbackProjects(category: (typeof SHOWCASE_CATEGORIES)[number]): GalleryProject[] {
+  return STATIC_FALLBACK_IMAGE_IDS[category].map((imageId, index) => ({
+    id: `static-${category.toLowerCase().replace(/\s+/g, '-')}-${index + 1}`,
+    name: `${category} Project ${index + 1}`,
+    city: '',
+    coverImageUrl: `/projects/project-${imageId}.jpg`,
+    thumbnailUrl: `/projects/project-${imageId}.jpg`,
+    publicUrl: '/contact#form',
+    category,
+  }))
 }
 
 export default function ShowcaseClient() {
@@ -35,30 +58,23 @@ export default function ShowcaseClient() {
     retry: 2,
   })
 
-  const useLiveData = !isError && !!data && Object.keys(data.categories).length > 0
+  const useLiveData = !isError && !!data
 
-  const displayCategories: string[] = useLiveData
-    ? Object.keys(data!.categories)
-    : (CATEGORIES as string[])
+  const displayCategories = SHOWCASE_CATEGORIES as readonly string[]
 
   function getProjectsForCategory(cat: string): GalleryProject[] {
-    if (useLiveData) return data!.categories[cat] ?? []
-    return getProjectsByCategory(cat as Category).map(p => ({
-      id: p.id,
-      name: p.label,
-      city: '',
-      coverImageUrl: p.image,
-      thumbnailUrl: p.image,
-      publicUrl: '/contact#form',
-      category: p.category,
-    }))
+    const fallback = buildStaticFallbackProjects(cat as (typeof SHOWCASE_CATEGORIES)[number])
+    if (!useLiveData) return fallback
+
+    const liveProjects = (data?.categories[cat] ?? []).slice(0, 10)
+    return liveProjects.length > 0 ? liveProjects : fallback
   }
 
   function getCategoryCoverUrl(category: string): string {
     if (useLiveData && data?.categories[category]?.[0]?.coverImageUrl) {
       return data.categories[category][0].coverImageUrl
     }
-    return STATIC_COVERS[category] ?? '/projects/project-122978.jpg'
+    return buildStaticFallbackProjects(category as (typeof SHOWCASE_CATEGORIES)[number])[0].coverImageUrl
   }
 
   const filteredProjects = selectedCategory ? getProjectsForCategory(selectedCategory) : []
