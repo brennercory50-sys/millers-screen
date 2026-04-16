@@ -7,44 +7,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Play, X } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 import HeroSection from '@/components/hero-section'
+import { STATIC_GALLERY_BY_CATEGORY } from '@/lib/projects'
 import type { GalleryProject, GalleryApiResponse } from '@/app/api/companycam/gallery/route'
 
 async function fetchGallery(): Promise<GalleryApiResponse> {
   const res = await fetch('/api/companycam/gallery')
   if (!res.ok) throw new Error('Gallery fetch failed')
   return res.json()
-}
-
-const SHOWCASE_CATEGORIES = [
-  'Flat',
-  'Gable',
-  'Dome',
-  'Mansard',
-  'Hip',
-  'Elite Room',
-  'Under Existing',
-] as const
-
-const STATIC_FALLBACK_IMAGE_IDS: Record<(typeof SHOWCASE_CATEGORIES)[number], string[]> = {
-  Flat: ['72557', '72561', '72562', '72564', '72566', '72568', '72570', '72573', '72580', '72584'],
-  Gable: ['72553', '72554', '72558', '72559', '72563', '72567', '72569', '72571', '72572', '72574'],
-  Dome: ['122977', '72552', '72575', '72576', '72577', '72578', '72579', '72581', '72582', '72583'],
-  Mansard: ['72565', '72585', '72586', '72587', '72588', '72589', '72590', '72591', '72592', '72593'],
-  Hip: ['122978', '122980', '122981', '72555', '72556', '72594', '72595', '72596', '72597', '72598'],
-  'Elite Room': ['72557', '72558', '72559', '72560', '72561', '72562', '72563', '72564', '72565', '72566'],
-  'Under Existing': ['72560', '72567', '72568', '72569', '72570', '72571', '72572', '72573', '72574', '72575'],
-}
-
-function buildStaticFallbackProjects(category: (typeof SHOWCASE_CATEGORIES)[number]): GalleryProject[] {
-  return STATIC_FALLBACK_IMAGE_IDS[category].map((imageId, index) => ({
-    id: `static-${category.toLowerCase().replace(/\s+/g, '-')}-${index + 1}`,
-    name: `${category} Project ${index + 1}`,
-    city: '',
-    coverImageUrl: `/projects/project-${imageId}.jpg`,
-    thumbnailUrl: `/projects/project-${imageId}.jpg`,
-    publicUrl: '/contact#form',
-    category,
-  }))
 }
 
 export default function ShowcaseClient() {
@@ -58,23 +27,34 @@ export default function ShowcaseClient() {
     retry: 2,
   })
 
-  const useLiveData = !isError && !!data
+  const useLiveData = !isError && !!data && Object.keys(data.categories).length > 0
 
-  const displayCategories = SHOWCASE_CATEGORIES as readonly string[]
+  const staticCategoryKeys = Object.keys(STATIC_GALLERY_BY_CATEGORY)
+  const liveCategoryKeys = useLiveData ? Object.keys(data!.categories) : []
+  const displayCategories: string[] = Array.from(new Set([...liveCategoryKeys, ...staticCategoryKeys]))
 
   function getProjectsForCategory(cat: string): GalleryProject[] {
-    const fallback = buildStaticFallbackProjects(cat as (typeof SHOWCASE_CATEGORIES)[number])
-    if (!useLiveData) return fallback
-
-    const liveProjects = (data?.categories[cat] ?? []).slice(0, 10)
-    return liveProjects.length > 0 ? liveProjects : fallback
+    if (useLiveData) {
+      const live = data!.categories[cat] ?? []
+      if (live.length > 0) return live
+    }
+    const staticImages = STATIC_GALLERY_BY_CATEGORY[cat] ?? []
+    return staticImages.map((img, i) => ({
+      id: `static-${cat}-${i}`,
+      name: `${cat} Project`,
+      city: '',
+      coverImageUrl: img,
+      thumbnailUrl: img,
+      publicUrl: '/contact#form',
+      category: cat,
+    }))
   }
 
   function getCategoryCoverUrl(category: string): string {
     if (useLiveData && data?.categories[category]?.[0]?.coverImageUrl) {
       return data.categories[category][0].coverImageUrl
     }
-    return buildStaticFallbackProjects(category as (typeof SHOWCASE_CATEGORIES)[number])[0].coverImageUrl
+    return STATIC_GALLERY_BY_CATEGORY[category]?.[0] ?? '/projects/project-122978.jpg'
   }
 
   const filteredProjects = selectedCategory ? getProjectsForCategory(selectedCategory) : []
@@ -128,7 +108,7 @@ export default function ShowcaseClient() {
 
           {isLoading ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
-              {Array.from({ length: 4 }).map((_, i) => (
+              {Array.from({ length: 7 }).map((_, i) => (
                 <div key={i} className="relative aspect-[4/3] rounded-xl bg-panel animate-pulse" />
               ))}
             </div>
