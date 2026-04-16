@@ -112,14 +112,6 @@ export const projects: Project[] = [
     image: '/projects/project-72560.jpg',
   },
   {
-    id: '14',
-    category: 'Flat',
-    style: 'Attached',
-    build: 'Standard',
-    label: 'Flat Roof Enclosure',
-    image: '/projects/project-72561.jpg',
-  },
-  {
     id: '15',
     category: 'Flat',
     style: 'Attached',
@@ -184,14 +176,6 @@ export const projects: Project[] = [
     image: '/projects/project-72569.jpg',
   },
   {
-    id: '23',
-    category: 'Flat',
-    style: 'Attached',
-    build: 'Standard',
-    label: 'Flat Roof Enclosure',
-    image: '/projects/project-72570.jpg',
-  },
-  {
     id: '24',
     category: 'Gable',
     style: 'Free Standing',
@@ -240,23 +224,26 @@ export function getProjectsByCategory(category: Category): Project[] {
 // Static fallback gallery — at least 10 photos per category.
 // Used when CompanyCam has no live projects for a given category.
 export const STATIC_GALLERY_BY_CATEGORY: Record<string, string[]> = {
+  // Verified Flat images only; padded with verified Gable fills
   Flat: [
     '/projects/project-72557.jpg',
-    '/projects/project-72561.jpg',
     '/projects/project-72562.jpg',
     '/projects/project-72564.jpg',
     '/projects/project-72566.jpg',
     '/projects/project-72568.jpg',
-    '/projects/project-72570.jpg',
     '/projects/project-72573.jpg',
     '/projects/project-72553.jpg',
     '/projects/project-72554.jpg',
+    '/projects/project-72558.jpg',
+    '/projects/project-72563.jpg',
   ],
+  // All 12 verified Gable images
   Gable: [
     '/projects/project-72553.jpg',
     '/projects/project-72554.jpg',
     '/projects/project-72558.jpg',
     '/projects/project-72559.jpg',
+    '/projects/project-72560.jpg',
     '/projects/project-72563.jpg',
     '/projects/project-72567.jpg',
     '/projects/project-72569.jpg',
@@ -265,54 +252,59 @@ export const STATIC_GALLERY_BY_CATEGORY: Record<string, string[]> = {
     '/projects/project-72574.jpg',
     '/projects/project-72575.jpg',
   ],
+  // 2 verified Dome images; padded with verified Gable fills
   Dome: [
     '/projects/project-122977.jpg',
     '/projects/project-72552.jpg',
+    '/projects/project-72553.jpg',
+    '/projects/project-72554.jpg',
     '/projects/project-72558.jpg',
+    '/projects/project-72559.jpg',
     '/projects/project-72563.jpg',
     '/projects/project-72569.jpg',
     '/projects/project-72571.jpg',
     '/projects/project-72572.jpg',
-    '/projects/project-72574.jpg',
-    '/projects/project-72575.jpg',
-    '/projects/project-72553.jpg',
   ],
+  // 1 verified Mansard image; padded with verified Hip then Gable fills
   Mansard: [
     '/projects/project-72565.jpg',
     '/projects/project-122978.jpg',
     '/projects/project-122980.jpg',
     '/projects/project-72555.jpg',
+    '/projects/project-72553.jpg',
+    '/projects/project-72554.jpg',
     '/projects/project-72558.jpg',
     '/projects/project-72563.jpg',
     '/projects/project-72571.jpg',
-    '/projects/project-72572.jpg',
     '/projects/project-72574.jpg',
-    '/projects/project-72575.jpg',
   ],
+  // 3 verified Hip images; padded with verified Gable fills
   Hip: [
     '/projects/project-122978.jpg',
     '/projects/project-122980.jpg',
     '/projects/project-72555.jpg',
-    '/projects/project-72565.jpg',
+    '/projects/project-72553.jpg',
+    '/projects/project-72554.jpg',
     '/projects/project-72558.jpg',
+    '/projects/project-72559.jpg',
     '/projects/project-72563.jpg',
     '/projects/project-72571.jpg',
-    '/projects/project-72572.jpg',
     '/projects/project-72574.jpg',
-    '/projects/project-72575.jpg',
   ],
+  // Verified Flat fills; 72561/72570 excluded (held for review)
   'Elite Room': [
     '/projects/project-72557.jpg',
-    '/projects/project-72561.jpg',
     '/projects/project-72562.jpg',
     '/projects/project-72564.jpg',
     '/projects/project-72566.jpg',
     '/projects/project-72568.jpg',
-    '/projects/project-72570.jpg',
     '/projects/project-72573.jpg',
     '/projects/project-72553.jpg',
     '/projects/project-72554.jpg',
+    '/projects/project-72558.jpg',
+    '/projects/project-72563.jpg',
   ],
+  // 1 verified Under Existing image (72560); padded with verified Gable fills
   'Under Existing': [
     '/projects/project-72560.jpg',
     '/projects/project-72553.jpg',
