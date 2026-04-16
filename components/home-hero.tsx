@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Shield, Users, Award, ArrowRight } from 'lucide-react'
@@ -14,44 +12,21 @@ const trustBadges = [
 ]
 
 export default function HomeHero() {
-  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 })
-  const rafRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-      rafRef.current = requestAnimationFrame(() => {
-        setMousePosition({
-          x: (e.clientX / window.innerWidth) * 100,
-          y: (e.clientY / window.innerHeight) * 100,
-        })
-      })
-    }
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
-    }
-  }, [])
-
   return (
     <section className="relative min-h-[60vh] lg:min-h-[90vh] flex items-center">
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/home-hero.jpg"
-          alt="Custom pool enclosure by Miller's Screen"
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
-          className="object-cover"
-          priority
-          quality={80}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-0 via-bg-0/85 to-bg-0/50" />
-        <div
-          className="hero-glow"
-          style={{ '--mouse-x': `${mousePosition.x}%`, '--mouse-y': `${mousePosition.y}%` } as React.CSSProperties}
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/home-hero.jpg"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-0/90 via-bg-0/70 to-bg-0/40" />
       </div>
 
       {/* Content */}
