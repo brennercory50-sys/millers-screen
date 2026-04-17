@@ -32,19 +32,6 @@ const navItems: NavItem[] = [
   { label: 'Contact', href: '/contact' },
 ]
 
-// --- Dev href validation ---
-if (process.env.NODE_ENV === 'development') {
-  const allHrefs = [
-    ...services.map(s => s.href),
-    ...navItems.filter(n => n.href).map(n => n.href as string),
-  ]
-  allHrefs.forEach(href => {
-    if (!href.startsWith('/') && !href.startsWith('http')) {
-      console.warn('[Nav] Broken href:', href)
-    }
-  })
-}
-
 // --- cx utility ---
 function cx(...classes: (string | false | undefined | null)[]): string {
   return classes.filter(Boolean).join(' ')

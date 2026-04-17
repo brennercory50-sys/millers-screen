@@ -57,6 +57,13 @@ export async function POST(request: Request) {
       )
     }
 
+    const escapeHtml = (str: string) => str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;')
+
     const { data: lead, error } = await supabaseClient
       .from('leads')
       .insert({
@@ -90,29 +97,29 @@ export async function POST(request: Request) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1; width: 120px;">Name:</td>
-              <td style="padding: 10px 0; color: #E9EEF5; font-weight: bold;">${fullName ?? ''}</td>
+              <td style="padding: 10px 0; color: #E9EEF5; font-weight: bold;">${escapeHtml(fullName ?? '')}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">Phone:</td>
-              <td style="padding: 10px 0;"><a href="tel:${phone ?? ''}" style="color: #B0161C; text-decoration: none;">${phone ?? ''}</a></td>
+              <td style="padding: 10px 0;"><a href="tel:${escapeHtml(phone ?? '')}" style="color: #B0161C; text-decoration: none;">${escapeHtml(phone ?? '')}</a></td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">Email:</td>
-              <td style="padding: 10px 0;"><a href="mailto:${email ?? ''}" style="color: #B0161C; text-decoration: none;">${email ?? ''}</a></td>
+              <td style="padding: 10px 0;"><a href="mailto:${escapeHtml(email ?? '')}" style="color: #B0161C; text-decoration: none;">${escapeHtml(email ?? '')}</a></td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">Project Type:</td>
-              <td style="padding: 10px 0; color: #E9EEF5;">${projectType ?? ''}</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${escapeHtml(projectType ?? '')}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">City:</td>
-              <td style="padding: 10px 0; color: #E9EEF5;">${city ?? 'Not specified'}</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${escapeHtml(city ?? 'Not specified')}</td>
             </tr>
           </table>
         </div>
         <div style="background: #11151B; padding: 20px; border-radius: 8px;">
           <h3 style="color: #A9B3C1; margin-top: 0; font-size: 14px;">Project Details:</h3>
-          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${message ?? 'No additional details provided'}</p>
+          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${escapeHtml(message ?? 'No additional details provided')}</p>
         </div>
         <p style="color: #A9B3C1; font-size: 12px; margin-top: 20px; text-align: center;">
           Submitted at: ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })}

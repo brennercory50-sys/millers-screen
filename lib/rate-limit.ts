@@ -5,17 +5,6 @@ interface RateLimitEntry {
 
 const rateLimitStore = new Map<string, RateLimitEntry>()
 
-function cleanupExpiredEntries() {
-  const now = Date.now()
-  for (const [key, entry] of rateLimitStore.entries()) {
-    if (entry.resetAt < now) {
-      rateLimitStore.delete(key)
-    }
-  }
-}
-
-setInterval(cleanupExpiredEntries, 60000)
-
 export interface RateLimitConfig {
   windowMs: number
   maxRequests: number
@@ -37,6 +26,9 @@ export function checkRateLimit(
   const entry = rateLimitStore.get(key)
   
   if (!entry || entry.resetAt < now) {
+    if (entry && entry.resetAt < now) {
+      rateLimitStore.delete(key)
+    }
     const newEntry: RateLimitEntry = {
       count: 1,
       resetAt: now + config.windowMs,
