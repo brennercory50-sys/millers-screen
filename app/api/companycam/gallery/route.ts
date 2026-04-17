@@ -69,8 +69,8 @@ export async function GET() {
     )
 
     const categories: Record<string, GalleryProject[]> = {}
-    const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000
-    const cutoffDate = new Date(Date.now() - TWO_DAYS_MS)
+    const ONE_DAY_MS = 1 * 24 * 60 * 60 * 1000
+    const cutoffDate = new Date(Date.now() - ONE_DAY_MS)
 
     for (const p of rawProjects) {
       if (p.status !== 'active' || p.archived) continue
