@@ -69,9 +69,14 @@ export async function GET() {
     )
 
     const categories: Record<string, GalleryProject[]> = {}
+    const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000
+    const cutoffDate = new Date(Date.now() - TWO_DAYS_MS)
 
     for (const p of rawProjects) {
       if (p.status !== 'active' || p.archived) continue
+
+      const updatedAt = new Date(p.updated_at)
+      if (updatedAt < cutoffDate) continue
 
       const coverImageUrl = getImageUrl(p.feature_image, 'web')
       if (!coverImageUrl) continue
