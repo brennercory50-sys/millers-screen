@@ -5,14 +5,59 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Play, X } from 'lucide-react'
+import { useQuery } from '@tanstack/react-query'
 import HeroSection from '@/components/hero-section'
-import { CATEGORIES, Category, Project, getProjectsByCategory } from '@/lib/projects'
+import { STATIC_GALLERY_BY_CATEGORY } from '@/lib/projects'
+import type { GalleryProject, GalleryApiResponse } from '@/app/api/companycam/gallery/route'
+
+async function fetchGallery(): Promise<GalleryApiResponse> {
+  const res = await fetch('/api/companycam/gallery')
+  if (!res.ok) throw new Error('Gallery fetch failed')
+  return res.json()
+}
 
 export default function ShowcaseClient() {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [selectedProject, setSelectedProject] = useState<GalleryProject | null>(null)
 
-  const filteredProjects = selectedCategory ? getProjectsByCategory(selectedCategory) : []
+  const { data, isLoading, isError } = useQuery<GalleryApiResponse>({
+    queryKey: ['showcase-gallery'],
+    queryFn: fetchGallery,
+    staleTime: 300_000,
+    retry: 2,
+  })
+
+  const useLiveData = !isError && !!data && Object.keys(data.categories).length > 0
+
+  const staticCategoryKeys = Object.keys(STATIC_GALLERY_BY_CATEGORY)
+  const liveCategoryKeys = useLiveData ? Object.keys(data!.categories) : []
+  const displayCategories: string[] = Array.from(new Set([...liveCategoryKeys, ...staticCategoryKeys]))
+
+  function getProjectsForCategory(cat: string): GalleryProject[] {
+    if (useLiveData) {
+      const live = data!.categories[cat] ?? []
+      if (live.length > 0) return live
+    }
+    const staticImages = STATIC_GALLERY_BY_CATEGORY[cat] ?? []
+    return staticImages.map((img, i) => ({
+      id: `static-${cat}-${i}`,
+      name: `${cat} Project`,
+      city: '',
+      coverImageUrl: img,
+      thumbnailUrl: img,
+      publicUrl: '/contact#form',
+      category: cat,
+    }))
+  }
+
+  function getCategoryCoverUrl(category: string): string {
+    if (useLiveData && data?.categories[category]?.[0]?.coverImageUrl) {
+      return data.categories[category][0].coverImageUrl
+    }
+    return STATIC_GALLERY_BY_CATEGORY[category]?.[0] ?? '/projects/project-122978.jpg'
+  }
+
+  const filteredProjects = selectedCategory ? getProjectsForCategory(selectedCategory) : []
 
   return (
     <>
@@ -54,49 +99,57 @@ export default function ShowcaseClient() {
           >
             <span className="text-sm font-semibold text-accent-red uppercase tracking-wider">Real Project Gallery</span>
             <h2 className="text-text-primary text-3xl md:text-4xl font-bold mt-2">
-              Browse Screen Room & Enclosure Styles
+              Browse Screen Room &amp; Enclosure Styles
             </h2>
             <p className="text-muted text-lg mt-3 max-w-2xl mx-auto">
               Tap a style below to instantly view real projects we&apos;ve built.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
-            {CATEGORIES.map((category, index) => (
-              <motion.button
-                key={category}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                onClick={() => setSelectedCategory(category)}
-                className={`relative aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer transition-all duration-300 ${
-                  selectedCategory === category
-                    ? 'ring-2 ring-accent-red scale-[1.02]'
-                    : 'hover:scale-[1.02] hover:shadow-xl'
-                }`}
-              >
-                <Image
-                  src={`/projects/project-${getCategoryCoverIndex(category)}.jpg`}
-                  alt={category}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute inset-0 bg-accent-red/0 group-hover:bg-accent-red/10 transition-colors duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                  <span className="text-white font-bold text-sm md:text-base drop-shadow-lg">
-                    {category}
-                  </span>
-                </div>
-                {selectedCategory === category && (
-                  <div className="absolute top-2 right-2 w-6 h-6 bg-accent-red rounded-full flex items-center justify-center">
-                    <div className="w-2 h-2 bg-white rounded-full" />
+          {isLoading ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+              {Array.from({ length: 7 }).map((_, i) => (
+                <div key={i} className="relative aspect-[4/3] rounded-xl bg-panel animate-pulse" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+              {displayCategories.map((category, index) => (
+                <motion.button
+                  key={category}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`relative aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer transition-all duration-300 ${
+                    selectedCategory === category
+                      ? 'ring-2 ring-accent-red scale-[1.02]'
+                      : 'hover:scale-[1.02] hover:shadow-xl'
+                  }`}
+                >
+                  <Image
+                    src={getCategoryCoverUrl(category)}
+                    alt={category}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-accent-red/0 group-hover:bg-accent-red/10 transition-colors duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+                    <span className="text-white font-bold text-sm md:text-base drop-shadow-lg">
+                      {category}
+                    </span>
                   </div>
-                )}
-              </motion.button>
-            ))}
-          </div>
+                  {selectedCategory === category && (
+                    <div className="absolute top-2 right-2 w-6 h-6 bg-accent-red rounded-full flex items-center justify-center">
+                      <div className="w-2 h-2 bg-white rounded-full" />
+                    </div>
+                  )}
+                </motion.button>
+              ))}
+            </div>
+          )}
 
           <AnimatePresence mode="wait">
             {selectedCategory && (
@@ -134,19 +187,18 @@ export default function ShowcaseClient() {
                       className="relative aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer bg-panel hover:shadow-xl transition-shadow duration-300"
                     >
                       <Image
-                        src={project.image}
-                        alt={project.label}
+                        src={project.coverImageUrl}
+                        alt={project.name}
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <span className="text-white font-medium text-xs md:text-sm px-2 text-center">
-                          {project.style}
+                      <div className="absolute inset-0 flex items-end justify-start opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3">
+                        <span className="text-white font-medium text-xs md:text-sm line-clamp-2 text-left">
+                          {project.name}
                         </span>
                       </div>
-
                     </motion.button>
                   ))}
                 </div>
@@ -163,7 +215,7 @@ export default function ShowcaseClient() {
             )}
           </AnimatePresence>
 
-          {!selectedCategory && (
+          {!selectedCategory && !isLoading && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -204,8 +256,8 @@ export default function ShowcaseClient() {
 
               <div className="relative flex-1 min-h-0 bg-black rounded-lg overflow-hidden aspect-video">
                 <Image
-                  src={selectedProject.image}
-                  alt={selectedProject.label}
+                  src={selectedProject.coverImageUrl}
+                  alt={selectedProject.name}
                   fill
                   className="object-contain"
                   priority
@@ -215,10 +267,11 @@ export default function ShowcaseClient() {
               <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <h3 className="text-white text-xl font-semibold">
-                    {selectedProject.label}
+                    {selectedProject.name}
                   </h3>
                   <p className="text-muted text-sm">
-                    {selectedProject.category} • {selectedProject.style}
+                    {selectedProject.category}
+                    {selectedProject.city ? ` • ${selectedProject.city}` : ''}
                   </p>
                 </div>
 
@@ -237,17 +290,4 @@ export default function ShowcaseClient() {
       </AnimatePresence>
     </>
   )
-}
-
-function getCategoryCoverIndex(category: Category): string {
-  const covers: Record<Category, string> = {
-    'Mansard': '122978',
-    'Dome': '72555',
-    'Hip': '72552',
-    'Gable': '122981',
-    'Pool Enclosures': '72552',
-    'Screen Rooms': '72553',
-    'MegaView': '122977',
-  }
-  return covers[category]
 }

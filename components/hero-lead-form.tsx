@@ -4,15 +4,7 @@ import { useState } from 'react'
 import { User, Phone, Mail, MapPin, ListChecks, Lock, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
-
-const projectTypes = [
-  'Pool Enclosure',
-  'Screen Room',
-  'MegaView® Enclosure',
-  'Rescreen',
-  'Repair',
-  'Other',
-]
+import { LEAD_PROJECT_TYPES } from '@/lib/validations'
 
 export default function HeroLeadForm() {
   const [formData, setFormData] = useState({
@@ -182,7 +174,7 @@ export default function HeroLeadForm() {
               className={`${inputBase} appearance-none cursor-pointer ${!formData.projectType ? 'text-muted/50' : ''}`}
             >
               <option value="">Project Type</option>
-              {projectTypes.map((type) => (
+              {LEAD_PROJECT_TYPES.map((type) => (
                 <option key={type} value={type}>{type}</option>
               ))}
             </select>
