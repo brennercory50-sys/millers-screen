@@ -195,7 +195,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-bg-0 text-text-primary`}>
         <div className="bg-layer">
           <svg width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
             <polygon points="0,0 1050,0 750,250 0,170" fill="rgba(25,70,160,.25)"/>

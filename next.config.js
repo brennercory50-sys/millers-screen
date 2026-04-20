@@ -6,8 +6,6 @@ const nextConfig = {
   distDir: process.env.NEXT_DIST_DIR || '.next',
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../'),
-    // Exclude nested project directories from scanning
-    excludeFiles: ['app/Premium_Firearms_Website/**'],
   },
   eslint: {
     ignoreDuringBuilds: true,
