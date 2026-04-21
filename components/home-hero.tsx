@@ -21,8 +21,11 @@ export default function HomeHero() {
           muted
           loop
           playsInline
+          preload="auto"
           poster="/images/home-hero.jpg"
           className="absolute inset-0 w-full h-full object-cover"
+          onPlay={(e) => (e.currentTarget.style.opacity = '1')}
+          style={{ opacity: 0, transition: 'opacity 0.4s ease-in' }}
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
