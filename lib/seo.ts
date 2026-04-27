@@ -43,7 +43,7 @@ function generateDescription(page: string, location?: string): string {
   const descriptions: Record<string, string> = {
     home: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, and MegaView® installations. 40+ years experience, in-house crews, licensed & permitted. Free estimates. Call 386-756-8770.",
     poolEnclosures: location
-      ? `Professional ${location} pool enclosure contractor. Full-service installation with permits, engineering, and in-house crews. Pool cages starting at $X. Free estimate. Call 386-756-8770.`
+      ? `Professional ${location} pool enclosure contractor. Full-service installation with permits, engineering, and in-house crews. Free estimate. Call 386-756-8770.`
       : "Expert pool enclosure installation in Volusia County, FL. Engineering, permitting, and installation all handled by our in-house crews. Licensed contractors with 40+ years experience. Request your free estimate today.",
     screenRooms: location
       ? `Custom ${location} screen room builder. Transform your patio into a comfortable outdoor living space. Permitted installs, premium materials, expert craftsmanship. Free estimate. Call 386-756-8770.`
