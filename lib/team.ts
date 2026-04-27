@@ -101,6 +101,7 @@ export const TEAM_DATA: TeamSection[] = [
         role: 'Sales',
         image: '/team/mark.jpg',
         bio: 'I was born & raised in Illinois. Went to college in Minnesota, then moved to Orlando, Fl and opened a dance studio where I taught ballroom dance for 7 years. I moved to Daytona Beach and have been a DJ for 30 years. I have 1 daughter & 3 grandkids.',
+        gallery: ['/team/mark-2.jpg', '/team/mark-3.jpg', '/team/mark-4.jpg', '/team/mark-5.jpg', '/team/mark-6.jpg'],
       },
       {
         id: 'dave',
