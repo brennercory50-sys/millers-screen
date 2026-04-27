@@ -176,6 +176,7 @@ export const TEAM_DATA: TeamSection[] = [
         name: 'Dale',
         firstName: 'Dale',
         role: 'Concrete Division',
+        image: '/team/dale.jpg',
         bio: 'Handles all concrete work for our enclosure projects. From footers to slabs, Dale delivers a solid foundation every time.',
         gallery: ['/team/dale-2.jpg', '/team/dale-3.jpg', '/team/dale-5.jpg'],
       },
@@ -195,14 +196,20 @@ export const TEAM_DATA: TeamSection[] = [
     icon: 'Building',
     members: [
       {
-        id: 'brandon-brenden-pending',
-        name: 'Brandon "Brenden" LAST_NAME_PENDING',
+        id: 'brandon-miller',
+        name: 'Brandon Miller',
         firstName: 'Brandon',
-        nickname: 'Brenden',
-        lastName: 'LAST_NAME_PENDING',
+        lastName: 'Miller',
         role: 'Shop Crew',
         image: '/team/brandon-brenden-pending.jpg',
         bio: 'Assists with aluminum prep and fabrication. Keeps the shop running smoothly so the crews have everything they need.',
+      },
+      {
+        id: 'brenden',
+        name: 'Brenden',
+        firstName: 'Brenden',
+        role: 'Shop Crew',
+        bio: '',
       },
       {
         id: 'thomas',
