@@ -92,14 +92,13 @@ export default function EmployeeModal({ member, isOpen, onClose }: EmployeeModal
           <X className="w-5 h-5" />
         </button>
 
-        <div className="relative flex-shrink-0" style={{ height: '280px' }}>
+        <div className="relative flex-shrink-0 bg-bg-1" style={{ height: '280px' }}>
           {!imageError && member.image ? (
             <Image
               src={member.image || '/placeholder.png'}
               alt={member.name}
               fill
-              className={member.imagePosition ? 'object-cover' : 'object-cover object-[50%_20%]'}
-              style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
+              className="object-contain"
               priority
               onError={() => setImageError(true)}
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
