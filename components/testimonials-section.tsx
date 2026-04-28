@@ -5,19 +5,39 @@ import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react'
 
 const testimonials = [
   {
-    quote: "As a customer Miller Screen is easy to work with. The team leader Terrence is very knowledgeable, pays attention to small details and very customer focused. I love my new screened in Lanai and it was done at a reasonable price. Great job all around.",
-    author: "Bob Bragdon",
-    location: "Volusia County"
+    quote: "I couldn't be happier with Miller's Screen. They did an excellent job designing and installing the screen enclosure for my new pool. They were punctual, professional and very polite. They did a top quality job! I highly recommend them for any screen enclosure. You won't regret it.",
+    author: "Susan Z.",
+    location: "Verified Google Review"
   },
   {
-    quote: "This past September, Miller's Screen completed the expanded screen enclosure at 274 Compass Rose Drive. My wife and I wish to complement the staff and crew. Nate and Chris did an outstanding job of not only doing meticulous work during the installation, but they also left the worksite completely void of any loose debris. Additionally, Mark was very cooperative regarding the scheduling and follow-up of the installation. I am very happy to highly recommend Miller's Screen and would be pleased to serve as a reference for prospective customers.",
-    author: "Joe Halasz",
-    location: "274 Compass Rose Drive, Daytona Beach, FL 32124"
+    quote: "These guys did an exceptional job on my new screen porch. Quality work and materials. Very professional crew. Bowen was super customer oriented.",
+    author: "Clint Watwood",
+    location: "Verified Google Review"
   },
   {
-    quote: "Miller's Screen is the only company in Volusia County offering the Megaview Extrusions Enclosure Solution. They are a family-owned and operated business with over 40 years of experience in the aluminum construction business. Superior quality, excellent service, and above all else, integrity!",
-    author: "Verified Customer",
-    location: "Volusia County, FL"
+    quote: "Miller's Screen was exceptional to work with, and the final product is outstanding! We selected the MegaView feature, and it gives us an uninterrupted view of the pond. So happy to have worked with Bowen Miller.",
+    author: "Kari Crameri",
+    location: "Verified Google Review"
+  },
+  {
+    quote: "The two young men that came and installed my pool enclosure, Nicco and Joseph, were very professional and did an amazing job. Observing these men gives me much hope for this generation. Integrity, respect and a great work ethic.",
+    author: "Randall Killian",
+    location: "Verified Google Review"
+  },
+  {
+    quote: "We just had Miller Screen install a large screen enclosure with a MegaView. The salesman, Mark, was easy to work with and the construction crew was very professional. Several of our friends comment is Wow! I would definitely recommend Miller Screen.",
+    author: "Agatha Clark",
+    location: "Verified Google Review"
+  },
+  {
+    quote: "Miller's Screen did an outstanding job on our pool screen enclosure. The project was completed on time, the results look fantastic, and they even followed up with a quality control check to ensure everything was perfect.",
+    author: "Joe Clark",
+    location: "Verified Google Review"
+  },
+  {
+    quote: "Working with Miller Screen is always a pleasure. Joseph did an excellent job on my repairs today. He was friendly and a delight to work with. Bowen is always prompt, professional, and efficient in communicating and getting work scheduled.",
+    author: "Eve Schauer",
+    location: "Verified Google Review"
   }
 ]
 
