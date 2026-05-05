@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Get a Free Screen Enclosure Estimate | Contact Miller's Screen",
   description: "Contact Miller's Screen for your free pool enclosure or screen room estimate. Call 386-756-8770 or request online. Fast response, no-obligation quotes, in-house crews.",
   keywords: ['contact millers screen', 'screen enclosure estimate', 'pool enclosure quote', 'daytona beach contractor', 'volusia county enclosure'],
+  alternates: { canonical: 'https://millersscreen.com/contact' },
   openGraph: {
     title: "Get a Free Screen Enclosure Estimate | Miller's Screen",
     description: "Contact Miller's Screen for your free pool enclosure or screen room estimate. Fast response, no-obligation quotes, in-house crews.",

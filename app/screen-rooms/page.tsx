@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Custom Screen Rooms & Patio Enclosures | Volusia County",
   description: "Custom screen rooms and patio enclosures in Volusia County. Expert design, quality construction, and professional installation. Create the outdoor living space you've always wanted. Get your free estimate.",
   keywords: ['screen room', 'screen enclosure', 'patio enclosure', 'lanai', 'florida screen room', 'outdoor living space', 'volusia county screen room'],
+  alternates: { canonical: 'https://millersscreen.com/screen-rooms' },
   openGraph: {
     title: "Custom Screen Rooms & Patio Enclosures | Miller's Screen",
     description: "Custom screen rooms and patio enclosures in Volusia County. Expert design, quality construction, and professional installation. Get your free estimate.",

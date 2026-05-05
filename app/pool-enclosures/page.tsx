@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Pool Enclosure Experts in Volusia County | Licensed & Permitted",
   description: "Expert pool enclosure installation in Volusia County, FL. Engineering, permitting, and installation all handled by our in-house crews. Licensed contractors with 40+ years experience. Request your free estimate.",
   keywords: ['pool enclosure', 'pool cage', 'pool screen enclosure', 'florida pool enclosure', 'daytona beach pool enclosure', 'screen pool cage', 'volusia county pool enclosure'],
+  alternates: { canonical: 'https://millersscreen.com/pool-enclosures' },
   openGraph: {
     title: "Pool Enclosure Experts in Volusia County | Miller's Screen",
     description: "Expert pool enclosure installation in Volusia County, FL. Engineering, permitting, and installation all handled by our in-house crews. Request your free estimate today.",

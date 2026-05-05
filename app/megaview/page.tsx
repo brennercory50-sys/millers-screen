@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "MegaView® Enclosures Volusia County | Premium Open-View Screen Design",
   description: "Miller's Screen is the ONLY authorized MegaView® builder in Volusia County. Experience enclosures with no vertical bars, no visual obstruction, just pure open views. Request a MegaView consultation today.",
   keywords: ['megaview enclosure', 'cableless enclosure', 'unobstructed view enclosure', 'modern screen enclosure', 'premium pool enclosure', 'florida megaview'],
+  alternates: { canonical: 'https://millersscreen.com/megaview' },
   openGraph: {
     title: "MegaView® Enclosures | Miller's Screen",
     description: "The only MegaView® builder in Volusia County. No bars. No obstruction. Just your view.",

@@ -16,8 +16,6 @@ import GoogleAnalytics from '@/components/google-analytics'
 import { TeamModalProvider } from '@/context/TeamModalContext'
 import { Providers } from '@/components/providers'
 
-export const dynamic = 'force-dynamic'
-
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = process.env.NEXTAUTH_URL || 'https://millersscreen.com'
   
@@ -149,7 +147,7 @@ export default function RootLayout({
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "5",
-                "reviewCount": "100",
+                "reviewCount": "3",
                 "bestRating": "5"
               },
               "sameAs": ["https://www.facebook.com/millersscreen"]

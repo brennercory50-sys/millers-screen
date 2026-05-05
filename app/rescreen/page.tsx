@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Screen Rescreening Services Volusia County | Pool Enclosure Rescreen",
   description: "Professional screen rescreening in Volusia County. Replace worn screens, fix storm damage, restore your pool enclosure or screen room. Fast service, free estimates. Call 386-756-8770.",
   keywords: ['rescreen', 'rescreening', 'screen replacement', 'pool cage rescreen', 'screen repair', 'volusia county', 'daytona beach', 'screen mesh replacement'],
+  alternates: { canonical: 'https://millersscreen.com/rescreen' },
   openGraph: {
     title: "Screen Rescreening Services | Miller's Screen",
     description: "Professional screen rescreening in Volusia County. Fast service, free estimates.",

@@ -41,6 +41,8 @@ export async function POST(request: Request) {
 
     const { fullName, phone, email, projectType, city, message } = validation.data as LeadFormData
 
+    const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error('Supabase not configured')
       return NextResponse.json(
@@ -56,13 +58,6 @@ export async function POST(request: Request) {
         { status: 503 }
       )
     }
-
-    const escapeHtml = (str: string) => str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;')
 
     const { data: lead, error } = await supabaseClient
       .from('leads')
@@ -97,29 +92,29 @@ export async function POST(request: Request) {
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1; width: 120px;">Name:</td>
-              <td style="padding: 10px 0; color: #E9EEF5; font-weight: bold;">${escapeHtml(fullName ?? '')}</td>
+              <td style="padding: 10px 0; color: #E9EEF5; font-weight: bold;">${esc(fullName ?? '')}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">Phone:</td>
-              <td style="padding: 10px 0;"><a href="tel:${escapeHtml(phone ?? '')}" style="color: #B0161C; text-decoration: none;">${escapeHtml(phone ?? '')}</a></td>
+              <td style="padding: 10px 0;"><a href="tel:${esc(phone ?? '')}" style="color: #B0161C; text-decoration: none;">${esc(phone ?? '')}</a></td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">Email:</td>
-              <td style="padding: 10px 0;"><a href="mailto:${escapeHtml(email ?? '')}" style="color: #B0161C; text-decoration: none;">${escapeHtml(email ?? '')}</a></td>
+              <td style="padding: 10px 0;"><a href="mailto:${esc(email ?? '')}" style="color: #B0161C; text-decoration: none;">${esc(email ?? '')}</a></td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">Project Type:</td>
-              <td style="padding: 10px 0; color: #E9EEF5;">${escapeHtml(projectType ?? '')}</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${esc(projectType ?? '')}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">City:</td>
-              <td style="padding: 10px 0; color: #E9EEF5;">${escapeHtml(city ?? 'Not specified')}</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${esc(city ?? 'Not specified')}</td>
             </tr>
           </table>
         </div>
         <div style="background: #11151B; padding: 20px; border-radius: 8px;">
           <h3 style="color: #A9B3C1; margin-top: 0; font-size: 14px;">Project Details:</h3>
-          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${escapeHtml(message ?? 'No additional details provided')}</p>
+          <p style="color: #E9EEF5; line-height: 1.6; margin: 0;">${esc(message ?? 'No additional details provided')}</p>
         </div>
         <p style="color: #A9B3C1; font-size: 12px; margin-top: 20px; text-align: center;">
           Submitted at: ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })}

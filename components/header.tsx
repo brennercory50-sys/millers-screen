@@ -241,7 +241,7 @@ export default function Header() {
 
             <div className="flex items-center gap-3">
               <a
-                href="tel:+13865551234"
+                href="tel:+13867568770"
                 className="hidden md:flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-colors duration-150"
                 aria-label="Call us"
               >
@@ -364,7 +364,7 @@ export default function Header() {
 
             <div className="p-4 border-t border-gray-100 space-y-3">
               <a
-                href="tel:+13865551234"
+                href="tel:+13867568770"
                 className="flex items-center justify-center gap-2 w-full py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-150"
                 onClick={() => setIsMenuOpen(false)}
                 aria-label="Call us now"

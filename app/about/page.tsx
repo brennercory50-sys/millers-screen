@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "About Miller's Screen | 40+ Years Volusia County Experience",
   description: "Family-owned and operated for 40+ years. Miller's Screen has completed over 1,000 projects in Volusia County. Meet our team of experienced installers, designers, and support staff.",
   keywords: ['about millers screen', 'volusia county contractor', 'daytona beach screen enclosure', 'family owned contractor', 'florida enclosure company'],
+  alternates: { canonical: 'https://millersscreen.com/about' },
   openGraph: {
     title: "About Miller's Screen | 40+ Years Experience",
     description: "Family-owned and operated for 40+ years. Miller's Screen has completed over 1,000 projects in Volusia County.",

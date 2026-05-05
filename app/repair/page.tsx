@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Screen Enclosure Repair Volusia County | Pool Cage & Frame Repair",
   description: "Professional screen enclosure repair in Volusia County. Frame fixes, sagging screens, door repairs, rust removal, and more. Licensed crew, free estimates. Call 386-756-8770.",
   keywords: ['screen repair', 'pool cage repair', 'enclosure repair', 'frame repair', 'screen door repair', 'rust removal', 'volusia county', 'daytona beach'],
+  alternates: { canonical: 'https://millersscreen.com/repair' },
   openGraph: {
     title: "Screen Enclosure Repair | Miller's Screen",
     description: "Professional screen enclosure repair in Volusia County. Licensed crew, free estimates.",
