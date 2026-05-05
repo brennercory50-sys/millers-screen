@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getSupabase } from '@/lib/supabase'
 import { checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit'
 import { validateLeadRequest, type LeadFormData } from '@/lib/validations'
+import { scoreLead } from '@/lib/lead-scoring'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,7 +40,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const { fullName, phone, email, projectType, city, message, source, utm } = validation.data as LeadFormData
+    const { fullName, phone, email, projectType, city, message, source, utm, timeline, budget } = validation.data as LeadFormData
 
     const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
@@ -47,6 +48,9 @@ export async function POST(request: Request) {
     const utmDisplay = utmEntries.length > 0
       ? utmEntries.map(([k, v]) => `${esc(k)}: ${esc(String(v))}`).join(' · ')
       : 'Direct / organic'
+
+    const leadScore = scoreLead({ projectType, timeline, budget, message, city })
+    const scoreColor = leadScore.score === 'HOT' ? '#ef4444' : leadScore.score === 'WARM' ? '#f59e0b' : '#6b7280'
 
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error('Supabase not configured')
@@ -90,6 +94,12 @@ export async function POST(request: Request) {
 
     const htmlBody = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0B0D10; color: #E9EEF5; padding: 20px;">
+        <div style="background: ${scoreColor}; padding: 12px 18px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+          <div style="color: #fff; font-size: 18px; font-weight: bold; letter-spacing: 1px;">
+            ${leadScore.emoji} ${leadScore.score} LEAD &middot; ${leadScore.points} pts
+          </div>
+          ${leadScore.reasons.length > 0 ? `<div style="color: rgba(255,255,255,0.85); font-size: 12px; margin-top: 4px;">${esc(leadScore.reasons.join(' · '))}</div>` : ''}
+        </div>
         <div style="border-bottom: 3px solid #B0161C; padding-bottom: 15px; margin-bottom: 20px;">
           <h2 style="color: #E9EEF5; margin: 0;">New Lead from Miller's Screen Website</h2>
         </div>
@@ -110,6 +120,14 @@ export async function POST(request: Request) {
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">Project Type:</td>
               <td style="padding: 10px 0; color: #E9EEF5;">${esc(projectType ?? '')}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #A9B3C1;">Timeline:</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${esc(timeline || 'Not specified')}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #A9B3C1;">Budget:</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${esc(budget || 'Not specified')}</td>
             </tr>
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">City:</td>
@@ -143,7 +161,7 @@ export async function POST(request: Request) {
           deployment_token: process.env.ABACUSAI_API_KEY ?? '',
           app_id: process.env.WEB_APP_ID ?? '',
           notification_id: process.env.NOTIF_ID_LEAD_FORM_SUBMISSION ?? '',
-          subject: `New Lead: ${projectType ?? 'Project'} - ${fullName ?? 'Unknown'}`,
+          subject: `${leadScore.emoji} ${leadScore.score}: ${projectType ?? 'Project'} - ${fullName ?? 'Unknown'}`,
           body: htmlBody,
           is_html: true,
           recipient_email: 'millersscreenoffice@gmail.com',
@@ -160,7 +178,7 @@ export async function POST(request: Request) {
       console.error('Failed to send email notification:', emailError)
     }
 
-    return NextResponse.json({ success: true, leadId: lead?.id ?? '' })
+    return NextResponse.json({ success: true, leadId: lead?.id ?? '', score: leadScore.score })
   } catch (error) {
     console.error('Lead submission error:', error)
     return NextResponse.json(
