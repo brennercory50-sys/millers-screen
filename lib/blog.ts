@@ -197,6 +197,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         heading: 'Rebuild if...',
+        paragraphs: [],
         bullets: [
           'The frame is bent, leaning, or pulling away from the house',
           'Multiple corner connectors are corroded or popped',

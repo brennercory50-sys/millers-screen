@@ -119,7 +119,7 @@ export default function BlogPostPage({ params }: PageProps) {
                 {section.heading && (
                   <h2 className="text-2xl md:text-3xl font-bold mb-4">{section.heading}</h2>
                 )}
-                {section.paragraphs.map((p, j) => (
+                {section.paragraphs?.map((p, j) => (
                   <p key={j} className="text-muted leading-relaxed mb-4 text-base">{p}</p>
                 ))}
                 {section.bullets && (
