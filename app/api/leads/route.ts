@@ -39,9 +39,14 @@ export async function POST(request: Request) {
       )
     }
 
-    const { fullName, phone, email, projectType, city, message } = validation.data as LeadFormData
+    const { fullName, phone, email, projectType, city, message, source, utm } = validation.data as LeadFormData
 
     const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+    const utmEntries = utm ? Object.entries(utm).filter(([, v]) => v) : []
+    const utmDisplay = utmEntries.length > 0
+      ? utmEntries.map(([k, v]) => `${esc(k)}: ${esc(String(v))}`).join(' · ')
+      : 'Direct / organic'
 
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
       console.error('Supabase not configured')
@@ -109,6 +114,14 @@ export async function POST(request: Request) {
             <tr>
               <td style="padding: 10px 0; color: #A9B3C1;">City:</td>
               <td style="padding: 10px 0; color: #E9EEF5;">${esc(city ?? 'Not specified')}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #A9B3C1;">Form:</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${esc(source || 'unknown')}</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: #A9B3C1;">Source:</td>
+              <td style="padding: 10px 0; color: #E9EEF5;">${utmDisplay}</td>
             </tr>
           </table>
         </div>

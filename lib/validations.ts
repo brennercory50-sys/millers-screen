@@ -18,6 +18,8 @@ export const leadSchema = z.object({
   }),
   city: z.string().max(100, 'City name is too long').optional().default(''),
   message: z.string().max(2000, 'Message is too long').optional().default(''),
+  source: z.string().max(50).optional().default(''),
+  utm: z.record(z.string().max(200)).optional().default({}),
 })
 
 export type LeadFormData = z.infer<typeof leadSchema>

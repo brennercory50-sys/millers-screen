@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Send, CheckCircle, AlertCircle, Phone, Clock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
 import { LEAD_PROJECT_TYPES } from '@/lib/validations'
+import { track, getStoredUtm } from '@/lib/analytics'
 
 export default function LeadForm() {
   const [formData, setFormData] = useState({
@@ -17,9 +18,14 @@ export default function LeadForm() {
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const startedRef = useRef(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
+    if (!startedRef.current) {
+      startedRef.current = true
+      track('form_start', { form_id: 'contact_lead_form' })
+    }
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
@@ -27,6 +33,7 @@ export default function LeadForm() {
     e.preventDefault()
     setStatus('loading')
     setErrorMessage('')
+    track('form_submit', { form_id: 'contact_lead_form', project_type: formData.projectType })
 
     const payload = {
       fullName: formData.fullName.trim(),
@@ -35,6 +42,8 @@ export default function LeadForm() {
       projectType: formData.projectType,
       city: formData.city.trim(),
       message: formData.message.trim(),
+      source: 'contact_form',
+      utm: getStoredUtm(),
     }
 
     try {
@@ -51,6 +60,12 @@ export default function LeadForm() {
         throw new Error(result?.message ?? 'Failed to submit form')
       }
 
+      track('generate_lead', {
+        form_id: 'contact_lead_form',
+        project_type: formData.projectType,
+        value: 1,
+        currency: 'USD',
+      })
       toast.success("Quote request sent! We'll call you within 1 hour.")
       setStatus('success')
       setFormData({ fullName: '', phone: '', email: '', projectType: '', city: '', message: '' })

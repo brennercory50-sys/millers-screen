@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { User, Phone, Mail, MapPin, ListChecks, Lock, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
 import { LEAD_PROJECT_TYPES } from '@/lib/validations'
+import { track, getStoredUtm } from '@/lib/analytics'
 
 export default function HeroLeadForm() {
   const [formData, setFormData] = useState({
@@ -16,9 +17,14 @@ export default function HeroLeadForm() {
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const startedRef = useRef(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target
+    if (!startedRef.current) {
+      startedRef.current = true
+      track('form_start', { form_id: 'hero_lead_form' })
+    }
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
@@ -26,6 +32,7 @@ export default function HeroLeadForm() {
     e.preventDefault()
     setStatus('loading')
     setErrorMessage('')
+    track('form_submit', { form_id: 'hero_lead_form', project_type: formData.projectType })
 
     try {
       const response = await fetch('/api/leads', {
@@ -38,6 +45,8 @@ export default function HeroLeadForm() {
           projectType: formData.projectType,
           city: formData.zipCode.trim(),
           message: '',
+          source: 'hero_form',
+          utm: getStoredUtm(),
         }),
       })
 
@@ -48,6 +57,12 @@ export default function HeroLeadForm() {
         throw new Error(result?.message ?? 'Failed to submit')
       }
 
+      track('generate_lead', {
+        form_id: 'hero_lead_form',
+        project_type: formData.projectType,
+        value: 1,
+        currency: 'USD',
+      })
       toast.success("Quote request sent! We'll call you within 1 hour.")
       setStatus('success')
       setFormData({ fullName: '', phone: '', email: '', zipCode: '', projectType: '' })

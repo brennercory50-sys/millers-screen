@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import { getAllBlogSlugs } from '@/lib/blog'
 
 const baseUrl = 'https://millersscreen.com'
 
@@ -15,6 +16,8 @@ const staticPages = [
   '/financing',
   '/warranty',
   '/contact',
+  '/blog',
+  '/privacy',
 ]
 
 const serviceAreas = [
@@ -51,5 +54,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticPagesSitemap, ...serviceAreaPages]
+  const blogPostPages = getAllBlogSlugs().map((slug) => ({
+    url: `${baseUrl}/blog/${slug}`,
+    lastModified: currentDate,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...staticPagesSitemap, ...serviceAreaPages, ...blogPostPages]
 }

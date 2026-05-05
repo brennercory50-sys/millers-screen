@@ -12,7 +12,10 @@ const quickLinks = [
   { label: 'Repairs', href: '/repair' },
   { label: 'Concrete / Pavers', href: '/concrete-pavers' },
   { label: 'MegaView®', href: '/megaview' },
+  { label: 'Showcase', href: '/showcase' },
+  { label: 'Resources', href: '/blog' },
   { label: 'Financing', href: '/financing' },
+  { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -92,6 +95,10 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-line text-center">
           <p className="text-muted text-xs">
             © {year} Miller&apos;s Screen. All rights reserved.
+            {' · '}
+            <Link href="/privacy" className="hover:text-text-primary transition-colors">
+              Privacy Policy
+            </Link>
           </p>
           <p className="text-muted text-xs mt-2">
             Built by <Link 

@@ -13,6 +13,8 @@ import Footer from '@/components/footer'
 import MobileCTABar from '@/components/mobile-cta-bar'
 import ChatbotWidget from '@/components/chatbot-widget'
 import GoogleAnalytics from '@/components/google-analytics'
+import UtmTracker from '@/components/utm-tracker'
+import CookieConsent from '@/components/cookie-consent'
 import { TeamModalProvider } from '@/context/TeamModalContext'
 import { Providers } from '@/components/providers'
 
@@ -206,6 +208,8 @@ export default function RootLayout({
           </svg>
         </div>
         <GoogleAnalytics />
+        <UtmTracker />
+        <CookieConsent />
         <Header />
         <main className="flex-1 pt-16 md:pt-20">
           <Providers>
