@@ -29,6 +29,7 @@ const navItems: NavItem[] = [
   { label: 'Services', hasDropdown: true },
   { label: 'MegaView®', href: '/megaview', featured: true },
   { label: 'Financing', href: '/financing' },
+  { label: 'Resources', href: '/blog' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ]
