@@ -275,8 +275,6 @@ export const STATIC_GALLERY_BY_CATEGORY: Record<string, string[]> = {
     '/projects/project-72554.jpg',
     '/projects/project-72558.jpg',
     '/projects/project-72563.jpg',
-    '/projects/project-72571.jpg',
-    '/projects/project-72574.jpg',
   ],
   // 3 verified Hip images; padded with verified Gable fills
   Hip: [
@@ -303,6 +301,8 @@ export const STATIC_GALLERY_BY_CATEGORY: Record<string, string[]> = {
     '/projects/project-72554.jpg',
     '/projects/project-72558.jpg',
     '/projects/project-72563.jpg',
+    '/projects/project-72571.jpg',
+    '/projects/project-72574.jpg',
   ],
   // 1 verified Under Existing image (72560); padded with verified Gable fills
   'Under Existing': [
