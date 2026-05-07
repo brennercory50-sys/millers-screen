@@ -252,29 +252,24 @@ export const STATIC_GALLERY_BY_CATEGORY: Record<string, string[]> = {
     '/projects/project-72574.jpg',
     '/projects/project-72575.jpg',
   ],
-  // 2 verified Dome images; padded with verified Gable fills
+  // 2 verified Dome images only
   Dome: [
-    '/projects/project-122977.jpg',
     '/projects/project-72552.jpg',
-    '/projects/project-72553.jpg',
-    '/projects/project-72554.jpg',
-    '/projects/project-72558.jpg',
-    '/projects/project-72559.jpg',
-    '/projects/project-72563.jpg',
     '/projects/project-72569.jpg',
-    '/projects/project-72571.jpg',
-    '/projects/project-72572.jpg',
   ],
-  // 1 verified Mansard image; padded with verified Hip then Gable fills
+  // Mansard images (including reclassified from Dome)
   Mansard: [
     '/projects/project-72565.jpg',
+    '/projects/project-122977.jpg',
     '/projects/project-122978.jpg',
     '/projects/project-122980.jpg',
     '/projects/project-72555.jpg',
     '/projects/project-72553.jpg',
     '/projects/project-72554.jpg',
     '/projects/project-72558.jpg',
+    '/projects/project-72559.jpg',
     '/projects/project-72563.jpg',
+    '/projects/project-72572.jpg',
   ],
   // 3 verified Hip images; padded with verified Gable fills
   Hip: [
