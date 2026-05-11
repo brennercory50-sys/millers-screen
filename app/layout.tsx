@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -11,7 +10,6 @@ const inter = Inter({
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import MobileCTABar from '@/components/mobile-cta-bar'
-import ChatbotWidget from '@/components/chatbot-widget'
 import GoogleAnalytics from '@/components/google-analytics'
 import UtmTracker from '@/components/utm-tracker'
 import CookieConsent from '@/components/cookie-consent'
@@ -61,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
         alt: "Miller's Screen - Premium Screen Enclosures in Volusia County"
       }],
     },
-twitter: {
+    twitter: {
       card: 'summary_large_image',
       site: '@MillersScreen',
       creator: '@MillersScreen',
@@ -86,8 +84,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script src="https://apps.abacus.ai/chatllm/appllm-lib.js" strategy="lazyOnload" />
-        
         {/* LocalBusiness Schema */}
         <script
           type="application/ld+json"
@@ -220,7 +216,6 @@ export default function RootLayout({
         </main>
         <Footer />
         <MobileCTABar />
-        <ChatbotWidget />
       </body>
     </html>
   )
