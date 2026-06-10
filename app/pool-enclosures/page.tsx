@@ -85,6 +85,30 @@ export default function PoolEnclosuresPage() {
         ]}
       />
 
+      {/* Pricing Range */}
+      <section className="py-10 md:py-14 bg-bg-1">
+        <div className="section-container">
+          <h2 className="text-text-primary text-2xl md:text-3xl font-bold mb-2">What Does a Pool Enclosure Cost?</h2>
+          <p className="text-muted mb-8 max-w-2xl">
+            Every enclosure is custom — size, roof style, screen type, and permit complexity all affect the final number. Here&apos;s a realistic starting range for Volusia County:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-3xl">
+            {[
+              { tier: 'Standard Pool Cage', range: 'From $12,000', desc: 'Flat or hip roof, standard screen, single door' },
+              { tier: 'Mid-Range Enclosure', range: '$18,000 – $30,000', desc: 'Gable or mansard, upgraded screen, custom doors' },
+              { tier: 'Premium / Large', range: '$30,000+', desc: 'MegaView®, oversized structure, or complex roofline' },
+            ].map((item) => (
+              <div key={item.tier} className="bg-panel border border-line rounded-xl p-5">
+                <p className="text-xs font-semibold text-accent-red uppercase tracking-wider mb-1">{item.tier}</p>
+                <p className="text-2xl font-black text-text-primary mb-2">{item.range}</p>
+                <p className="text-sm text-muted">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-muted/60 mt-5">Prices are estimates only. Your free in-person walkthrough gives you an exact, no-obligation quote.</p>
+        </div>
+      </section>
+
       <GalleryGrid title="Recent pool enclosures" images={poolImages} />
       <FAQSection />
       <CTABlock

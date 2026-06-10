@@ -1,20 +1,20 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { User, Phone, Mail, MapPin, ListChecks, Lock, ArrowRight, CheckCircle, AlertCircle } from 'lucide-react'
+import { User, Phone, ListChecks, Lock, ArrowRight, CheckCircle, AlertCircle, Clock } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { toast } from 'sonner'
 import { LEAD_PROJECT_TYPES } from '@/lib/validations'
 import { track, getStoredUtm } from '@/lib/analytics'
 
+const NEXT_STEPS = [
+  { step: '1', title: 'We call you back', desc: 'Within 1 hour during business hours' },
+  { step: '2', title: 'In-person walkthrough', desc: 'One of our crew visits your property — not a salesperson' },
+  { step: '3', title: 'Fixed quote in 48 hrs', desc: 'Detailed, no-surprise price. No obligation to sign' },
+]
+
 export default function HeroLeadForm() {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    phone: '',
-    email: '',
-    zipCode: '',
-    projectType: '',
-  })
+  const [formData, setFormData] = useState({ fullName: '', phone: '', projectType: '' })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
   const startedRef = useRef(false)
@@ -41,31 +41,22 @@ export default function HeroLeadForm() {
         body: JSON.stringify({
           fullName: formData.fullName.trim(),
           phone: formData.phone.trim(),
-          email: formData.email.trim(),
+          email: '',
           projectType: formData.projectType,
-          city: formData.zipCode.trim(),
-          message: '',
           source: 'hero_form',
           utm: getStoredUtm(),
         }),
       })
 
       const result = await response.json()
-
       if (!response.ok) {
         toast.error(result?.message ?? 'Failed to submit. Please try again.')
         throw new Error(result?.message ?? 'Failed to submit')
       }
 
-      track('generate_lead', {
-        form_id: 'hero_lead_form',
-        project_type: formData.projectType,
-        value: 1,
-        currency: 'USD',
-      })
-      toast.success("Quote request sent! We'll call you within 1 hour.")
+      track('generate_lead', { form_id: 'hero_lead_form', project_type: formData.projectType, value: 1, currency: 'USD' })
       setStatus('success')
-      setFormData({ fullName: '', phone: '', email: '', zipCode: '', projectType: '' })
+      setFormData({ fullName: '', phone: '', projectType: '' })
     } catch (error) {
       setStatus('error')
       setErrorMessage(error instanceof Error ? error.message : 'Something went wrong')
@@ -77,23 +68,40 @@ export default function HeroLeadForm() {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-2xl p-8 text-center shadow-2xl"
+        className="bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-2xl p-6 lg:p-8 shadow-2xl"
       >
-        <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-        <h3 className="text-2xl font-bold text-text-primary mb-2">Quote Request Sent!</h3>
-        <p className="text-muted mb-6">We&apos;ll call you back within 1 hour.</p>
+        <div className="text-center mb-6">
+          <CheckCircle className="w-14 h-14 text-green-500 mx-auto mb-3" />
+          <h3 className="text-xl font-bold text-text-primary mb-1">Request Received!</h3>
+          <p className="text-sm text-muted">Here&apos;s what happens next:</p>
+        </div>
+
+        <div className="space-y-3 mb-6">
+          {NEXT_STEPS.map(({ step, title, desc }) => (
+            <div key={step} className="flex gap-3 items-start">
+              <div className="w-7 h-7 rounded-full bg-accent-red flex items-center justify-center flex-shrink-0 mt-0.5">
+                <span className="text-white text-xs font-bold">{step}</span>
+              </div>
+              <div>
+                <p className="text-text-primary text-sm font-semibold leading-tight">{title}</p>
+                <p className="text-muted text-xs leading-relaxed">{desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <a
-          href="tel:386-756-8770"
-          className="inline-flex items-center gap-2 bg-green-600 text-white font-bold px-6 py-3 rounded-lg hover:bg-green-700 transition-colors text-lg"
+          href="tel:+13867568770"
+          className="w-full bg-accent-red hover:bg-accent-red-hover text-white font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm"
         >
-          <Phone className="w-5 h-5" />
-          Call 386-756-8770
+          <Phone className="w-4 h-4" />
+          Call Now: 386-756-8770
         </a>
         <button
           onClick={() => setStatus('idle')}
-          className="mt-4 block mx-auto text-sm text-muted hover:text-text-primary transition-colors"
+          className="mt-3 w-full text-center text-xs text-muted/60 hover:text-muted transition-colors"
         >
-          Submit Another Request
+          Submit another request
         </button>
       </motion.div>
     )
@@ -107,9 +115,10 @@ export default function HeroLeadForm() {
       onSubmit={handleSubmit}
       className="bg-white/[0.05] backdrop-blur-xl border border-white/10 rounded-2xl p-6 lg:p-8 shadow-2xl"
     >
-      <h3 className="text-xl lg:text-2xl font-bold text-text-primary text-center mb-6">
+      <h3 className="text-xl lg:text-2xl font-bold text-text-primary text-center mb-1">
         GET YOUR <span className="text-accent-red font-black">FREE</span> QUOTE
       </h3>
+      <p className="text-center text-xs text-muted/70 mb-5">Spring schedule filling fast — request your slot now</p>
 
       <AnimatePresence>
         {status === 'error' && (
@@ -154,46 +163,19 @@ export default function HeroLeadForm() {
         </div>
 
         <div className="relative">
-          <Mail className={iconBase} />
-          <input
-            type="email"
-            name="email"
+          <ListChecks className={iconBase} />
+          <select
+            name="projectType"
             required
-            value={formData.email}
+            value={formData.projectType}
             onChange={handleChange}
-            className={inputBase}
-            placeholder="Email Address"
-            autoComplete="email"
-          />
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          <div className="relative">
-            <MapPin className={iconBase} />
-            <input
-              type="text"
-              name="zipCode"
-              value={formData.zipCode}
-              onChange={handleChange}
-              className={inputBase}
-              placeholder="Zip Code"
-            />
-          </div>
-          <div className="relative">
-            <ListChecks className={iconBase} />
-            <select
-              name="projectType"
-              required
-              value={formData.projectType}
-              onChange={handleChange}
-              className={`${inputBase} appearance-none cursor-pointer ${!formData.projectType ? 'text-muted/50' : ''}`}
-            >
-              <option value="">Project Type</option>
-              {LEAD_PROJECT_TYPES.map((type) => (
-                <option key={type} value={type}>{type}</option>
-              ))}
-            </select>
-          </div>
+            className={`${inputBase} appearance-none cursor-pointer ${!formData.projectType ? 'text-muted/50' : ''}`}
+          >
+            <option value="">Project Type</option>
+            {LEAD_PROJECT_TYPES.map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
         </div>
 
         <button
@@ -216,8 +198,12 @@ export default function HeroLeadForm() {
       </div>
 
       <div className="mt-4 flex items-center justify-center gap-1.5 text-muted/50 text-xs">
+        <Clock className="w-3 h-3" />
+        <span>Responding within 1 hour &nbsp;·&nbsp; No obligation</span>
+      </div>
+      <div className="mt-2 flex items-center justify-center gap-1.5 text-muted/40 text-xs">
         <Lock className="w-3 h-3" />
-        <span>No obligation. Fast response.</span>
+        <span>Your info is never sold or shared</span>
       </div>
     </form>
   )

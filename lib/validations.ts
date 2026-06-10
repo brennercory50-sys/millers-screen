@@ -27,7 +27,7 @@ export const LEAD_BUDGETS = [
 export const leadSchema = z.object({
   fullName: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
   phone: z.string().min(10, 'Valid phone number is required').max(20, 'Phone number is too long'),
-  email: z.string().email('Valid email address is required'),
+  email: z.union([z.string().email(), z.literal('')]).default(''),
   projectType: z.enum(LEAD_PROJECT_TYPES, {
     errorMap: () => ({ message: 'Valid project type is required' }),
   }),

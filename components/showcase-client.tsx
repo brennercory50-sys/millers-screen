@@ -10,6 +10,16 @@ import HeroSection from '@/components/hero-section'
 import { STATIC_GALLERY_BY_CATEGORY } from '@/lib/projects'
 import type { GalleryProject, GalleryApiResponse } from '@/app/api/companycam/gallery/route'
 
+const CATEGORY_META: Record<string, { label: string; desc: string }> = {
+  'Flat':           { label: 'Flat Roof Pool Cage',    desc: 'Clean horizontal top over your pool' },
+  'Gable':          { label: 'Gable Roof Enclosure',   desc: 'Peaked roof — screen rooms & patios' },
+  'Dome':           { label: 'Dome Pool Enclosure',     desc: 'Classic curved dome over your pool' },
+  'Mansard':        { label: 'Mansard Enclosure',       desc: 'Sloped panels — traditional FL style' },
+  'Hip':            { label: 'Hip Roof Pool Cage',      desc: 'Multi-slope roof, polished finish' },
+  'Elite Room':     { label: 'Elite Screen Room',       desc: 'Premium full-room addition to your home' },
+  'Under Existing': { label: 'Under Existing Roof',     desc: 'Screened in beneath your current overhang' },
+}
+
 async function fetchGallery(): Promise<GalleryApiResponse> {
   const res = await fetch('/api/companycam/gallery')
   if (!res.ok) throw new Error('Gallery fetch failed')
@@ -137,8 +147,11 @@ export default function ShowcaseClient() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   <div className="absolute inset-0 bg-accent-red/0 group-hover:bg-accent-red/10 transition-colors duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                    <span className="text-white font-bold text-sm md:text-base drop-shadow-lg">
-                      {category}
+                    <span className="text-white font-bold text-sm md:text-base drop-shadow-lg block leading-tight">
+                      {CATEGORY_META[category]?.label ?? category}
+                    </span>
+                    <span className="text-white/75 text-[10px] md:text-xs leading-tight block mt-0.5 drop-shadow">
+                      {CATEGORY_META[category]?.desc}
                     </span>
                   </div>
                   {selectedCategory === category && (
@@ -163,10 +176,12 @@ export default function ShowcaseClient() {
               >
                 <div className="text-center mb-8">
                   <h3 className="text-text-primary text-2xl md:text-3xl font-bold">
-                    {selectedCategory} Projects
+                    {CATEGORY_META[selectedCategory]?.label ?? selectedCategory} Projects
                   </h3>
                   <p className="text-muted mt-2">
-                    Real completed examples of {selectedCategory.toLowerCase()} builds.
+                    {CATEGORY_META[selectedCategory]?.desc
+                      ? `${CATEGORY_META[selectedCategory].desc} — real completed builds.`
+                      : `Real completed examples of ${selectedCategory.toLowerCase()} builds.`}
                   </p>
                   <p className="text-muted/70 text-sm mt-1">
                     Looking for something similar?{' '}

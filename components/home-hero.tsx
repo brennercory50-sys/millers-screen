@@ -2,19 +2,19 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Shield, Users, Award, ArrowRight } from 'lucide-react'
+import { Shield, Users, Award, ArrowRight, Phone } from 'lucide-react'
 import HeroLeadForm from './hero-lead-form'
 
 const trustBadges = [
   { icon: Award, label: '40+', text: 'YEARS EXPERIENCE' },
-  { icon: Users, label: '', text: 'IN-HOUSE CREWS NOT SUBCONTRACTORS' },
-  { icon: Shield, label: '', text: 'LICENSED & INSURED CBC#1262142' },
+  { icon: Users, label: '', text: 'IN-HOUSE CREWS ONLY' },
+  { icon: Shield, label: '', text: 'LICENSED CBC#1262142' },
 ]
 
 export default function HomeHero() {
   return (
     <section className="relative min-h-[60vh] lg:min-h-[90vh] flex items-center">
-      {/* Background */}
+      {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
@@ -25,11 +25,11 @@ export default function HomeHero() {
           poster="/images/home-hero.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           onPlay={(e) => (e.currentTarget.style.opacity = '1')}
-          style={{ opacity: 0, transition: 'opacity 0.4s ease-in' }}
+          style={{ opacity: 0, transition: 'opacity 0.6s ease-in' }}
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-0/90 via-bg-0/70 to-bg-0/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-bg-0/95 via-bg-0/80 to-bg-0/50" />
       </div>
 
       {/* Content */}
@@ -53,8 +53,7 @@ export default function HomeHero() {
             </h1>
 
             <p className="text-base md:text-lg text-muted mb-8 max-w-lg leading-relaxed">
-              In-house crews. Top-quality materials.<br className="hidden sm:block" />
-              Results that speak for themselves.
+              In-house crews. Top-quality materials. Licensed, permitted, and built to Florida code.
             </p>
 
             {/* Trust Badges */}
@@ -82,7 +81,7 @@ export default function HomeHero() {
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 mb-5">
               <Link
                 href="/contact#form"
                 className="btn-primary text-base md:text-lg px-8 py-4 min-h-[52px] text-center inline-flex items-center justify-center gap-2"
@@ -90,13 +89,19 @@ export default function HomeHero() {
                 GET MY FREE QUOTE
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <Link
-                href="/showcase"
-                className="btn-secondary text-base md:text-lg px-8 py-4 min-h-[52px] text-center"
+              <a
+                href="tel:+13867568770"
+                className="btn-secondary text-base md:text-lg px-8 py-4 min-h-[52px] text-center inline-flex items-center justify-center gap-2"
               >
-                VIEW OUR PROJECTS
-              </Link>
+                <Phone className="w-5 h-5" />
+                386-756-8770
+              </a>
             </div>
+
+            {/* Office hours */}
+            <p className="text-xs text-muted/60">
+              Mon–Fri 8am–5pm &nbsp;·&nbsp; We answer — no voicemail maze
+            </p>
           </motion.div>
 
           {/* Right Column — Lead Form */}
