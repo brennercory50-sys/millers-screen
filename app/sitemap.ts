@@ -17,25 +17,14 @@ const staticPages = [
   '/warranty',
   '/contact',
   '/blog',
+  '/jobs',
   '/privacy',
 ]
 
-const serviceAreas = [
-  '/daytona-beach/pool-enclosures',
-  '/port-orange/pool-enclosures',
-  '/ormond-beach/pool-enclosures',
-  '/new-smyrna-beach/pool-enclosures',
-  '/deland/pool-enclosures',
-  '/deltona/pool-enclosures',
-  '/south-daytona/pool-enclosures',
-  '/daytona-beach/screen-rooms',
-  '/port-orange/screen-rooms',
-  '/ormond-beach/screen-rooms',
-  '/new-smyrna-beach/screen-rooms',
-  '/deland/screen-rooms',
-  '/deltona/screen-rooms',
-  '/south-daytona/screen-rooms',
-]
+const CITIES = ['daytona-beach', 'port-orange', 'ormond-beach', 'new-smyrna-beach', 'deland', 'deltona', 'south-daytona']
+const SERVICES = ['pool-enclosures', 'screen-rooms', 'concrete-pavers']
+
+const serviceAreas = CITIES.flatMap(city => SERVICES.map(service => `/${city}/${service}`))
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date().toISOString()

@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Jobs in Progress | Miller\'s Screen',
   description: 'Live view of our current construction projects. See photos and locations of active pool enclosures, screen rooms, and concrete work across Volusia County.',
   keywords: ['jobs', 'projects', 'construction', 'active work', 'pool enclosure progress', 'screen room progress', 'volusia county'],
+  alternates: { canonical: 'https://millersscreen.com/jobs' },
   openGraph: {
     title: 'Jobs in Progress | Miller\'s Screen',
     description: 'Live view of our current construction projects across Volusia County.',

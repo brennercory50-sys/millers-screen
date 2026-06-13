@@ -3,6 +3,7 @@ export interface BlogPost {
   title: string
   description: string
   publishedAt: string
+  updatedAt?: string
   readMinutes: number
   category: 'Cost' | 'Buying Guide' | 'Maintenance' | 'Permits' | 'Local'
   coverImage: string

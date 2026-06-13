@@ -44,7 +44,7 @@ export default function BlogPostPage({ params }: PageProps) {
     description: post.description,
     image: `https://millersscreen.com${post.coverImage}`,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
+    dateModified: post.updatedAt ?? post.publishedAt,
     author: { '@type': 'Organization', name: "Miller's Screen" },
     publisher: {
       '@type': 'Organization',

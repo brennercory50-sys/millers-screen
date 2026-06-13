@@ -48,8 +48,8 @@ export default function HomeHero() {
             </p>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-7xl font-black leading-[1.05] mb-6">
-              <span className="text-text-primary block">QUALITY YOU CAN SEE.</span>
-              <span className="text-accent-red block">BUILT TO LAST.</span>
+              <span className="text-text-primary block">POOL ENCLOSURES &amp;</span>
+              <span className="text-accent-red block">SCREEN ROOMS DONE RIGHT.</span>
             </h1>
 
             <p className="text-base md:text-lg text-muted mb-8 max-w-lg leading-relaxed">

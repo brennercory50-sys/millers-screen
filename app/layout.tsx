@@ -67,12 +67,6 @@ export async function generateMetadata(): Promise<Metadata> {
       description: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, MegaView®, rescreening & repairs. 40+ years experience, in-house crews.",
       images: ['/og-image.png'],
     },
-    other: {
-      'geo.region': 'US-FL',
-      'geo.placename': 'South Daytona',
-      'geo.position': '29.1697;-81.0056',
-      'ICBM': '29.1697, -81.0056',
-    },
   }
 }
 
@@ -142,13 +136,14 @@ export default function RootLayout({
                   { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Screen Repairs" } }
                 ]
               },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5",
-                "reviewCount": "3",
-                "bestRating": "5"
+              "identifier": {
+                "@type": "PropertyValue",
+                "name": "Florida Contractor License",
+                "value": "CBC1262142"
               },
-              "sameAs": ["https://www.facebook.com/millersscreen"]
+              "sameAs": [
+                "https://www.facebook.com/millersscreen"
+              ]
             })
           }}
         />

@@ -9,58 +9,6 @@ interface SEOMetadata {
   image?: string
 }
 
-const KEYWORDS = {
-  poolEnclosures: ['pool enclosure', 'pool cage', 'pool screen enclosure', 'screen pool enclosure', 'florida pool enclosure', 'daytona beach pool enclosure'],
-  screenRooms: ['screen room', 'screen enclosure', 'patio enclosure', 'lanai', 'florida screen room', 'outdoor living space'],
-  megaview: ['megaview enclosure', 'cableless enclosure', 'unobstructed view enclosure', 'modern screen enclosure', 'premium pool enclosure'],
-  concretePavers: ['concrete contractors', 'paver installation', 'driveway pavers', 'patio pavers', 'concrete patio', 'florida paver contractor'],
-  general: ['screen repair', 'rescreen', 'volusia county', 'daytona beach', 'florida', 'aluminum construction', 'pool cage', 'screen enclosure contractor'],
-}
-
-function generateTitle(page: string, location?: string): string {
-  const titles: Record<string, string> = {
-    home: "Volusia County's Trusted Screen Enclosure Contractor | Miller's Screen",
-    poolEnclosures: location 
-      ? `${location} Pool Enclosure Contractor | Licensed & Insured`
-      : "Pool Enclosure Experts in Volusia County | Licensed & Permitted",
-    screenRooms: location
-      ? `${location} Screen Room Builder | Custom Patio Enclosures`
-      : "Custom Screen Rooms & Patio Enclosures | Volusia County",
-    megaview: "MegaView® Enclosures Volusia County | Exclusive Cable-Free Design",
-    concretePavers: location
-      ? `${location} Concrete & Paver Contractor | Professional Installation`
-      : "Concrete & Paver Installation | Volusia County",
-    showcase: "Our Screen Enclosure Projects | View Completed Jobs",
-    financing: "Financing Options for Screen Enclosures | Easy Payment Plans",
-    warranty: "Warranty & Maintenance | Miller's Screen",
-    about: "About Miller's Screen | 40+ Years Volusia County Experience",
-    contact: "Get a Free Screen Enclosure Estimate | Contact Miller's Screen",
-  }
-  return titles[page] || titles.home
-}
-
-function generateDescription(page: string, location?: string): string {
-  const descriptions: Record<string, string> = {
-    home: "Volusia County's most trusted screen enclosure contractor. Pool enclosures, screen rooms, and MegaView® installations. 40+ years experience, in-house crews, licensed & permitted. Free estimates. Call 386-756-8770.",
-    poolEnclosures: location
-      ? `Professional ${location} pool enclosure contractor. Full-service installation with permits, engineering, and in-house crews. Free estimate. Call 386-756-8770.`
-      : "Expert pool enclosure installation in Volusia County, FL. Engineering, permitting, and installation all handled by our in-house crews. Licensed contractors with 40+ years experience. Request your free estimate today.",
-    screenRooms: location
-      ? `Custom ${location} screen room builder. Transform your patio into a comfortable outdoor living space. Permitted installs, premium materials, expert craftsmanship. Free estimate. Call 386-756-8770.`
-      : "Custom screen rooms and patio enclosures in Volusia County. Expert design, quality construction, and professional installation. Create the outdoor living space you've always wanted. Get your free estimate.",
-    megaview: "Miller's Screen is the ONLY authorized MegaView® builder in Volusia County. Experience the clearest views with our exclusive cable-supported, post-free enclosure design. Request a MegaView consultation today.",
-    concretePavers: location
-      ? `Professional ${location} concrete and paver contractor. Driveways, patios, walkways, and pool decks. Quality craftsmanship, durable materials. Free estimate. Call 386-756-8770.`
-      : "Expert concrete and paver installation in Volusia County, FL. Driveways, patios, pool decks, and walkways. Professional contractors with quality materials and craftsmanship. Get your free estimate today.",
-    showcase: "Browse our portfolio of completed pool enclosures, screen rooms, and MegaView® projects. 1000+ completed jobs across Volusia County. See the quality of our craftsmanship.",
-    financing: "Affordable financing options for your screen enclosure project. 0% interest for 18 months available. Get the outdoor space you want now and pay over time. Apply today.",
-    warranty: "Miller's Screen workmanship warranty and maintenance guide. One-year warranty on all installations. Learn how to care for your screen enclosure.",
-    about: "Family-owned and operated for 40+ years. Miller's Screen has completed over 1,000 projects in Volusia County. Meet our team of experienced installers, designers, and support staff.",
-    contact: "Contact Miller's Screen for your free pool enclosure or screen room estimate. Call 386-756-8770 or request online. Fast response, no-obligation quotes, in-house crews.",
-  }
-  return descriptions[page] || descriptions.home
-}
-
 export function generateSEOMetadata(config: SEOMetadata): Metadata {
   const { title, description, keywords = [], path, type = 'website', image } = config
   
@@ -108,12 +56,6 @@ export function generateSEOMetadata(config: SEOMetadata): Metadata {
         'max-snippet': -1,
       },
     },
-    other: {
-      'geo.region': 'US-FL',
-      'geo.placename': 'South Daytona',
-      'geo.position': '29.1697;-81.0056',
-      'ICBM': '29.1697, -81.0056',
-    },
   }
 }
 
@@ -122,7 +64,7 @@ export function generateFAQSchema(page: string): Array<{ question: string; answe
     poolEnclosures: [
       {
         question: "How much does a pool enclosure cost in Volusia County?",
-        answer: "Pool enclosure costs in Volusia County typically range from $8,000 to $30,000+ depending on size, materials, and design. At Miller's Screen, we provide free detailed estimates with no obligation. Our pricing includes engineering, permits, and professional installation by our in-house crews."
+        answer: "Pool enclosure costs in Volusia County typically start around $12,000 for a standard mid-size cage and range to $38,000+ for larger premium structures. Pricing depends on size, roof style, screen type, and permitting. Miller's Screen provides free on-site estimates with no obligation — our pricing includes engineering, permits, and in-house installation."
       },
       {
         question: "Do I need a permit for a pool enclosure in Florida?",
@@ -140,7 +82,7 @@ export function generateFAQSchema(page: string): Array<{ question: string; answe
     screenRooms: [
       {
         question: "What is the average cost of a screen room in Florida?",
-        answer: "Screen room costs in Volusia County typically range from $5,000 to $25,000 depending on size, design complexity, and finish options. Miller's Screen provides free on-site estimates to give you an accurate price for your specific project."
+        answer: "Screen room costs in Volusia County typically start around $8,000 for a standard attached patio room and range to $25,000+ for custom designs with premium materials. Miller's Screen provides free on-site estimates to give you an accurate price for your specific project."
       },
       {
         question: "Can I add a screen room to my existing patio?",

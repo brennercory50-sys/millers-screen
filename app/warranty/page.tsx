@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Warranty & Maintenance | Miller's Screen",
   description: "Miller's Screen workmanship warranty and maintenance guide. One-year warranty on all installations. Learn how to care for your screen enclosure.",
   keywords: ['warranty', 'maintenance', 'screen enclosure care', 'pool cage maintenance', 'screen repair'],
+  alternates: { canonical: 'https://millersscreen.com/warranty' },
   openGraph: {
     title: "Warranty & Maintenance | Miller's Screen",
     description: "Miller's Screen workmanship warranty and maintenance guide. One-year warranty on all installations.",

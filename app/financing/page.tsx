@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Financing Options for Screen Enclosures | Easy Payment Plans",
   description: "Affordable financing options for your screen enclosure project. 0% interest for 18 months available. Get the outdoor space you want now and pay over time. Apply today.",
   keywords: ['financing', 'payment plans', 'screen enclosure loan', 'pool enclosure financing', '0% interest', 'easy payments'],
+  alternates: { canonical: 'https://millersscreen.com/financing' },
   openGraph: {
     title: "Financing Options | Miller's Screen",
     description: "Affordable financing options for your screen enclosure project. 0% interest for 18 months available.",

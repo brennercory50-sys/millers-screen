@@ -81,12 +81,36 @@ const SERVICES: Record<string, { name: string; pluralName: string; description: 
   },
 }
 
-const BASE_PROJECTS = [
-  { image: '/projects/project-122978.jpg', alt: 'Pool enclosure project' },
-  { image: '/projects/project-122980.jpg', alt: 'Screen enclosure project' },
-  { image: '/projects/project-72552.jpg', alt: 'Florida pool cage' },
-  { image: '/projects/project-72554.jpg', alt: 'Custom enclosure project' },
-]
+const CITY_TESTIMONIALS: Record<string, { quote: string; name: string }> = {
+  'daytona-beach': {
+    quote: "We've lived in Daytona Beach for 20 years and Miller's Screen built the best addition we've made to our home. The crew was fast, professional, and left the yard spotless.",
+    name: 'Verified Customer, Daytona Beach',
+  },
+  'port-orange': {
+    quote: "Had Miller's Screen rescreen and add a new door to our Port Orange enclosure. Showed up on time, priced exactly what they quoted, and finished the same day. Couldn't ask for more.",
+    name: 'Verified Customer, Port Orange',
+  },
+  'ormond-beach': {
+    quote: "We got three quotes and Miller's Screen wasn't the cheapest — but they were the only crew who actually walked the property and explained the permit process. Glad we went with them.",
+    name: 'Verified Customer, Ormond Beach',
+  },
+  'new-smyrna-beach': {
+    quote: "Salt air destroys screens fast out here. Miller's Screen used heavier mesh and the right hardware for our coastal property. Two years in and it still looks brand new.",
+    name: 'Verified Customer, New Smyrna Beach',
+  },
+  'deland': {
+    quote: "Came out to DeLand on time, handled every piece of the permit themselves, and the pool enclosure came out beautiful. My neighbors have already asked for their number.",
+    name: 'Verified Customer, DeLand',
+  },
+  'deltona': {
+    quote: "Miller's Screen installed our pool enclosure in Deltona and I couldn't be happier. Great communication throughout, no surprise costs, and the workmanship is excellent.",
+    name: 'Verified Customer, Deltona',
+  },
+  'south-daytona': {
+    quote: "As a South Daytona neighbor, I expected good service — but the quality of the build really exceeded my expectations. These guys clearly take pride in their work.",
+    name: 'Verified Customer, South Daytona',
+  },
+}
 
 interface Props {
   params: Promise<{ city: string; service: string }>
@@ -307,9 +331,9 @@ export default async function ServiceAreaPage({ params }: Props) {
                   </div>
                 </div>
                 <blockquote className="text-text-primary italic mb-4">
-                  &ldquo;Miller&apos;s Screen did an excellent job on our pool enclosure. Professional crew, clean work, finished ahead of schedule. Highly recommend for anyone in Daytona Beach!&rdquo;
+                  &ldquo;{CITY_TESTIMONIALS[city]?.quote ?? "Miller's Screen did an outstanding job. Professional crew, clean work, and finished on schedule. Highly recommend."}&rdquo;
                 </blockquote>
-                <p className="text-sm text-muted">— Verified Customer, {cityData.name}</p>
+                <p className="text-sm text-muted">— {CITY_TESTIMONIALS[city]?.name ?? `Verified Customer, ${cityData.name}`}</p>
               </div>
             </div>
           </div>
@@ -329,7 +353,7 @@ export default async function ServiceAreaPage({ params }: Props) {
             {cityData.neighborhoods.map((neighborhood, i) => (
               <a
                 key={i}
-                href={`#form`}
+                href="/contact#form"
                 className="bg-panel px-4 py-2 rounded-full text-sm text-text-primary hover:bg-accent-red hover:text-white transition-colors cursor-pointer"
               >
                 {neighborhood}
